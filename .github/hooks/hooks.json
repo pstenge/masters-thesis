@@ -1,0 +1,22 @@
+{
+  "$schema": "https://example.com/copilot/hooks.schema.json",
+  "version": 1,
+  "description": "Starter automation hooks for LaTeX thesis workflows.",
+  "hooks": [
+    {
+      "name": "latex-sanity-check",
+      "trigger": "onSave",
+      "match": ["**/*.tex"],
+      "run": [
+        {
+          "command": "latexmk -pdf -interaction=nonstopmode thesis.tex",
+          "optional": true
+        },
+        {
+          "command": "chktex ${file}",
+          "optional": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+\documentclass{electhesis}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{eleccite}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{cleveref}
+\usepackage[margin=1in, bindingoffset=0mm]{geometry}
+\methesis
+
+\renewcommand{\citeetal}{et~al}
+\newcommand{\citet}[1]{\citeauthor{#1} \citeshell{\citeyear{#1}}}
+
+\begin{document}
+\bibliographystyle{electhesis}
+
+\title{Precise Localisation for Vineyard Pruning Operations}
+\author{Philip Stenger}
+\date{01 March 2026}
+
+\frontmatter
+
+\maketitle
+
+\include{abstract}
+
+\tableofcontents
+
+\include{acknowledgements}
+
+\include{preface}
+
+\include{notation}
+
+\mainmatter
+\include{introduction}
+
+\include{1-intro/introduction}
+
+\include{2-background/background}
+
+\include{3-SLAM/SLAM}
+
+\include{4-precise-alignment/precise-alignment}
+
+\include{5-conclusion/conclusion}
+
+\bibliography{MastersThesis}
+
+\backmatter
+\appendix
+\include{appendix-a}
+
+\end{document}

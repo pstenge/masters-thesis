@@ -1,0 +1,962 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.10)  13 MAR 2026 10:54
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**c:/Users/PSTENGE/Documents/misc/thesis/thesis.tex
+(c:/Users/PSTENGE/Documents/misc/thesis/thesis.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(electhesis.cls
+Document Class: electhesis 1994/12/02 Elec. Eng. thesis class
+Elec. Eng. Thesis Class `electhesis' <1994/12/02>. BETA VERSION.
+
+Please note that this is a BETA version of electhesis.
+If you encounter any problems or bugs in using it please email a message
+to latex@elec.canterbury.ac.nz.
+
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
+Document Class: book 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/base\bk11.clo
+File: bk11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count275
+\c@chapter=\count276
+\c@section=\count277
+\c@subsection=\count278
+\c@subsubsection=\count279
+\c@paragraph=\count280
+\c@subparagraph=\count281
+\c@figure=\count282
+\c@table=\count283
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen148
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+)) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+ (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
+\col@sep=\dimen149
+\ar@mcellbox=\box53
+\extrarowheight=\dimen150
+\NC@list=\toks17
+\extratabsurround=\skip51
+\backup@length=\skip52
+\ar@cellbox=\box54
+)
+\TX@col@width=\dimen151
+\TX@old@table=\dimen152
+\TX@old@col=\dimen153
+\TX@target=\dimen154
+\TX@delta=\dimen155
+\TX@cols=\count284
+\TX@ftn=\toks18
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen156
+\lightrulewidth=\dimen157
+\cmidrulewidth=\dimen158
+\belowrulesep=\dimen159
+\belowbottomsep=\dimen160
+\aboverulesep=\dimen161
+\abovetopsep=\dimen162
+\cmidrulesep=\dimen163
+\cmidrulekern=\dimen164
+\defaultaddspace=\dimen165
+\@cmidla=\count285
+\@cmidlb=\count286
+\@aboverulesep=\dimen166
+\@belowrulesep=\dimen167
+\@thisruleclass=\count287
+\@lastruleclass=\count288
+\@thisrulewidth=\dimen168
+) (eleccite.sty
+Package: eleccite 1994/11/10 Elec.\ Eng.\ citation style file
+
+Elec. Eng. Citation Style File `eleccite' <1994/11/10>.
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2025/07/09 v2.17z AMS math features
+\@mathmargin=\skip53
+
+For additional information on amsmath, use the `?' option.
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+ (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks19
+\ex@=\dimen169
+)) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen170
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count289
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count290
+\leftroot@=\count291
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count292
+\DOTSCASE@=\count293
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box55
+\strutbox@=\box56
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen171
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count294
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count295
+\dotsspace@=\muskip17
+\c@parentequation=\count296
+\dspbrk@lvl=\count297
+\tag@help=\toks20
+\row@=\count298
+\column@=\count299
+\maxfields@=\count300
+\andhelp@=\toks21
+\eqnshift@=\dimen172
+\alignsep@=\dimen173
+\tagshift@=\dimen174
+\tagwidth@=\dimen175
+\totwidth@=\dimen176
+\lineht@=\dimen177
+\@envbody=\toks22
+\multlinegap=\skip54
+\multlinetaggap=\skip55
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+ (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks24
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+ (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+ (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen178
+\Gin@req@width=\dimen179
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip56
+\multirow@cntb=\count301
+\multirow@dima=\skip57
+\bigstrutjot=\dimen180
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+ (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+ (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen181
+\captionmargin=\dimen182
+\caption@leftmargin=\dimen183
+\caption@rightmargin=\dimen184
+\caption@width=\dimen185
+\caption@indent=\dimen186
+\caption@parindent=\dimen187
+\caption@hangindent=\dimen188
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
+Package caption Info: \@makecaption = \long macro:#1#2-> \vskip \abovecaptionskip \sbox \@tempboxa {\footnotesize {\bfseries #1}\hskip 1em #2} \ifdim \wd \@tempboxa >\hsize \footnotesize {\bfseries #1}\hskip 1em #2\par \else \hbox to\hsize {\hfil \box \@tempboxa \hfil }\fi \vskip \belowcaptionskip  on input line 1175.
+)
+
+Package caption Warning: Unknown document class (or package),
+(caption)                standard defaults will be used.
+See the caption package documentation for explanation.
+
+\c@caption@flags=\count302
+\c@continuedfloat=\count303
+)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count304
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count305
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count306
+\float@exts=\toks25
+\float@box=\box57
+\@float@everytoks=\toks26
+\@floatcapt=\box58
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/cleveref\cleveref.sty
+Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
+)
+==> First Aid for cleveref.sty applied!
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+ (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+\Gm@cnth=\count307
+\Gm@cntv=\count308
+\c@Gm@tempcnt=\count309
+\Gm@bindingoffset=\dimen189
+\Gm@wd@mp=\dimen190
+\Gm@odd@mp=\dimen191
+\Gm@even@mp=\dimen192
+\Gm@layoutwidth=\dimen193
+\Gm@layoutheight=\dimen194
+\Gm@layouthoffset=\dimen195
+\Gm@layoutvoffset=\dimen196
+\Gm@dimlist=\toks27
+ (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count310
+) (thesis.aux (abstract.aux) (acknowledgements.aux) (preface.aux) (notation.aux) (introduction.aux) (1-intro/introduction.aux) (2-background/background.aux) (3-SLAM/SLAM.aux) (4-precise-alignment/precise-alignment.aux) (5-conclusion/conclusion.aux) (appendix-a.aux))
+\openout1 = `thesis.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+ (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count311
+\scratchdimen=\dimen197
+\scratchbox=\box59
+\nofMPsegments=\count312
+\nofMParguments=\count313
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count314
+\MPscratchDim=\dimen198
+\MPnumerator=\count315
+\makeMPintoPDFobject=\count316
+\everyMPtoPDFconversion=\toks29
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: twoside 
+* h-part:(L,W,R)=(72.26999pt, 452.9679pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 700.50687pt, 72.26999pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=452.9679pt
+* \textheight=700.50687pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-39.45274pt
+* \headheight=11.0pt
+* \headsep=28.45274pt
+* \topskip=11.0pt
+* \footskip=42.67912pt
+* \marginparwidth=106.0pt
+* \marginparsep=7.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Font Info:    Trying to load font information for U+msa on input line 27.
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 27.
+ (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+
+
+{C:/Users/PSTENGE/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+\openout2 = `abstract.aux'.
+
+ (abstract.tex [2
+
+
+]) [3] [4
+
+
+
+] (thesis.toc [5])
+\tf@toc=\write3
+\openout3 = `thesis.toc'.
+
+ [6]
+\openout2 = `acknowledgements.aux'.
+
+ (acknowledgements.tex) [7
+
+
+]
+\openout2 = `preface.aux'.
+
+ (preface.tex [8
+
+
+
+
+]) [9]
+\openout2 = `notation.aux'.
+
+ (notation.tex [10
+
+
+
+
+]) [11] [12
+
+
+
+]
+\openout2 = `introduction.aux'.
+
+
+No file introduction.tex.
+\openout2 = `1-intro/introduction.aux'.
+
+(1-intro/introduction.tex
+Chapter 1.
+(1-intro/tex/1-research-context.tex) (1-intro/tex/1-motivation.tex [1
+
+
+
+
+
+]) (1-intro/tex/1-research-objectives.tex [2]
+Overfull \hbox (15.22014pt too wide) in paragraph at lines 17--18
+[]\OT1/cmr/m/n/10.95 Validate lo-cal-i-sa-tion per-for-mance un-der vary-ing vine-yard con-di-tions in-clud-ing GNSS dropout,
+ []
+
+) (1-intro/tex/1-thesis-structure.tex)) [3]
+\openout2 = `2-background/background.aux'.
+
+ (2-background/background.tex [4
+
+
+
+
+]
+Chapter 2.
+(2-background/tex/2-robot-localisation.tex [5] [6] [7]
+<2-background/figures/globalMappingOccupancyGrid.png, id=76, 450.9347pt x 513.41812pt>
+File: 2-background/figures/globalMappingOccupancyGrid.png Graphic file (type png)
+<use 2-background/figures/globalMappingOccupancyGrid.png>
+Package pdftex.def Info: 2-background/figures/globalMappingOccupancyGrid.png  used on input line 88.
+(pdftex.def)             Requested size: 226.48395pt x 257.86787pt.
+<2-background/figures/sonarOccupancyGrid.png, id=78, 545.03625pt x 274.02374pt>
+File: 2-background/figures/sonarOccupancyGrid.png Graphic file (type png)
+<use 2-background/figures/sonarOccupancyGrid.png>
+Package pdftex.def Info: 2-background/figures/sonarOccupancyGrid.png  used on input line 99.
+(pdftex.def)             Requested size: 226.48395pt x 113.86826pt.
+<2-background/figures/OccupancyGridSensorFusion.png, id=79, 322.20375pt x 576.65437pt>
+File: 2-background/figures/OccupancyGridSensorFusion.png Graphic file (type png)
+<use 2-background/figures/OccupancyGridSensorFusion.png>
+Package pdftex.def Info: 2-background/figures/OccupancyGridSensorFusion.png  used on input line 108.
+(pdftex.def)             Requested size: 226.48395pt x 405.35352pt.
+ [8] [9 <./2-background/figures/globalMappingOccupancyGrid.png> <./2-background/figures/sonarOccupancyGrid.png>] [10 <./2-background/figures/OccupancyGridSensorFusion.png>] [11]) (2-background/tex/2-vineyard-robotics.tex [12] [13]) (2-background/tex/2-vineyard-pruning.tex [14]
+Underfull \hbox (badness 10000) in paragraph at lines 24--24
+[]|\OT1/cmr/m/n/10.95 Moderate (Depth-
+ []
+
+
+Underfull \hbox (badness 2173) in paragraph at lines 24--24
+[]|\OT1/cmr/m/n/10.95 Archie Jnr [Navone
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 24--24
+[]|\OT1/cmr/m/n/10.95 High (3D Co-or-di-
+ []
+
+)) [15]
+\openout2 = `3-SLAM/SLAM.aux'.
+
+ (3-SLAM/SLAM.tex [16
+
+
+
+
+]
+Chapter 3.
+(3-SLAM/3-intro/tex/3-intro.tex [17]) (3-SLAM/3-related-work/tex/3-related-work.tex [18] [19] [20]
+Underfull \hbox (badness 10000) in paragraph at lines 81--81
+[]|\OT1/cmr/bx/n/10 Latin Hy-per-cube
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--81
+[]|\OT1/cmr/m/n/10 Guaranteed uni-vari-ate
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--81
+\OT1/cmr/m/n/10 uni-for-mity [Chris-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--81
+[]|\OT1/cmr/m/n/10 High; in-de-pen-dent
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--81
+\OT1/cmr/m/n/10 of $\OML/cmm/m/it/10 d$ \OT1/cmr/m/n/10 [Deutsch and
+ []
+
+
+Underfull \hbox (badness 2426) in paragraph at lines 81--81
+[]|\OT1/cmr/m/n/10 Consistent; asymp-tot-i-
+ []
+
+
+Underfull \hbox (badness 1331) in paragraph at lines 81--81
+[]|\OT1/cmr/m/n/10 Near-random with low
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--81
+\OT1/cmr/m/n/10 dis-crep-ancy [Chris-
+ []
+
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\OT1/cmr/bx/n/10 VSLAM Fail-ure
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 Requires adap-tive
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 Segmentation er-rors
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 Necessitates ro-bust
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+\OT1/cmr/m/n/10 loss ker-nels [Soares
+ []
+
+
+Underfull \hbox (badness 4441) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 Geometric de-gen-er-acy
+ []
+
+
+Underfull \hbox (badness 6268) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 High de-pen-dency on
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+\OT1/cmr/m/n/10 sen-sor fu-sion [Wei
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 Motion blur [Xu
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 Point cloud skew
+ []
+
+) (3-SLAM/3-methodology/tex/3-methodology.tex [22] [23] [24]
+Underfull \vbox (badness 3343) has occurred while \output is active []
+
+ [25] [26] [27]
+
+LaTeX Warning: Citation `cite:22' on page 28 undefined on input line 200.
+
+
+LaTeX Warning: Citation `cite:23' on page 28 undefined on input line 200.
+
+
+LaTeX Warning: Citation `cite:24' on page 28 undefined on input line 203.
+
+[28]
+
+LaTeX Warning: Citation `cite:25' on page 29 undefined on input line 208.
+
+
+LaTeX Warning: Citation `cite:26' on page 29 undefined on input line 211.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 224--224
+[]|\OT1/cmr/m/n/10.95 High-density sam-pling within
+ []
+
+
+LaTeX Warning: Citation `cite:28' on page 29 undefined on input line 227.
+
+
+LaTeX Warning: Citation `cite:29' on page 29 undefined on input line 231.
+
+[29]) (3-SLAM/3-results/tex/3-results.tex
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+[30]
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--93
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--93
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--93
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--93
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--93
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [31]
+Overfull \vbox (32.99356pt too high) detected at line 120
+ []
+
+
+Overfull \vbox (32.99356pt too high) detected at line 120
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Baseline
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Refined
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Proposed
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Baseline
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Refined
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Proposed
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Baseline
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Refined
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Proposed
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [32]
+Underfull \hbox (badness 10000) in paragraph at lines 137--137
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--137
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--137
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--137
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--137
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+<3-SLAM/3-results/figures/glim_error_distribution_by_stage_log.png, id=167, 1003.75pt x 602.25pt>
+File: 3-SLAM/3-results/figures/glim_error_distribution_by_stage_log.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/glim_error_distribution_by_stage_log.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/glim_error_distribution_by_stage_log.png  used on input line 149.
+(pdftex.def)             Requested size: 362.37569pt x 217.42552pt.
+<3-SLAM/3-results/figures/proposed_error_distribution_by_stage_log.png, id=168, 1003.75pt x 602.25pt>
+File: 3-SLAM/3-results/figures/proposed_error_distribution_by_stage_log.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/proposed_error_distribution_by_stage_log.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/proposed_error_distribution_by_stage_log.png  used on input line 158.
+(pdftex.def)             Requested size: 362.37569pt x 217.42552pt.
+[33]
+<3-SLAM/3-results/figures/glim_consensus_progression.png, id=172, 1003.75pt x 602.25pt>
+File: 3-SLAM/3-results/figures/glim_consensus_progression.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/glim_consensus_progression.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/glim_consensus_progression.png  used on input line 174.
+(pdftex.def)             Requested size: 362.37569pt x 217.42552pt.
+<3-SLAM/3-results/figures/proposed_consensus_progression.png, id=173, 1003.75pt x 602.25pt>
+File: 3-SLAM/3-results/figures/proposed_consensus_progression.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/proposed_consensus_progression.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/proposed_consensus_progression.png  used on input line 183.
+(pdftex.def)             Requested size: 362.37569pt x 217.42552pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [34 <./3-SLAM/3-results/figures/glim_error_distribution_by_stage_log.png> <./3-SLAM/3-results/figures/proposed_error_distribution_by_stage_log.png>]
+<3-SLAM/3-results/figures/spider_error_per_m.png, id=179, 793.96625pt x 642.4pt>
+File: 3-SLAM/3-results/figures/spider_error_per_m.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/spider_error_per_m.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/spider_error_per_m.png  used on input line 200.
+(pdftex.def)             Requested size: 217.42265pt x 175.91068pt.
+<3-SLAM/3-results/figures/spider_error_pct.png, id=180, 795.97375pt x 639.38875pt>
+File: 3-SLAM/3-results/figures/spider_error_pct.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/spider_error_pct.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/spider_error_pct.png  used on input line 207.
+(pdftex.def)             Requested size: 217.42265pt x 174.64705pt.
+<3-SLAM/3-results/figures/spider_mean_abs_pos_err.png, id=181, 787.94376pt x 637.38126pt>
+File: 3-SLAM/3-results/figures/spider_mean_abs_pos_err.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/spider_mean_abs_pos_err.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/spider_mean_abs_pos_err.png  used on input line 214.
+(pdftex.def)             Requested size: 217.42265pt x 175.86879pt.
+<3-SLAM/3-results/figures/spider_rpe_1m_trans_std.png, id=182, 787.94376pt x 634.37pt>
+File: 3-SLAM/3-results/figures/spider_rpe_1m_trans_std.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/spider_rpe_1m_trans_std.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/spider_rpe_1m_trans_std.png  used on input line 221.
+(pdftex.def)             Requested size: 217.42265pt x 175.0379pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [35 <./3-SLAM/3-results/figures/glim_consensus_progression.png> <./3-SLAM/3-results/figures/proposed_consensus_progression.png>]
+<3-SLAM/3-results/figures/ds0_xy.png, id=188, 803.0pt x 228.855pt>
+File: 3-SLAM/3-results/figures/ds0_xy.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/ds0_xy.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/ds0_xy.png  used on input line 238.
+(pdftex.def)             Requested size: 217.42265pt x 61.96626pt.
+<3-SLAM/3-results/figures/pds0_xy.png, id=189, 803.0pt x 220.825pt>
+File: 3-SLAM/3-results/figures/pds0_xy.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/pds0_xy.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/pds0_xy.png  used on input line 244.
+(pdftex.def)             Requested size: 217.42265pt x 59.792pt.
+<3-SLAM/3-results/figures/ds1_xy.png, id=190, 803.0pt x 602.25pt>
+File: 3-SLAM/3-results/figures/ds1_xy.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/ds1_xy.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/ds1_xy.png  used on input line 253.
+(pdftex.def)             Requested size: 217.42265pt x 163.06914pt.
+<3-SLAM/3-results/figures/pds1_xy.png, id=191, 803.0pt x 602.25pt>
+File: 3-SLAM/3-results/figures/pds1_xy.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/pds1_xy.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/pds1_xy.png  used on input line 259.
+(pdftex.def)             Requested size: 217.42265pt x 163.06914pt.
+<3-SLAM/3-results/figures/ds2_xy.png, id=192, 803.0pt x 247.92625pt>
+File: 3-SLAM/3-results/figures/ds2_xy.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/ds2_xy.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/ds2_xy.png  used on input line 268.
+(pdftex.def)             Requested size: 217.42265pt x 67.13013pt.
+<3-SLAM/3-results/figures/pds2_xy.png, id=193, 803.0pt x 191.71625pt>
+File: 3-SLAM/3-results/figures/pds2_xy.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/pds2_xy.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/pds2_xy.png  used on input line 274.
+(pdftex.def)             Requested size: 217.42265pt x 51.91034pt.
+<3-SLAM/3-results/figures/ds3_xy.png, id=194, 803.0pt x 246.9225pt>
+File: 3-SLAM/3-results/figures/ds3_xy.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/ds3_xy.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/ds3_xy.png  used on input line 283.
+(pdftex.def)             Requested size: 217.42265pt x 66.85834pt.
+<3-SLAM/3-results/figures/pds3_xy.png, id=195, 803.0pt x 249.93375pt>
+File: 3-SLAM/3-results/figures/pds3_xy.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/pds3_xy.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/pds3_xy.png  used on input line 289.
+(pdftex.def)             Requested size: 217.42265pt x 67.67369pt.
+<3-SLAM/3-results/figures/ds4_xy.png, id=196, 803.0pt x 190.7125pt>
+File: 3-SLAM/3-results/figures/ds4_xy.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/ds4_xy.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/ds4_xy.png  used on input line 298.
+(pdftex.def)             Requested size: 217.42265pt x 51.63855pt.
+<3-SLAM/3-results/figures/pds4_xy.png, id=197, 803.0pt x 183.68625pt>
+File: 3-SLAM/3-results/figures/pds4_xy.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/pds4_xy.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/pds4_xy.png  used on input line 304.
+(pdftex.def)             Requested size: 217.42265pt x 49.73608pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [36 <./3-SLAM/3-results/figures/spider_error_per_m.png> <./3-SLAM/3-results/figures/spider_error_pct.png> <./3-SLAM/3-results/figures/spider_mean_abs_pos_err.png> <./3-SLAM/3-results/figures/spider_rpe_1m_trans_std.png>]
+<3-SLAM/3-results/figures/ds0_z.png, id=205, 803.0pt x 401.5pt>
+File: 3-SLAM/3-results/figures/ds0_z.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/ds0_z.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/ds0_z.png  used on input line 319.
+(pdftex.def)             Requested size: 217.42265pt x 108.71275pt.
+<3-SLAM/3-results/figures/pds0_z.png, id=206, 803.0pt x 401.5pt>
+File: 3-SLAM/3-results/figures/pds0_z.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/pds0_z.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/pds0_z.png  used on input line 325.
+(pdftex.def)             Requested size: 217.42265pt x 108.71275pt.
+<3-SLAM/3-results/figures/ds1_z.png, id=207, 803.0pt x 401.5pt>
+File: 3-SLAM/3-results/figures/ds1_z.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/ds1_z.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/ds1_z.png  used on input line 334.
+(pdftex.def)             Requested size: 217.42265pt x 108.71275pt.
+<3-SLAM/3-results/figures/pds1_z.png, id=208, 803.0pt x 401.5pt>
+File: 3-SLAM/3-results/figures/pds1_z.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/pds1_z.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/pds1_z.png  used on input line 340.
+(pdftex.def)             Requested size: 217.42265pt x 108.71275pt.
+<3-SLAM/3-results/figures/ds2_z.png, id=209, 803.0pt x 401.5pt>
+File: 3-SLAM/3-results/figures/ds2_z.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/ds2_z.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/ds2_z.png  used on input line 349.
+(pdftex.def)             Requested size: 217.42265pt x 108.71275pt.
+<3-SLAM/3-results/figures/pds2_z.png, id=210, 803.0pt x 401.5pt>
+File: 3-SLAM/3-results/figures/pds2_z.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/pds2_z.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/pds2_z.png  used on input line 355.
+(pdftex.def)             Requested size: 217.42265pt x 108.71275pt.
+<3-SLAM/3-results/figures/ds3_z.png, id=211, 578.16pt x 289.08pt>
+File: 3-SLAM/3-results/figures/ds3_z.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/ds3_z.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/ds3_z.png  used on input line 364.
+(pdftex.def)             Requested size: 217.42265pt x 108.70908pt.
+<3-SLAM/3-results/figures/pds3_z.png, id=212, 803.0pt x 401.5pt>
+File: 3-SLAM/3-results/figures/pds3_z.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/pds3_z.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/pds3_z.png  used on input line 370.
+(pdftex.def)             Requested size: 217.42265pt x 108.71275pt.
+<3-SLAM/3-results/figures/ds4_z.png, id=213, 578.16pt x 289.08pt>
+File: 3-SLAM/3-results/figures/ds4_z.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/ds4_z.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/ds4_z.png  used on input line 379.
+(pdftex.def)             Requested size: 217.42265pt x 108.70908pt.
+<3-SLAM/3-results/figures/pds4_z.png, id=214, 803.0pt x 401.5pt>
+File: 3-SLAM/3-results/figures/pds4_z.png Graphic file (type png)
+<use 3-SLAM/3-results/figures/pds4_z.png>
+Package pdftex.def Info: 3-SLAM/3-results/figures/pds4_z.png  used on input line 385.
+(pdftex.def)             Requested size: 217.42265pt x 108.71275pt.
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [37 <./3-SLAM/3-results/figures/ds0_xy.png> <./3-SLAM/3-results/figures/pds0_xy.png> <./3-SLAM/3-results/figures/ds1_xy.png> <./3-SLAM/3-results/figures/pds1_xy.png> <./3-SLAM/3-results/figures/ds2_xy.png> <./3-SLAM/3-results/figures/pds2_xy.png> <./3-SLAM/3-results/figures/ds3_xy.png> <./3-SLAM/3-results/figures/pds3_xy.png> <./3-SLAM/3-results/figures/ds4_xy.png> <./3-SLAM/3-results/figures/pds4_xy.png>]
+Overfull \vbox (4.457pt too high) has occurred while \output is active []
+
+ [38 <./3-SLAM/3-results/figures/ds0_z.png> <./3-SLAM/3-results/figures/pds0_z.png> <./3-SLAM/3-results/figures/ds1_z.png> <./3-SLAM/3-results/figures/pds1_z.png> <./3-SLAM/3-results/figures/ds2_z.png> <./3-SLAM/3-results/figures/pds2_z.png> <./3-SLAM/3-results/figures/ds3_z.png> <./3-SLAM/3-results/figures/pds3_z.png> <./3-SLAM/3-results/figures/ds4_z.png> <./3-SLAM/3-results/figures/pds4_z.png>] (3-SLAM/3-discussion/tex/3-discussion.tex [39]
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+[]|\OT1/cmr/bx/n/10.95 Dataset
+ []
+
+[40] [41] [42] [43]) (3-SLAM/3-summary/tex/3-summary.tex)) [44]
+\openout2 = `4-precise-alignment/precise-alignment.aux'.
+
+ (4-precise-alignment/precise-alignment.tex
+Chapter 4.
+(4-precise-alignment/4-intro/tex/4-intro.tex) (4-precise-alignment/4-related-work/tex/4-related-work.tex) (4-precise-alignment/4-methodology/tex/4-methodology.tex) (4-precise-alignment/4-results/tex/4-results.tex) (4-precise-alignment/4-discussion/tex/4-discussion.tex) (4-precise-alignment/4-summary/tex/4-summary.tex)) [45
+
+
+
+
+]
+\openout2 = `5-conclusion/conclusion.aux'.
+
+ (5-conclusion/conclusion.tex [46
+
+
+
+
+]
+Chapter 5.
+(5-conclusion/tex/5-future-work.tex)) [47] (thesis.bbl [48
+
+
+
+]
+Chapter 6.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 40.
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
+File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 40.
+ [49]
+Underfull \hbox (badness 10000) in paragraph at lines 92--96
+\OT1/cmr/m/n/10.95 https://www.mpi.govt.nz/resources-and-forms/economic-intelligence/situation-and-
+ []
+
+[50] [51] [52]) [53] [54
+
+]
+\openout2 = `appendix-a.aux'.
+
+ (appendix-a.tex) [55
+
+
+] (thesis.aux (abstract.aux) (acknowledgements.aux) (preface.aux) (notation.aux) (introduction.aux) (1-intro/introduction.aux) (2-background/background.aux) (3-SLAM/SLAM.aux) (4-precise-alignment/precise-alignment.aux) (5-conclusion/conclusion.aux) (appendix-a.aux))
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 7307 strings out of 467867
+ 152141 string characters out of 5417366
+ 569658 words of memory out of 5000000
+ 35943 multiletter control sequences out of 15000+600000
+ 645215 words of font info for 105 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 67i,14n,77p,1504b,513s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\PSTENGE\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on thesis.pdf (67 pages, 1649474 bytes).
+PDF statistics:
+ 382 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 156 words of extra memory for PDF output out of 10000 (max. 10000000)
+

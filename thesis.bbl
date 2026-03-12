@@ -1,0 +1,293 @@
+\begin{thebibliography}{{2025 {{Marlborough Vineyard Monitoring Report}}}~{}}
+
+\bibitem[{2025 {{Marlborough Vineyard Monitoring
+  Report}}}~{}]{2025MarlboroughVineyard}
+ `2025 {{Marlborough Vineyard Monitoring Report}}'.
+
+\bibitem[{Aguiar\
+  {\citeetal}}~{2022}]{aguiarLocalizationMappingAgriculture2022}
+{\sc Aguiar, A.S., {Neves dos Santos}, F., Sobreira, H., {Boaventura-Cunha}, J.
+  and Sousa, A.J.} (2022), `Localization and {{Mapping}} on {{Agriculture
+  Based}} on {{Point-Feature Extraction}} and {{Semiplanes Segmentation From 3D
+  LiDAR Data}}', {\it Front. Robot. AI}, Vol.\,9, January.
+
+\bibitem[{Ahmed\ {\citeetal}}~{2023}]{ahmedMachineVisionBasedCropLoad2023}
+{\sc Ahmed, D., Sapkota, R., Churuvija, M. and Karkee, M.} (2023), `Machine
+  {{Vision-Based Crop-Load Estimation Using YOLOv8}}', April.
+
+\bibitem[{Besl\ and McKay}~{1992}]{beslMethodRegistration3D1992a}
+{\sc Besl, P. and McKay, N.D.} (1992), `A method for registration of 3-{{D}}
+  shapes', {\it IEEE Trans. Pattern Anal. Mach. Intell.}, Vol.\,14, No.\,2,
+  February, pp.\,239--256.
+\newblock [TLDR] A general-purpose, representation-independent method for the
+  accurate and computationally efficient registration of 3-D shapes including
+  free-form curves and surfaces based on the iterative closest point (ICP)
+  algorithm.
+
+\bibitem[{Botterill\ {\citeetal}}~{2017}]{botterillRobotSystemPruning2017}
+{\sc Botterill, T., Paulin, S., Green, R., Williams, S., Lin, J., Saxton, V.,
+  Mills, S., Chen, X. and {Corbett-Davies}, S.} (2017), `A {{Robot System}} for
+  {{Pruning Grape Vines}}', {\it Journal of Field Robotics}, Vol.\,34, No.\,6,
+  pp.\,1100--1122.
+
+\bibitem[{Chen\ and Medioni}~{1991}]{chenObjectModelingRegistration1991}
+{\sc Chen, Y. and Medioni, G.} (1991), `Object modeling by registration of
+  multiple range images', In {\it 1991 {{IEEE International Conference}} on
+  {{Robotics}} and {{Automation Proceedings}}}, April, pp.\,2724--2729 vol.3.
+
+\bibitem[{Chrisman}~{2014}]{chrismanLatinHypercubeSampling2014}
+{\sc Chrisman, L.} (2014), `Latin {{Hypercube Sampling}} vs. {{Monte Carlo
+  Sampling}} \textbar{} {{Analytica}}', July.
+
+\bibitem[{Deutsch\ and Deutsch}~{2012}]{deutschLatinHypercubeSampling2012}
+{\sc Deutsch, J.L. and Deutsch, C.V.} (2012), `Latin hypercube sampling with
+  multidimensional uniformity', {\it Journal of Statistical Planning and
+  Inference}, Vol.\,142, No.\,3, March, pp.\,763--772.
+
+\bibitem[{Elfes}~{1989}]{elfesUsingOccupancyGrids1989}
+{\sc Elfes, A.} (1989), `Using occupancy grids for mobile robot perception and
+  navigation', {\it Computer}, Vol.\,22, No.\,6, June, pp.\,46--57.
+
+\bibitem[{Felicetti\ {\citeetal}}~{2025}]{felicettiTractorMountedGrapevine2025}
+{\sc Felicetti, M.J., Ross, R., Putland, S. and Bennett, S.} (2025), `Tractor
+  {{Mounted Grapevine Pruning System}}', {\it Journal of Field Robotics},
+  Vol.\,42, No.\,4, pp.\,1361--1372.
+
+\bibitem[{Forster\
+  {\citeetal}}~{2017}]{forsterOnManifoldPreintegrationRealTime2017}
+{\sc Forster, C., Carlone, L., Dellaert, F. and Scaramuzza, D.} (2017),
+  `On-{{Manifold Preintegration}} for {{Real-Time Visual-Inertial Odometry}}',
+  {\it IEEE Trans. Robot.}, Vol.\,33, No.\,1, February, pp.\,1--21.
+\newblock Comment: 20 pages, 24 figures, accepted for publication in IEEE
+  Transactions on Robotics (TRO) 2016.
+
+\bibitem[{Guan\ {\citeetal}}~{2025}]{guanResearchAgriculturalAutonomous2025}
+{\sc Guan, X., Ge, H., Nie, S. and Ding, Y.} (2025), `Research on
+  {{Agricultural Autonomous Positioning}} and {{Navigation System Based}} on
+  {{LIO-SAM}} and {{Apriltag Fusion}}', {\it Agronomy}, Vol.\,15, No.\,12,
+  November.
+
+\bibitem[{Han\ {\citeetal}}~{2020}]{hanMultiObjectiveOptimizationLoop2020}
+{\sc Han, D., Li, Y., Song, T. and Liu, Z.} (2020), `Multi-{{Objective
+  Optimization}} of {{Loop Closure Detection Parameters}} for {{Indoor 2D
+  Simultaneous Localization}} and {{Mapping}}', {\it Sensors}, Vol.\,20,
+  No.\,7, March, p.\,1906.
+
+\bibitem[{He\ {\citeetal}}~{2023}]{hePointLIORobustHighBandwidth2023}
+{\sc He, D., Xu, W., Chen, N., Kong, F., Yuan, C. and Zhang, F.} (2023),
+  `Point-{{LIO}}: {{Robust High}}-{{Bandwidth Light Detection}} and {{Ranging
+  Inertial Odometry}}', {\it Advanced Intelligent Systems}, Vol.\,5, April.
+
+\bibitem[{Hizatate\ {\citeetal}}~{2025}]{hizatateDevelopmentRobotPruning2025}
+{\sc Hizatate, T., Nishio, M. and Noguchi, N.} (2025), `Development of a
+  {{Robot Pruning System}} for {{Grapevines}}', {\it IFAC-PapersOnLine},
+  Vol.\,59, No.\,23, pp.\,66--71.
+
+\bibitem[{Hroob\ {\citeetal}}~{2021}]{hroobBenchmarkVisual3D2021}
+{\sc Hroob, I., Polvara, R., Molina, S., Cielniak, G. and Hanheide, M.} (2021),
+  `Benchmark of visual and {{3D}} lidar {{SLAM}} systems in simulation
+  environment for vineyards', July.
+
+\bibitem[{Industries}~{2025}]{industriesSituationOutlookPrimary2025}
+{\sc Industries, M.f.P.} (2025), `Situation and {{Outlook}} for {{Primary
+  Industries}} \textbar{} {{NZ Government}}',
+  https://www.mpi.govt.nz/resources-and-forms/economic-intelligence/situation-and-outlook-for-primary-industries,
+  December.
+
+\bibitem[{Kandasamy\ {\citeetal}}~{}]{kandasamyTuningHyperparametersGrad}
+{\sc Kandasamy, K., Vysyaraju, K.R., Neiswanger, W., Paria, B., Collins, C.R.,
+  Schneider, J., Poczos, B. and Xing, E.P.} `Tuning {{Hyperparameters}} without
+  {{Grad Students}}: {{Scalable}} and {{Robust Bayesian Optimisation}} with
+  {{Dragonfly}}'.
+
+\bibitem[{Khan\ {\citeetal}}~{2025}]{khanReviewSLAMTechniques2025}
+{\sc Khan, M., Ahmed, T. and Chen, H.} (2025), `A {{Review}} of {{SLAM
+  Techniques}} for {{Agricultural Robotics}}: {{Challenges}},
+  {{Architectures}}, and {{Future Directions}}', July, pp.\,598--603.
+
+\bibitem[{Koide\ {\citeetal}}~{2024}]{koideGLIM3DRangeInertial2024}
+{\sc Koide, K., Yokozuka, M., Oishi, S. and Banno, A.} (2024), `{{GLIM}}: {{3D
+  Range-Inertial Localization}} and {{Mapping}} with {{GPU-Accelerated Scan
+  Matching Factors}}', {\it Robotics and Autonomous Systems}, Vol.\,179,
+  September, p.\,104750.
+\newblock Comment: Robotics and Autonomous Systems.
+
+\bibitem[{Leonard\ and
+  {Durrant-Whyte}}~{1991}]{leonardSimultaneousMapBuilding1991}
+{\sc Leonard, J. and {Durrant-Whyte}, H.} (1991), `Simultaneous map building
+  and localization for an autonomous mobile robot', In {\it Proceedings
+  {{IROS}} '91:{{IEEE}}/{{RSJ International Workshop}} on {{Intelligent
+  Robots}} and {{Systems}} '91}, November, pp.\,1442--1447 vol.3.
+
+\bibitem[{Lu\ and Milios}~{1997}]{luGloballyConsistentRange1997}
+{\sc Lu, F. and Milios, E.} (1997), `Globally {{Consistent Range Scan
+  Alignment}} for {{Environment Mapping}}', {\it Autonomous Robots}, Vol.\,4,
+  No.\,4, October, pp.\,333--349.
+\newblock [TLDR] The problem of consistent registration of multiple frames of
+  measurements (range scans), together with therelated issues of representation
+  and manipulation of spatialuncertainties are studied, to maintain all the
+  local frames of data as well as the relative spatial relationships between
+  localframes.
+
+\bibitem[{Marzoa~Tanco\
+  {\citeetal}}~{2024}]{marzoatancoMAgroDatasetDataset2024}
+{\sc Marzoa~Tanco, M., Trinidad~Barnech, G., Andrade, F., Baliosian, J.,
+  LLofriu, M., Di~Martino, {\relax JM}. and Tejera, G.} (2024), `{{MAgro}}
+  dataset: {{A}} dataset for simultaneous localization and mapping in
+  agricultural environments', {\it The International Journal of Robotics
+  Research}, Vol.\,43, No.\,5, April, pp.\,591--601.
+
+\bibitem[{Moravec}~{1980}]{moravecObstacleAvoidanceNavigatio1980}
+{\sc Moravec, H.P.} (1980), `Obstacle {{Avoidance}} and {{Navigatio}} n in the
+  {{Real World}} by a {{Seeing Robot Rover}}', July.
+
+\bibitem[{Moravec}~{1990}]{moravecStanfordCartCMU1990}
+{\sc Moravec, H.P.} (1990), `The {{Stanford Cart}} and the {{CMU Rover}}', In
+  {\sc Cox, I.J. and Wilfong, G.T.}\ (Eds.), {\it Autonomous {{Robot
+  Vehicles}}}, Springer, New York, NY, pp.\,407--419.
+
+\bibitem[{Navone\ {\citeetal}}~{2025}]{navoneAutonomousRoboticPruning2025}
+{\sc Navone, A., Martini, M. and Chiaberge, M.} (2025), `Autonomous {{Robotic
+  Pruning}} in {{Orchards}} and {{Vineyards}}: A {{Review}}', May.
+
+\bibitem[{Nilsson}~{1984}]{nilssonShakeyRobot1984}
+{\sc Nilsson, N.J.} (1984), {\it Shakey the {{Robot}}}, Technical {{Note}}~AIC
+  Technical Note, April.
+
+\bibitem[{Packham\ and Schmidt}~{2008}]{packhamLatinHypercubeSampling2008}
+{\sc Packham, N. and Schmidt, W.M.} (2008), `Latin hypercube sampling with
+  dependence and applications in finance', {\it CPQF Working Paper Series},
+  No.\,15.
+
+\bibitem[{Papadimitriou\
+  {\citeetal}}~{2022}]{papadimitriouLoopClosureDetection2022}
+{\sc Papadimitriou, A., Kleitsiotis, I., Kostavelis, I., Mariolis, I.,
+  Giakoumis, D., Likothanassis, S. and Tzovaras, D.} (2022), `Loop {{Closure
+  Detection}} and {{SLAM}} in {{Vineyards}} with {{Deep Semantic Cues}}', In
+  {\it 2022 {{International Conference}} on {{Robotics}} and {{Automation}}
+  ({{ICRA}})}, May, pp.\,2251--2258.
+
+\bibitem[{Polvara\ {\citeetal}}~{2024}]{polvaraBacchusLongTermBLT2024}
+{\sc Polvara, R., Molina, S., Hroob, I., Papadimitriou, A., Tsiolis, K.,
+  Giakoumis, D., Likothanassis, S., Tzovaras, D., Cielniak, G. and Hanheide,
+  M.} (2024), `Bacchus {{Long-Term}} ({{BLT}}) data set: {{Acquisition}} of the
+  agricultural multimodal {{BLT}} data set with automated robot deployment',
+  {\it Journal of Field Robotics}, Vol.\,41, No.\,7, pp.\,2280--2298.
+
+\bibitem[{{Rapado-Rincon}\ and
+  Kootstra}~{2025}]{rapado-rinconTreeSLAMSemanticObject2025a}
+{\sc {Rapado-Rincon}, D. and Kootstra, G.} (2025), `Tree-{{SLAM}}: Semantic
+  object {{SLAM}} for efficient mapping of individual trees in orchards', July.
+\newblock Comment: Paper submitted to Smart Agricultural Technology.
+
+\bibitem[{Rusinkiewicz\ and
+  Levoy}~{2001}]{rusinkiewiczEfficientVariantsICP2001}
+{\sc Rusinkiewicz, S. and Levoy, M.} (2001), `Efficient variants of the {{ICP}}
+  algorithm', In {\it Proceedings {{Third International Conference}} on 3-{{D
+  Digital Imaging}} and {{Modeling}}}, May, pp.\,145--152.
+
+\bibitem[{Schmidt\ {\citeetal}}~{2024}]{schmidtROVERMultiSeasonDataset2024}
+{\sc Schmidt, F., Blessing, C., Enzweiler, M. and Valada, A.} (2024),
+  `{{ROVER}}: {{A Multi-Season Dataset}} for {{Visual SLAM}}', December.
+\newblock Comment: 17 pages, 7 figures, 11 tables.
+
+\bibitem[{Segal\ {\citeetal}}~{2009}]{segalGeneralizedICP2009}
+{\sc Segal, A., Haehnel, D. and Thrun, S.} (2009), `Generalized-{{ICP}}', In
+  {\it Robotics: {{Science}} and {{Systems V}}}, {Robotics: Science and Systems
+  Foundation}, June.
+\newblock [TLDR] The Iterative Closest Point ('ICP') and `point-to-plane ICP`
+  algorithms are combined into a single probabilistic framework and the new
+  approach is shown to be more robust to incorrect correspondences, and thus
+  makes it easier to tune the maximum match distance parameter present in most
+  variants of ICP.
+
+\bibitem[{Shan\ and Englot}~{2018}]{shanLeGOLOAMLightweightGroundOptimized2018}
+{\sc Shan, T. and Englot, B.} (2018), `{{LeGO-LOAM}}: {{Lightweight}} and
+  {{Ground-Optimized Lidar Odometry}} and {{Mapping}} on {{Variable Terrain}}',
+  In {\it 2018 {{IEEE}}/{{RSJ International Conference}} on {{Intelligent
+  Robots}} and {{Systems}} ({{IROS}})}, October, pp.\,4758--4765.
+
+\bibitem[{Shan\ {\citeetal}}~{2020}]{shanLIOSAMTightlycoupledLidar2020}
+{\sc Shan, T., Englot, B., Meyers, D., Wang, W., Ratti, C. and Rus, D.} (2020),
+  `{{LIO-SAM}}: {{Tightly-coupled Lidar Inertial Odometry}} via {{Smoothing}}
+  and {{Mapping}}', July.
+\newblock Comment: IROS 2020.
+
+\bibitem[{Silwal\
+  {\citeetal}}~{2021}]{silwalRobustIlluminationInvariantCamera2021}
+{\sc Silwal, A., Parhar, T., Yandun, F. and Kantor, G.} (2021), `A {{Robust
+  Illumination-Invariant Camera System}} for {{Agricultural Applications}}', In
+  {\it 2021 {{IEEE}}/{{RSJ International Conference}} on {{Intelligent Robots}}
+  and {{Systems}} ({{IROS}})}, September, pp.\,3292--3298.
+\newblock Comment: 8 Pages, 5 Figures.
+
+\bibitem[{Smith\ and
+  Cheeseman}~{1987}]{smithRepresentationEstimationSpatial1987}
+{\sc Smith, R. and Cheeseman, P.} (1987), `On the {{Representation}} and
+  {{Estimation}} of {{Spatial Uncertainty}}', {\it The International Journal of
+  Robotics Research}, Vol.\,5, February.
+
+\bibitem[{Soares\ {\citeetal}}~{2025}]{soaresVARSLAMVisualAdaptive2025}
+{\sc Soares, J.C.V., Abati, G.F. and Semini, C.} (2025), `{{VAR-SLAM}}:
+  {{Visual Adaptive}} and {{Robust SLAM}} for {{Dynamic Environments}}',
+  October.
+\newblock Comment: Code available at https://github.com/iit-DLSLab/VAR-SLAM.
+
+\bibitem[{{soumyadip}}~{2024}]{soumyadipIntroductionLiDARSLAM2024}
+{\sc {soumyadip}} (2024), `Introduction to {{LiDAR SLAM}}: {{LOAM}} \&
+  {{LeGO-LOAM}} - {{Paper}} \& {{Code Explained}} with {{ROS}} 2', August.
+
+\bibitem[{Tang\ {\citeetal}}~{2024}]{tangFruitTreeMappingSystem2024}
+{\sc Tang, B., Guo, Z., Huang, C., Huai, S. and Gai, J.} (2024), `A
+  {{Fruit-Tree Mapping System}} for {{Semi-Structured Orchards Based}} on
+  {{Multi-Sensor-Fusion SLAM}}', {\it IEEE Access}, Vol.\,12,
+  pp.\,162122--162130.
+
+\bibitem[{Ullah\ {\citeetal}}~{2024}]{ullahMobileRobotLocalization2024}
+{\sc Ullah, I., Adhikari, D., Khan, H., Anwar, M.S., Ahmad, S. and Bai, X.}
+  (2024), `Mobile robot localization: {{Current}} challenges and future
+  prospective', {\it Computer Science Review}, Vol.\,53, August, p.\,100651.
+
+\bibitem[{Wang\ {\citeetal}}~{2025}]{wangSuperLIORobustEfficient2025}
+{\sc Wang, L., Zhang, X., Li, C., He, D., Pan, Y. and Yi, J.} (2025),
+  `Super-{{LIO}}: {{A Robust}} and {{Efficient LiDAR-Inertial Odometry System}}
+  with a {{Compact Mapping Strategy}}', https://arxiv.org/abs/2509.05723v2,
+  September.
+
+\bibitem[{Wei\ {\citeetal}}~{2026}]{weiLiDARVisualInertial2026}
+{\sc Wei, H., Wu, P., Zhang, X., Zheng, J., Zhang, J. and Wei, K.} (2026),
+  `{{LiDAR}}--{{Visual}}--{{Inertial Multi-UGV Collaborative SLAM Framework}}',
+  {\it Drones}, Vol.\,10, No.\,1, January.
+
+\bibitem[{Xu\ {\citeetal}}~{2022}]{xuFASTLIO2FastDirect2022}
+{\sc Xu, W., Cai, Y., He, D., Lin, J. and Zhang, F.} (2022), `{{FAST-LIO2}}:
+  {{Fast Direct LiDAR-Inertial Odometry}}', {\it IEEE Transactions on
+  Robotics}, Vol.\,38, No.\,4, August, pp.\,2053--2073.
+
+\bibitem[{Xu\ {\citeetal}}~{2024}]{xuTKOSLAMVisualSLAM2024}
+{\sc Xu, T., Chen, M. and Liu, J.} (2024), `{{TKO}}-{{SLAM}}: {{Visual SLAM}}
+  algorithm based on time-delay feature regression and keyframe pose
+  optimization', {\it Journal of Field Robotics}, Vol.\,41, May,
+  pp.\,1960--1983.
+
+\bibitem[{You\ {\citeetal}}~{2022}]{youOpticalFlowbasedBranch2022}
+{\sc You, A., Grimm, C. and Davidson, J.R.} (2022), `Optical flow-based branch
+  segmentation for complex orchard environments', February.
+
+\bibitem[{Zhan\ {\citeetal}}~{2026}]{zhanAgriLiRa4DMultiSensorUAV2026}
+{\sc Zhan, Z., Ming, Y., Li, S. and Yuan, J.} (2026), `{{AgriLiRa4D}}: {{A
+  Multi-Sensor UAV Dataset}} for {{Robust SLAM}} in {{Challenging Agricultural
+  Fields}}', January.
+
+\bibitem[{Zhang\ and Singh}~{2014}]{zhangLOAMLidarOdometry2014}
+{\sc Zhang, J. and Singh, S.} (2014), `{{LOAM}}: {{Lidar Odometry}} and
+  {{Mapping}} in {{Real-time}}', July.
+
+\bibitem[{Zhang\ {\citeetal}}~{2026}]{zhangKeyTechnologiesIntelligent2026}
+{\sc Zhang, Y., Sun, Z., Peng, W., Lin, Y., Li, X., Yan, K. and Chen, P.}
+  (2026), `Key {{Technologies}} for {{Intelligent Operation}} of {{Plant
+  Protection UAVs}} in {{Hilly}} and {{Mountainous Areas}}: {{Progress}},
+  {{Challenges}}, and {{Prospects}}', {\it Agronomy}, Vol.\,16, No.\,2,
+  January.
+
+\end{thebibliography}

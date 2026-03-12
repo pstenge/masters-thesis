@@ -1,0 +1,113 @@
+%%
+%% This is file `eleccite.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% eleccite.dtx  (with options: `eleccite')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from eleccite.sty.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file eleccite.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+\def\fileversion{v1.1e}
+\def\filedate{1994/11/10}
+\def\docdate{1994/11/08}
+\ProvidesPackage{eleccite}[\filedate\space Elec.\ Eng.\ citation style file]
+\typeout{Elec. Eng. Citation Style File `eleccite' <\filedate>.}
+\def\citeleft{[}
+\def\citeright{]}
+\def\citesep{,\penalty500\ }
+\def\citenotesep{, }
+\def\citeyearsep{~}
+\def\citesyearsep{~}
+\def\citeshell#1{\citeleft#1\citeright}
+\def\citeetal{\emph{et~al.}}
+\def\cite{\@tempswafalse
+          \@ifstar {\@ifnextchar [{\@tempswatrue\@citesx}{\@citesx[]}}
+                   {\@ifnextchar [{\@tempswatrue\@citex} {\@citex[]}}}
+\def\@citex[#1]#2{%
+  \let\@citea\@empty
+  \@cite{\@for\@citeb:=#2\do
+    {\@citea\def\@citea{\citesep}%
+     \edef\@citeb{\expandafter\@iden\@citeb}%
+     \if@filesw\immediate\write\@auxout{\string\citation{\@citeb}}\fi
+     \@ifundefined{b@\@citeb}{{\reset@font\bfseries ?}\@warning
+       {Citation `\@citeb' on page \thepage \space undefined}}%
+     {\@citeauthyear{\@citeb}}}}{#1}}
+\def\@citesx[#1]#2{%
+  \if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+  \@ifundefined{b@#2}{{\reset@font\bfseries ?}\@warning
+       {Citation `#2' on page \thepage \space undefined}}%
+  {\@citeauthor{#2}\citesyearsep\@cite{\@citeyear{#2}}{#1}}}
+\def\@cite#1#2{%
+  \citeleft#1\if@tempswa \citenotesep#2\fi\citeright}
+\def\citebare{%
+  \@tempswafalse
+  \@ifnextchar [{\@tempswatrue\@citebarex}{\@citebarex[]}}
+\def\@citebarex[#1]#2{%
+  \if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+  \@ifundefined{b@#2}{{\reset@font\bfseries ?}\@warning
+       {Citation `#2' on page \thepage \space undefined}}%
+  {\@citeauthyear{#2}}\if@tempswa \citenotesep#1\fi}
+\def\citeauthor#1{%
+  \if@filesw\immediate\write\@auxout{\string\citation{#1}}\fi
+  \@ifundefined{b@#1}{{\reset@font\bfseries ?}\@warning
+       {Citation `#1' on page \thepage \space undefined}}%
+  {\@citeauthor{#1}}}
+\def\citeyear#1{%
+  \if@filesw\immediate\write\@auxout{\string\citation{#1}}\fi
+  \@ifundefined{b@#1}{{\reset@font\bfseries ?}\@warning
+       {Citation `#1' on page \thepage \space undefined}}%
+  {\@citeyear{#1}}}
+\def\@citeauthyear#1{%
+  \expandafter\expandafter\expandafter\@citeauthyearx
+  \csname b@#1\endcsname\@}
+\def\@citeauthyearx#1#2\@{%
+  #1\citeyearsep#2}
+\def\@citeauthor#1{%
+  \expandafter\expandafter\expandafter\@citeauthorx
+  \csname b@#1\endcsname\@}
+\def\@citeauthorx#1#2\@{%
+  #1}
+\def\@citeyear#1{%
+  \expandafter\expandafter\expandafter\@citeyearx
+  \csname b@#1\endcsname\@}
+\def\@citeyearx#1#2\@{%
+  #2}
+\def\@lbibitem[#1~#2]#3{%
+  \item\if@filesw{ \def\protect##1{\string ##1\space}\immediate
+  \write\@auxout{\string\bibcite{#3}{{#1}{#2}}}\fi\ignorespaces}}
+\@ifclassloaded{article}{%
+\renewenvironment{thebibliography}[1]{%
+   \@tempcnta\c@secnumdepth \c@secnumdepth -5\relax
+   \section{\refname}\c@secnumdepth\@tempcnta
+   \list{}{\labelwidth 0em \itemindent-\leftmargin}
+   \def\newblock{\hskip .11em plus .33em minus -.07em}
+   \sloppy\clubpenalty4000\widowpenalty4000%
+   \sfcode`\.=1000}
+  {\def\@noitemerr{\@warning{Empty `thebibliography' environment}}%
+   \endlist}%
+}{%
+\renewenvironment{thebibliography}[1]{%
+   \chapter{\bibname}%
+   \list{}{\labelwidth 0em \itemindent-\leftmargin}%
+   \def\newblock{\hskip .11em plus .33em minus -.07em}%
+   \sloppy\clubpenalty4000\widowpenalty4000%
+   \sfcode`\.=1000\relax}
+  {\def\@noitemerr{\@warning{Empty `thebibliography' environment}}%
+   \endlist}%
+}
+\endinput
+%%
+%% End of file `eleccite.sty'.

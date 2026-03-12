@@ -1,0 +1,373 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(thesis.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(electhesis.cls
+Document Class: electhesis 1994/12/02 Elec. Eng. thesis class
+Elec. Eng. Thesis Class `electhesis' <1994/12/02>. BETA VERSION.
+
+Please note that this is a BETA version of electhesis.
+If you encounter any problems or bugs in using it please email a message
+to latex@elec.canterbury.ac.nz.
+
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
+Document Class: book 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/base\bk11.clo))
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+)) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty))
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+) (eleccite.sty
+Elec. Eng. Citation Style File `eleccite' <1994/11/10>.
+) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+For additional information on amsmath, use the `?' option.
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty))
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty)
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty))
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+)
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty)
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty)
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics
+.cfg)
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.d
+ef)))
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+)
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.st
+y (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty)
+
+
+Package caption Warning: Unknown document class (or package),
+(caption)                standard defaults will be used.
+See the caption package documentation for explanation.
+
+)) (C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty)
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/cleveref\cleveref.sty
+)
+==> First Aid for cleveref.sty applied!
+
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty))
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg
+))
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-p
+dftex.def) (thesis.aux (abstract.aux) (acknowledgements.aux) (preface.aux)
+(notation.aux) (introduction.aux) (1-intro/introduction.aux)
+(2-background/background.aux) (3-SLAM/SLAM.aux)
+(4-precise-alignment/precise-alignment.aux) (5-conclusion/conclusion.aux)
+(appendix-a.aux))
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.
+mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf
+-base.sty
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys
+.cfg))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd)
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd)
+[1{C:/Users/PSTENGE/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+(abstract.tex [2]) [3] [4] (thesis.toc [5]) [6] (acknowledgements.tex) [7]
+(preface.tex [8]) [9] (notation.tex [10]) [11] [12]
+No file introduction.tex.
+(1-intro/introduction.tex
+Chapter 1.
+(1-intro/tex/1-research-context.tex) (1-intro/tex/1-motivation.tex [1])
+(1-intro/tex/1-research-objectives.tex [2]
+Overfull \hbox (15.22014pt too wide) in paragraph at lines 17--18
+[]\OT1/cmr/m/n/10.95 Validate lo-cal-i-sa-tion per-for-mance un-der vary-ing vi
+ne-yard con-di-tions in-clud-ing GNSS dropout,
+) (1-intro/tex/1-thesis-structure.tex)) [3] (2-background/background.tex
+[4]
+Chapter 2.
+(2-background/tex/2-robot-localisation.tex [5] [6] [7] [8] [9 <./2-background/f
+igures/globalMappingOccupancyGrid.png> <./2-background/figures/sonarOccupancyGr
+id.png>] [10 <./2-background/figures/OccupancyGridSensorFusion.png>] [11])
+(2-background/tex/2-vineyard-robotics.tex [12] [13])
+(2-background/tex/2-vineyard-pruning.tex [14]
+Underfull \hbox (badness 10000) in paragraph at lines 24--24
+[]|\OT1/cmr/m/n/10.95 Moderate (Depth-
+
+Underfull \hbox (badness 2173) in paragraph at lines 24--24
+[]|\OT1/cmr/m/n/10.95 Archie Jnr [Navone
+
+Underfull \hbox (badness 10000) in paragraph at lines 24--24
+[]|\OT1/cmr/m/n/10.95 High (3D Co-or-di-
+)) [15] (3-SLAM/SLAM.tex [16]
+Chapter 3.
+(3-SLAM/3-intro/tex/3-intro.tex) (3-SLAM/3-related-work/tex/3-related-work.tex
+[17] [18] [19]
+Underfull \hbox (badness 10000) in paragraph at lines 81--81
+[]|\OT1/cmr/bx/n/10 Latin Hy-per-cube
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--81
+[]|\OT1/cmr/m/n/10 Guaranteed uni-vari-ate
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--81
+\OT1/cmr/m/n/10 uni-for-mity [Chris-
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--81
+[]|\OT1/cmr/m/n/10 High; in-de-pen-dent
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--81
+\OT1/cmr/m/n/10 of $\OML/cmm/m/it/10 d$ \OT1/cmr/m/n/10 [Deutsch and
+
+Underfull \hbox (badness 2426) in paragraph at lines 81--81
+[]|\OT1/cmr/m/n/10 Consistent; asymp-tot-i-
+
+Underfull \hbox (badness 1331) in paragraph at lines 81--81
+[]|\OT1/cmr/m/n/10 Near-random with low
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--81
+\OT1/cmr/m/n/10 dis-crep-ancy [Chris-
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[20] [21]
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\OT1/cmr/bx/n/10 VSLAM Fail-ure
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 Requires adap-tive
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 Segmentation er-rors
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 Necessitates ro-bust
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+\OT1/cmr/m/n/10 loss ker-nels [Soares
+
+Underfull \hbox (badness 4441) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 Geometric de-gen-er-acy
+
+Underfull \hbox (badness 6268) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 High de-pen-dency on
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+\OT1/cmr/m/n/10 sen-sor fu-sion [Wei
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 Motion blur [Xu
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 Point cloud skew
+) (3-SLAM/3-methodology/tex/3-methodology.tex [22] [23] [24] [25] [26] [27]
+
+LaTeX Warning: Citation `cite:22' on page 28 undefined on input line 200.
+
+
+LaTeX Warning: Citation `cite:23' on page 28 undefined on input line 200.
+
+
+LaTeX Warning: Citation `cite:24' on page 28 undefined on input line 203.
+
+
+LaTeX Warning: Citation `cite:25' on page 28 undefined on input line 208.
+
+
+LaTeX Warning: Citation `cite:26' on page 28 undefined on input line 211.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 224--224
+[]|\OT1/cmr/m/n/10.95 High-density sam-pling within
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation `cite:28' on page 28 undefined on input line 227.
+
+[28]
+
+LaTeX Warning: Citation `cite:29' on page 29 undefined on input line 231.
+
+) (3-SLAM/3-results/tex/3-results.tex [29]
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--93
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--93
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--93
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--93
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--93
+[]|\OT1/cmr/bx/n/10.95 Dataset
+[30]
+Underfull \vbox (badness 10000) has occurred while \output is active [31]
+Overfull \vbox (32.99356pt too high) detected at line 120
+
+Overfull \vbox (32.99356pt too high) detected at line 120
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Baseline
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Refined
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Proposed
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Baseline
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Refined
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Proposed
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Baseline
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Refined
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10.95 Proposed
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--137
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--137
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--137
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--137
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--137
+[]|\OT1/cmr/bx/n/10.95 Dataset
+[32] [33 <./3-SLAM/3-results/figures/glim_error_distribution_by_stage_log.png> 
+<./3-SLAM/3-results/figures/proposed_error_distribution_by_stage_log.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active [34 <./3-S
+LAM/3-results/figures/glim_consensus_progression.png> <./3-SLAM/3-results/figur
+es/proposed_consensus_progression.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active [35 <./3-S
+LAM/3-results/figures/spider_error_per_m.png> <./3-SLAM/3-results/figures/spide
+r_error_pct.png> <./3-SLAM/3-results/figures/spider_mean_abs_pos_err.png> <./3-
+SLAM/3-results/figures/spider_rpe_1m_trans_std.png>])
+Underfull \vbox (badness 10000) has occurred while \output is active [36 <./3-S
+LAM/3-results/figures/ds0_xy.png> <./3-SLAM/3-results/figures/pds0_xy.png> <./3
+-SLAM/3-results/figures/ds1_xy.png> <./3-SLAM/3-results/figures/pds1_xy.png> <.
+/3-SLAM/3-results/figures/ds2_xy.png> <./3-SLAM/3-results/figures/pds2_xy.png> 
+<./3-SLAM/3-results/figures/ds3_xy.png> <./3-SLAM/3-results/figures/pds3_xy.png
+> <./3-SLAM/3-results/figures/ds4_xy.png> <./3-SLAM/3-results/figures/pds4_xy.p
+ng>]
+Overfull \vbox (4.457pt too high) has occurred while \output is active [37 <./3
+-SLAM/3-results/figures/ds0_z.png> <./3-SLAM/3-results/figures/pds0_z.png> <./3
+-SLAM/3-results/figures/ds1_z.png> <./3-SLAM/3-results/figures/pds1_z.png> <./3
+-SLAM/3-results/figures/ds2_z.png> <./3-SLAM/3-results/figures/pds2_z.png> <./3
+-SLAM/3-results/figures/ds3_z.png> <./3-SLAM/3-results/figures/pds3_z.png> <./3
+-SLAM/3-results/figures/ds4_z.png> <./3-SLAM/3-results/figures/pds4_z.png>]
+(3-SLAM/3-discussion/tex/3-discussion.tex [38]
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+[]|\OT1/cmr/bx/n/10.95 Dataset
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+[]|\OT1/cmr/bx/n/10.95 Dataset
+[39] [40] [41] [42]) (3-SLAM/3-summary/tex/3-summary.tex)) [43]
+(4-precise-alignment/precise-alignment.tex [44]
+Chapter 4.
+(4-precise-alignment/4-intro/tex/4-intro.tex)
+(4-precise-alignment/4-related-work/tex/4-related-work.tex)
+(4-precise-alignment/4-methodology/tex/4-methodology.tex)
+(4-precise-alignment/4-results/tex/4-results.tex)
+(4-precise-alignment/4-discussion/tex/4-discussion.tex)
+(4-precise-alignment/4-summary/tex/4-summary.tex)) [45]
+(5-conclusion/conclusion.tex [46]
+Chapter 5.
+(5-conclusion/tex/5-future-work.tex)) [47] (thesis.bbl [48]
+Chapter 6.
+(C:\Users\PSTENGE\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd)
+[49]
+Underfull \hbox (badness 10000) in paragraph at lines 92--96
+\OT1/cmr/m/n/10.95 https://www.mpi.govt.nz/resources-and-forms/economic-intelli
+gence/situation-and-
+[50] [51] [52]) [53] [54] (appendix-a.tex) [55] (thesis.aux (abstract.aux)
+(acknowledgements.aux) (preface.aux) (notation.aux) (introduction.aux)
+(1-intro/introduction.aux) (2-background/background.aux) (3-SLAM/SLAM.aux)
+(4-precise-alignment/precise-alignment.aux) (5-conclusion/conclusion.aux)
+(appendix-a.aux)) )
+(see the transcript file for additional information) <C:\Users\PSTENGE\AppData\
+Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/PSTENGE/A
+ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/User
+s/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.p
+fb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmbx8.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmcsc10.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmex10.pfb><C:/Users/PSTENGE/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/PSTENGE/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/PSTENGE/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/PS
+TENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb>
+<C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmr10.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmr12.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmr6.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/PSTENGE/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/PSTENGE/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/PSTENGE/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/PS
+TENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C
+:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+ti10.pfb><C:/Users/PSTENGE/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/symbols/msbm10.pfb>
+Output written on thesis.pdf (67 pages, 1648046 bytes).
+Transcript written on thesis.log.
+pdflatex: major issue: So far, you have not checked for MiKTeX updates.

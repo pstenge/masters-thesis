@@ -1,0 +1,127 @@
+\section{Robot Localisation}
+
+\subsection{Introduction}
+
+Robot localisation is the fundamental process of determining the robot's pose (position and orientation) within a given frame of reference using sensory information. It is a critical step in all robot navigation and manipulation tasks which interact with the environment. Localisation is tightly linked with the domains of navigation, and mapping. Localisation and mapping are often combined in Simultaneous Localisation and Mapping (SLAM) \cite{ullahMobileRobotLocalization2024} \cite{leonardSimultaneousMapBuilding1991}. SLAM is a common precursory step for robot navigation.
+
+This chapter discusses a historical overview of robot localisation, focusing on the foundational research that established the field. While much of this research is several decades old, the contributions in the form of mathematical formulations, algorithms, and conceptual mobile robot frameworks remain central to contemporary SLAM research. An understanding of this early research is therefore necessary in contextualising the pathways of research that have led to the state-of-the-art SLAM methods of today. 
+
+This chapter will trace the key breakthroughs that directly influence modern systems, including probabilistic localisation and mapping, multi-sensor fusion, scan matching techniques such as the Iterative Closest Point algorithm, and graph-based formulations for global consistency through pose graph optimisation. These concepts compose the theoretical and algorithmic backbone of modern SLAM, and are particularly relevant to semi-structured and uncertain environments such as vineyards and orchards. 
+
+\subsection{The Inception of Mobile Robots with Reasoning}
+
+From 1966 through 1972, Stanford Research Institute (SRI) developed the world's first mobile robot, ``Shakey the Robot'', with the capacity to reason about its actions. It was equipped with a TV camera and an optical range finder to observe its environment. An antenna radio link communicated back to a computer, which in turn controlled the robot.
+
+The environment was exceptionally controlled - simple enough to allow visual capabilities to be useful, but complex enough to exhibit the limits of the proposed method. The environment contained only planar surfaces. Objects were uniformly coated with red, grey or white paint so that they were opaque with non-specular surfaces. Illumination was limited to a 2-1/2 to 1 range by using light coloured walls and floor alongside regularly spaced overhead fluorescent lights.
+
+In the technical note on Shakey, N.\ J.\ Nilsson states that the most important result is ``an appreciation of the potential complexity of the problem of vision when the real world is the subject matter'' -- indeed an observation that has stood the test of time well into the 21st century.
+
+Shakey did not maintain a continuous pose estimate. Instead, localisation was formulated in discrete, semantic primitives such as ``room 1'', ``room 2'' and ``door 1''. The default localisation method was a form of pure open-loop, discrete dead reckoning. Shakey moved through a set of effectively atomic commands such as ROLL and TURN. The localisation system assumed the motion executed perfectly, and updated the position estimate deterministically after each command had executed. Shakey also had the ability to perform visual landmark localisation using only three primitives: doorways, convex corners and concave corners. These landmarks were pre-modelled and expected to exist in particular locations.
+
+In an experiment where Shakey was approximately 7.5 feet away from a wall, a doorway, a convex corner and a concave corner, the robot could localise itself with an accuracy of between 5 and 10 per cent of the range, and an orientation of 5 degrees. Shakey was extremely slow, taking hours to navigate simple environments \cite{nilssonShakeyRobot1984}. Nevertheless, it set the foundation for robot localisation research over the following decades.
+
+In 1980, Hans Moravec built upon Stanford's prior research and developed the Stanford AI Lab Cart \cite{moravecObstacleAvoidanceNavigatio1980}. For the first time, stereo vision was utilised on a mobile robot for navigation. While Shakey used multiple different sensors for perception, the Cart relied solely on visual information.
+
+Image features, such as corners and high-variance ``image patches'', were represented using a multi-resolution image pyramid. Using stereo vision, the cart could determine the approximate 3D locations of these features. Similar to Shakey, the Cart was slow, moving only one metre every 10--15 minutes in discrete lurches. The cart could then derive its own motion by finding the 3D coordinate transform between subsequent observations of the same features. The 6-DOF motion matrix was estimated by solving the rigid transformation aligning the prior and current 3D feature sets using the weighted least squares method. For a 20 metre indoor course, the cart would take approximately 5 hours to navigate \cite{moravecStanfordCartCMU1990}. The Cart's internal map and localisation system was purely geometric, whereas Shakey, by contrast, maintained a symbolic and semantic spatial representation.
+
+\subsection{Statistical Estimation of Spatial Uncertainty}
+
+Smith and Cheeseman's 1986 research ``On the Representation and Estimation of Spatial Uncertainty'' \cite{smithRepresentationEstimationSpatial1987} laid the framework for the Kalman filter, occupancy grids and other probabilistic representations of space which are still widely used today. The paper presents the spatial relationship between objects or coordinate frames as approximate transformations (ATs), which consist of an estimated pose and an associated covariance matrix that encapsulates the spatial second-order uncertainty. The two core operations presented in this paper are \textit{compounding} and \textit{merging}.
+
+Compounding is used to propagate uncertainty through sequential spatial transformations. It does this by treating the poses as random variables and propagating their uncertainty through the nonlinear composition of transformations using first-order linearization.
+
+Let two uncertain poses be composed as \[\mathbf{x}_3 = f(\mathbf{x}_1, \mathbf{x}_2),\]
+where \(\mathbf{x}_i\) denotes a pose with mean \(\boldsymbol{\mu}_i\) and covariance \(\mathbf{C}_i\). 
+
+The nonlinear function \(f(\cdot)\) is linearized about the mean values using a first-order Taylor expansion,
+\[
+\delta \mathbf{x}_3 \approx \mathbf{J}
+\begin{bmatrix}
+\delta \mathbf{x}_1 \\
+\delta \mathbf{x}_2
+\end{bmatrix},
+\]
+where \(\mathbf{J}\) is the Jacobian of \(f\) evaluated at \((\boldsymbol{\mu}_1, \boldsymbol{\mu}_2)\). The covariance of the compounded transformation is then computed as
+\[
+\mathbf{C}_3 = \mathbf{J}
+\begin{bmatrix}
+\mathbf{C}_1 & \mathbf{0} \\
+\mathbf{0} & \mathbf{C}_2
+\end{bmatrix}
+\mathbf{J}^\top .
+\]
+
+This formulation shows that uncertainty grows as transformations are compounded: variances from each step contribute additively, while correlations between position and orientation naturally emerge due to the geometry of the transformation.
+
+Merging is used to reduce uncertainty by combining multiple independent estimates of the same spatial relationship. It does this by fusing parallel approximate transformations using a minimum-variance estimator derived from Kalman filtering.
+
+Let two independent estimates of the same pose be given by
+\[
+\mathbf{x}_1 \sim \mathcal{N}(\boldsymbol{\mu}_1, \mathbf{C}_1), 
+\qquad
+\mathbf{x}_2 \sim \mathcal{N}(\boldsymbol{\mu}_2, \mathbf{C}_2).
+\]
+The merged estimate \((\boldsymbol{\mu}_3, \mathbf{C}_3)\) is computed using the Kalman gain
+\[
+\mathbf{K} = \mathbf{C}_1 \left( \mathbf{C}_1 + \mathbf{C}_2 \right)^{-1},
+\]
+with the updated mean and covariance given by
+\[
+\boldsymbol{\mu}_3 = \boldsymbol{\mu}_1 + \mathbf{K}\left( \boldsymbol{\mu}_2 - \boldsymbol{\mu}_1 \right),
+\]
+\[
+\mathbf{C}_3 = \mathbf{C}_1 - \mathbf{K}\mathbf{C}_1 .
+\]
+
+This operation produces a weighted average of the two estimates, where estimates with lower covariance have greater influence. As a result, the merged covariance is smaller than either input covariance, reflecting the reduction in uncertainty obtained by fusing independent information sources.
+
+Together, these operations allow uncertainty to be consistently propagated and reduced within a network of spatial relations, referred to as a \textit{relational map}. 
+
+The foundational paper for Kalman filtering was produced by Rudolf E. Kalman in 1960, which introduced the concept of recursive state prediction and uncertainty propagation in the time domain. However, it was not until Smith and Cheeseman's paper titled ``Estimating Uncertain Spatial Relationships in Robotics'' that the Extended Kalman Filter was applied to the SLAM problem. They introduced the concept of the ``Stochastic Map'', which aggregated the estimated sensor poses and estimated landmark poses into a single, unified vector. The covariance matrix describes the deeply correlated relationship between uncertainty measurements in sensor and landmark poses. This concept marked a departure in robot localisation research from deterministic methods to probabilistic methods.
+
+Building on the work from Smith and Cheeseman \cite{smithRepresentationEstimationSpatial1987}, Alberto Elfes from Carnegie Mellon University made the observation that previous geometric approaches to robot perception lacked the ability to handle sensor uncertainty and errors, confining the applicability to highly structured domains \cite{elfesUsingOccupancyGrids1989}. For more complex and unstructured environments, robot perception systems had to address unexpected circumstances and handle environments with little or no prior knowledge of the terrain. Thus, in 1989, Elfes introduces occupancy grids for robot perception. An occupancy grid is a tessellated representation of spatial information, constituted by a multi-dimensional lattice of cells that represent free space. The occupancy grid maintains stochastic estimates of the occupancy state of each cell within the lattice. The occupancy estimates are derived from probabilistic sensor models of incoming range sensor data \cite{elfesUsingOccupancyGrids1989}.
+
+Mapping is therefore constructed by incrementally integrating sensor measurements and estimating the occupancy of regions of space within a probabilistic spatial representation, rather than explicitly extracting geometric features such as in the Stanford Cart \cite{moravecStanfordCartCMU1990} or using a symbolic spatial representation like Shakey the robot \cite{nilssonShakeyRobot1984}. A proposed framework is illustrated in \cref{fig:elfesMappingFramework}, whereby multiple sensor views are composed into a local sensor map, and then multiple sensor maps are fused into a single global map with a consistent reference frame. While the exact methods of integrating and fusing sensor data have developed immensely over the past 30 years, this framework remains the backbone of many modern SLAM techniques today.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{2-background/figures/globalMappingOccupancyGrid.png}
+    \caption{A framework for occupancy-grid-based robot mapping. \protect\cite{elfesUsingOccupancyGrids1989}}
+    \label{fig:elfesMappingFramework}
+\end{figure}
+
+
+\cref{fig:sonarMapping} illustrates a sonar mapping robot utilising occupancy grids for navigation. While this robot was still ``stop-and-go'', unable to integrate sensor measurements during motion, similar to Shakey the robot \cite{nilssonShakeyRobot1984} and the Cart \cite{moravecStanfordCartCMU1990}, the resolution of the global map was sufficient to distinguish walls and open doors.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{2-background/figures/sonarOccupancyGrid.png}
+    \caption{Sonar mapping along a corridor \protect\cite{elfesUsingOccupancyGrids1989}.}
+    \label{fig:sonarMapping}
+\end{figure}
+
+In \cref{fig:occupancyGridSensorFusion}, Elfes shows an example of fusing sonar and scanline stereo maps. Both sensor datasets are initially converted into the common occupancy grid format before being superimposed. The stereo excels in angular resolution; however, unmarked surfaces or low-contrast edges are not detected well, and uncertainty scales with distance. Sonar detects surfaces well but has poor angular resolution due to the large beam width. Comparatively, sonar has low range uncertainty.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{2-background/figures/OccupancyGridSensorFusion.png}
+    \caption{Sensor integration of sonar and scanline stereo. Occupancy grids generated separately for sonar (a) and scanline stereo (b), as well as the integrated map (c) obtained through sensor fusion, are shown. Occupied regions are marked by shaded squares, empty areas by dots fading to white space, and unknown spaces by + marks \protect\cite{elfesUsingOccupancyGrids1989}. }
+    \label{fig:occupancyGridSensorFusion}
+\end{figure}
+
+
+Elfes asserts that in order to merge multiple sensor views, acquired by the robot at different positions, into a coherent world map, one must be able to accurately estimate the robot's motion. This statement summarises the co-dependence between localisation and mapping that persists in modern-day SLAM. Elfes notes that dead reckoning estimates are not sufficient, and that positional error is compounded over sequences of movement -- as mathematically formulated in Smith and Cheeseman's aforementioned compounding operation \cite{smithRepresentationEstimationSpatial1987}. This compounding uncertainty necessitates the ability to explicitly track positional uncertainty and take it into account when composing a world map.
+
+Elfes employs the approximate transformation (AT) framework proposed by Smith, Self and Cheeseman \cite{smithRepresentationEstimationSpatial1987}. The robot motion is initially derived from dead reckoning and inertial navigation. For more precise positional estimation, a multi-resolution correlation-based motion solver is utilised by searching for the optimal registration between the current robot view and the global map. Low resolution results are propagated up as priors for subsequent higher resolution registrations. Uncertainty is propagated over time by applying a convolving operation around the robot position, effectively ``blurring'' the occupancy grid. As the robot position accumulates error over time, older positions are ``sharp'' while newer positional estimates become increasingly ``fuzzy'', offering less and less useful information. Eventually, the robot's position ``dissolves'' in a ``cloud of probabilistic smoke'' \cite{elfesUsingOccupancyGrids1989}. Unlike purely geometric maps, the architecture proposed by Elfes explicitly handles the uncertainty from a multi-sensor composition of information in an integrated framework. This framework simplified the localisation problem fundamentally, and paved the way for the development of Simultaneous Localisation and Mapping (SLAM) in the 1990s and beyond.
+
+\subsection{Optimisation Methods for Pose Estimation}
+
+The 1992 paper titled ``A Method for Registration of 3-D Shapes'' by Besl and McKay \cite{beslMethodRegistration3D1992a} introduces the \textit{Iterative Closest Point (ICP)} algorithm, an algorithm for rigid 3D registration, which later became the foundation of real-time SLAM and specifically LiDAR-based SLAM. The paper frames 3-D registration as an optimisation problem in which the rigid 3D transformation between two point sets is estimated by minimising the error between corresponding points. The ICP algorithm proceeds iteratively by alternating between finding new correspondences using a closest-point criterion and executing closed-form least-squares estimation of the optimal rigid-body transformation between correspondence sets. The paper provides a proof that demonstrates that the algorithm converges monotonically to a local minimum with respect to the mean-square distance objective function. However, convergence is sensitive to initial conditions and partial overlap -- while a local minimum is guaranteed, it by no means guarantees the global minimum.
+
+This foundational work was built on by Yang Chen and Gerard Medioni in their paper ``Object Modeling by Registration of Multiple Range Images'' \cite{chenObjectModelingRegistration1991} which introduced the point-to-plane error metric, which greatly improved the robustness for environments with smooth surfaces, such as what one would find in and around buildings. Further research into the efficiency of the algorithm produced papers such as ``Efficient variants of the ICP algorithm'' by Rusinkiewicz et al.\ \cite{rusinkiewiczEfficientVariantsICP2001}. This research was critical in making ICP efficient enough for real-time SLAM. In 2009, Segal et al. introduced the ``Generalised-ICP'' \cite{segalGeneralizedICP2009} which combined point-to-point, point-to-plane, and plane-to-plane into a generalised algorithm which significantly improved robustness in unstructured environments.
+
+Lu \& Milios introduced pose graph optimisation \cite{luGloballyConsistentRange1997}, which offered a mathematical optimisation-based alternative to the filtering approaches, such as Kalman filters, information filters and particle filters, which dominated the SLAM landscape. Filtering techniques like EKF struggled with scalability and linearisation in large environments as they essentially ``forgot'' past states after they are integrated into the global model. This approach results in an inconsistent world model as different parts of the model are updated independently \cite{luGloballyConsistentRange1997}. This is in comparison with optimisation techniques such as pose graph optimisation which maintain the entire history of poses and systematically propagate pose optimisations to all related frames.
+
+Sensor data measured at a single robot pose is called a ``data frame''. Spatial relations between frames are derived from scan-matching or from odometry measurements. In the pose graph, local frame positions (i.e. robot poses) are stored as variables, and spatial relations between frames are stored as constraints. In traditional graph terminology, the variables are ``nodes'' and the constraints are ``edges''. The objective of pose graph optimisation is to optimise the estimates of the variables using the network of the constraints. Through this process, data frames can be aligned and registered to create a coherent global map \cite{luGloballyConsistentRange1997}.
+
