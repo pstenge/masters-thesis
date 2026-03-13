@@ -8,17 +8,50 @@
 
 ## Repository Layout
 
-| Directory | Contents |
-|---|---|
-| `1-intro/` | Introduction chapter |
-| `2-background/` | Background and literature context |
-| `3-SLAM/` | SLAM experiment chapter |
-| `4-precise-alignment/` | Precise alignment experiment chapter |
-| `5-conclusion/` | Conclusion and future work |
+Front matter (root): `abstract.tex`, `acknowledgements.tex`, `notation.tex`, `preface.tex`, `appendix-a.tex`.
 
-Each chapter directory contains a top-level `.tex` file that `\input`s section files from a `tex/` subdirectory. Some chapters also have `figures/` subdirectories.
+### Chapter file structure
 
-Front matter: `abstract.tex`, `acknowledgements.tex`, `notation.tex`, `preface.tex`.
+```
+1-intro/
+├── introduction.tex
+└── tex/
+    ├── 1-motivation.tex
+    ├── 1-research-context.tex
+    ├── 1-research-objectives.tex
+    └── 1-thesis-structure.tex
+
+2-background/
+├── background.tex
+└── tex/
+    ├── 2-robot-localisation.tex
+    ├── 2-vineyard-pruning.tex
+    └── 2-vineyard-robotics.tex
+
+3-SLAM/
+├── SLAM.tex
+├── 3-intro/tex/3-intro.tex
+├── 3-related-work/tex/3-related-work.tex
+├── 3-methodology/tex/3-methodology.tex
+├── 3-results/tex/3-results.tex
+├── 3-discussion/tex/3-discussion.tex
+└── 3-summary/tex/3-summary.tex
+
+4-precise-alignment/
+├── precise-alignment.tex
+├── 4-intro/tex/4-intro.tex
+├── 4-related-work/tex/4-related-work.tex
+├── 4-methodology/tex/4-methodology.tex
+├── 4-results/tex/4-results.tex
+├── 4-discussion/tex/4-discussion.tex
+└── 4-summary/tex/4-summary.tex
+
+5-conclusion/
+├── conclusion.tex
+└── tex/5-future-work.tex
+```
+
+The top-level `.tex` file in each chapter `\input`s the section files listed above. Some chapters also have `figures/` subdirectories.
 
 ## Universal Conventions
 - Use UK English (e.g., "localisation," "optimisation," "modelling").

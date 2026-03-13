@@ -1,6 +1,8 @@
 \section{Proposed Methods}
 
-To begin this investigation, we implemented GLIM. We chose GLIM as it had infrastructure in place to add extension modules to incorporate new sensors and capabilities. GLIM provides a global callback slot mechanism that allows access to the internal states of the mapping process and insertion of additional constraints into the factor graph. GLIM also eliminated sensor-specific processes, meaning it can be applied to a wide variety of range sensors such as spinning-type LiDAR, non-repetitive scan LiDAR, solid-state LiDAR and even RGB-D cameras.
+The following subsections describe the methods developed and integrated to achieve globally consistent, ENU-referenced localisation in vineyard environments. These contributions build on the GLIM framework surveyed in the preceding section and address the key challenges of reference frame alignment, GNSS outlier rejection, and parameter optimisation.
+
+To begin this investigation, we implemented GLIM \cite{koideGLIM3DRangeInertial2024}. We chose GLIM as it had infrastructure in place to add extension modules to incorporate new sensors and capabilities. GLIM provides a global callback slot mechanism that allows access to the internal states of the mapping process and insertion of additional constraints into the factor graph. GLIM also eliminated sensor-specific processes, meaning it can be applied to a wide variety of range sensors such as spinning-type LiDAR, non-repetitive scan LiDAR, solid-state LiDAR and even RGB-D cameras.
 
 GLIM state estimation is created in the local odometry frame. For our use in the wider research project, we required state estimation in the local ENU reference frame, which is a surveyed-in point at each of our farms. Thus, we needed a procedure to align the GLIM reference frame with the existing local ENU reference frame.
 
@@ -21,7 +23,7 @@ where $\tau$ is a distance consistency threshold reflecting accepted SLAM error 
 
 This approach was chosen over stochastic methods like RANSAC or iterative M-estimators because it takes advantage of the invariance of pairwise Euclidean distances under rigid body transformations, which means that the method remains entirely deterministic and independent of any initial pose estimate or probabilistic modelling.
 
-To formalize the inlier classification, we define a pairwise consistency indicator $c_{ij}$ in Equation \eqref{eq:indicator}:
+To formalise the inlier classification, we define a pairwise consistency indicator $c_{ij}$ in Equation \eqref{eq:indicator}:
 \begin{equation}
 \label{eq:indicator}
 c_{ij} = 
@@ -39,7 +41,7 @@ A measurement is classified as an inlier if the fraction of other points with wh
 GNSS multipath errors can often create erroneous clusters of points that are mutually consistent, and therefore are not filtered out by conventional statistical outlier methods. However, the majority-based criterion in Equation \eqref{eq:majority_criterion} ensures that points are only kept if they belong to the global rigid consensus, effectively filtering out clusters of mutually consistent but globally erroneous points. After classification, only inlier GNSS measurements and their corresponding map-frame estimates are preserved for subsequent processing.
 \subsection{Planar Geometry Quality Assessment in 2D}
 
-Subsequently to outlier rejection, we assess the geometric quality of the remaining set of points under the assumption of planar motion by analyzing their distribution in the horizontal plane. This analysis is motivated by the use of the Kabsch algorithm for rigid alignment, which relies on singular value decomposition (SVD) of the cross-covariance matrix and is highly sensitive to degenerate or weakly excited point configurations. Trajectories that are near-collinear, poorly distributed, or exhibit insufficient translational or rotational excitation can lead to ill-conditioned covariance matrices, resulting in unstable or biased pose estimates. By explicitly detecting such configurations prior to alignment, we ensure that the point sets provide sufficient geometric constraints to yield a well-conditioned SVD and improve the numerical stability and accuracy of the estimated transformation. In particular, we enforce minimum requirements on translational baseline ($\geq 5.0\,\mathrm{m}$), planar spread, rotational excitation, and numerical conditioning.
+Subsequently to outlier rejection, we assess the geometric quality of the remaining point set under the assumption of planar motion by analysing its distribution in the horizontal plane. This analysis is motivated by the sensitivity of the Kabsch algorithm to degenerate point configurations: near-collinear or poorly distributed trajectories produce ill-conditioned cross-covariance matrices, leading to unstable or biased transformations. By detecting such configurations before alignment, we ensure the SVD is well-conditioned and that the estimated transformation is numerically reliable. In particular, we enforce minimum requirements on translational baseline ($\geq 5.0\,\mathrm{m}$), planar spread, rotational excitation, and numerical conditioning.
 
 Given a set of 3D points $\{\mathbf{p}_i\}_{i=1}^{N}$, only the horizontal components are considered by projecting each point onto the $xy$-plane, yielding $\mathbf{q}_i = [x_i, y_i]^\top$. If fewer than three points are available, the geometry is deemed insufficient and the assessment terminates early.
 
@@ -50,12 +52,12 @@ The projected points are assembled into a data matrix $\mathbf{M}$ as defined in
 \mathbf{q}_1 & \mathbf{q}_2 & \cdots & \mathbf{q}_N
 \end{bmatrix} \in \mathbb{R}^{2 \times N},
 \end{equation}
-which is centered by subtracting the mean $\bar{\mathbf{q}}$ from each column. Singular value decomposition is then applied to the centered matrix as shown in Equation \eqref{eq:svd}:
+which is centred by subtracting the mean $\bar{\mathbf{q}}$ from each column. Singular value decomposition is then applied to the centred matrix as shown in Equation \eqref{eq:svd}:
 \begin{equation}
 \label{eq:svd}
 \mathbf{M} = \mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^\top,
 \end{equation}
-yielding two singular values $\sigma_1 \geq \sigma_2$ that characterize the principal spatial extents of the trajectory in the plane.
+yielding two singular values $\sigma_1 \geq \sigma_2$ that characterise the principal spatial extents of the trajectory in the plane.
 
 The condition number $\kappa$ is defined in Equation \eqref{eq:condition_number}:
 \begin{equation}
@@ -76,7 +78,7 @@ Rotational excitation is evaluated independently by computing the angular span o
 The final geometry quality assessment combines these criteria, reporting whether the point set exhibits sufficient planar spread, adequate rotational excitation, and non-degenerate conditioning. This 2D-based evaluation provides a robust and numerically stable measure of geometric suitability for planar motion scenarios.
 \subsection{GLIM Reference Frame Alignment with Local ENU}
 
-Given two corresponding point sets $\{\mathbf{a}_i\}_{i=1}^N, \{\mathbf{b}_i\}_{i=1}^N \subset \mathbb{R}^3$, the goal is to estimate a rigid-body transformation $(\mathbf{R}, \mathbf{t}) \in \mathrm{SO}(3) \times \mathbb{R}^3$ that minimizes the sum of squared alignment errors as defined in the following objective function:
+Given two corresponding point sets $\{\mathbf{a}_i\}_{i=1}^N, \{\mathbf{b}_i\}_{i=1}^N \subset \mathbb{R}^3$, the goal is to estimate a rigid-body transformation $(\mathbf{R}, \mathbf{t}) \in \mathrm{SO}(3) \times \mathbb{R}^3$ that minimises the sum of squared alignment errors as defined in the following objective function:
 \begin{equation}
 \label{eq:kabsch_objective}
 \min_{\mathbf{R}, \mathbf{t}} \sum_{i=1}^{N} \left\| \mathbf{b}_i - (\mathbf{R}\mathbf{a}_i + \mathbf{t}) \right\|^2, \quad \text{s.t. } \det(\mathbf{R}) = 1.
@@ -88,7 +90,7 @@ First, the centroids of both point sets are computed as:
 \boldsymbol{\mu}_A = \frac{1}{N} \sum_{i=1}^N \mathbf{a}_i, \qquad \boldsymbol{\mu}_B = \frac{1}{N} \sum_{i=1}^N \mathbf{b}_i.
 \end{equation}
 
-The point sets are then centered by subtracting their respective centroids:
+The point sets are then centred by subtracting their respective centroids:
 \begin{equation}
 \label{eq:centering}
 \tilde{\mathbf{a}}_i = \mathbf{a}_i - \boldsymbol{\mu}_A, \qquad \tilde{\mathbf{b}}_i = \mathbf{b}_i - \boldsymbol{\mu}_B.
@@ -128,7 +130,7 @@ The resulting rigid transformation $(\mathbf{R}, \mathbf{t})$ aligns the source 
 
 \subsection{GNSS Prior Factor Construction}
 
-This procedure augments an existing SLAM factor graph with GNSS-based prior constraints that relate submap poses to global position measurements. Each GNSS measurement is incorporated as a probabilistic constraint on the estimated submap pose through a known sensor extrinsic calibration.
+This procedure augments an existing SLAM factor graph \cite{grisettiTutorialGraphBasedSLAM2010a} with GNSS-based prior constraints that relate submap poses to global position measurements. Each GNSS measurement is incorporated as a probabilistic constraint on the estimated submap pose through a known sensor extrinsic calibration.
 
 Let $\mathbf{T}_{\text{map}}^{\text{enu}} \in SE(3)$ denote the rigid transformation from the local ENU frame to the GLIM map frame, and $\mathbf{p}_{\text{imu}}^{\text{gps}} \in \mathbb{R}^3$ the fixed translation from the IMU frame to the GNSS antenna frame. For each correspondence between a submap and a GNSS measurement, the following steps are performed.
 
@@ -157,33 +159,33 @@ This formulation is valid as the GLIM submap origin is defined at the IMU center
 
 This factor directly constrains the corresponding submap pose variable in the factor graph, contributing to global consistency and LiDAR-inertial odometry drift correction. In effect, this factor constrains the GLIM-predicted position of the GPS antenna using the measured GNSS position at that time.
 
-\subsection{Methodology: Robust SLAM Parameterization via Iterative Region Refinement}
+\subsection{Robust SLAM Parameterisation via Iterative Region Refinement}
 
-The optimisation of Simultaneous Localisation and Mapping (SLAM) parameters is a high-dimensional, non-convex problem where the objective is to identify a parameter vector $\Theta$ that minimises localisation error across heterogeneous environments[cite: 1]. This paragraph proposes a model-free, heuristic region-refinement algorithm that transitions from global stochastic exploration to localised deterministic refinement[cite: 2]. The strategy assumes that optimal configurations cluster within specific sub-regions of the hyper-dimensional search space $\Omega$, which are iteratively identified and contracted using statistical distribution analysis[cite: 3].
+The optimisation of Simultaneous Localisation and Mapping (SLAM) parameters is a high-dimensional, non-convex problem where the objective is to identify a parameter vector $\Theta$ that minimises localisation error across heterogeneous environments \cite{hanMultiObjectiveOptimizationLoop2020}. This subsection proposes a model-free, heuristic region-refinement algorithm that transitions from global stochastic exploration to localised deterministic refinement. The strategy assumes that optimal configurations cluster within specific sub-regions of the hyper-dimensional search space $\Omega$, which are iteratively identified and contracted using statistical distribution analysis.
 
-\paragraph{Problem Formulation}
-We define the SLAM system as a complex function $f(X,\theta)$, where $X$ represents raw sensor data (e.g., LiDAR scans and inertial measurements) and $\Theta$ is the $d$-dimensional parameter vector[cite: 4]. In a typical LiDAR-inertial setup, $\Theta$ includes parameters such as LiDAR resolution and registration strategy. The objective is to find $\Theta^*$ such that:
+\subsubsection{Problem Formulation}
+We define the SLAM system as a complex function $f(X,\theta)$, where $X$ represents raw sensor data (e.g., LiDAR scans and inertial measurements) and $\Theta$ is the $d$-dimensional parameter vector. In a typical LiDAR-inertial setup, $\Theta$ includes parameters such as LiDAR resolution and registration strategy. The objective is to find $\Theta^*$ such that:
 \begin{equation}
     \Theta^* = \arg\min_{\Theta \in \Omega} \mathcal{J}(\Theta)
 \end{equation}
-where $\mathcal{J}$ is a robust objective function representing the consensus performance across $K$ distinct motion profiles[cite: 6].
+where $\mathcal{J}$ is a robust objective function representing the consensus performance across $K$ distinct motion profiles.
 
-\paragraph{Sampling via Latin Hypercube Strategy}
-To explore the initial parameter manifold, we utilise Latin Hypercube Sampling (LHS) as an alternative to traditional grid search or independent Monte Carlo (MC) sampling[cite: 7]. LHS is technically categorised as a stratified sampling design[cite: 8]. For a sample size $N$ in $d$ dimensions, the range of each parameter $\theta_j$ is partitioned into $N$ equiprobable intervals for $j=1, \dots, d$[cite: 9]. The mathematical constraint --- ensuring exactly one sample per row and column of the grid --- minimises the ``clustering'' phenomenon common in pure random sampling[cite: 10]. This stratification ensures that the marginal distribution of each parameter is sampled uniformly, providing a convergence rate of $o(N^{-1/2})$, which is quadratically faster than the rate of Monte Carlo methods[cite: 11].
+\subsubsection{Sampling via Latin Hypercube Strategy}
+To explore the initial parameter manifold, we utilise Latin Hypercube Sampling (LHS) as an alternative to traditional grid search or independent Monte Carlo (MC) sampling \cite{deutschLatinHypercubeSampling2012}. LHS is technically categorised as a stratified sampling design \cite{chrismanLatinHypercubeSampling2014}. For a sample size $N$ in $d$ dimensions, the range of each parameter $\theta_j$ is partitioned into $N$ equiprobable intervals for $j=1, \dots, d$ \cite{chrismanLatinHypercubeSampling2014}. The mathematical constraint --- ensuring exactly one sample per row and column of the grid --- minimises the ``clustering'' phenomenon common in pure random sampling \cite{deutschLatinHypercubeSampling2012}. This stratification ensures that the marginal distribution of each parameter is sampled uniformly, achieving a lower variance than independent Monte Carlo sampling for the same sample size \cite{packhamLatinHypercubeSampling2008}.
 
-\subparagraph{Implementation and Normalization}
-Parameter vectors are first normalised to the unit hypercube $[0, 1]^d$[cite: 12]. To ensure reproducibility, the pseudo-random permutations used to construct the hypercube are seeded deterministically[cite: 13]. The samples are subsequently scaled to physical ranges using:
+\paragraph{Implementation and Normalisation}
+Parameter vectors are first normalised to the unit hypercube $[0, 1]^d$ \cite{deutschLatinHypercubeSampling2012}. To ensure reproducibility, the pseudo-random permutations used to construct the hypercube are seeded deterministically. The samples are subsequently scaled to physical ranges using:
 \begin{equation}
     \theta_{j,i} = \theta_{j, \min} + u_{j,i} (\theta_{j, \max} - \theta_{j, \min})
 \end{equation}
-where $\theta_{j, \min}$ and $\theta_{j, \max}$ represent the physical lower and upper bounds for parameter $j$[cite: 14].
+where $\theta_{j, \min}$ and $\theta_{j, \max}$ represent the physical lower and upper bounds for parameter $j$.
 
-\paragraph{The Multi-Dataset Consensus Framework}
-A primary challenge in SLAM optimisation is the risk of ``over-specialisation'', where parameters become overfitted to the unique noise characteristics of a single trajectory[cite: 15]. We implement a Consensus Survival Framework to prioritise reliability across datasets[cite: 16].
+\subsubsection{The Multi-Dataset Consensus Framework}
+A primary challenge in SLAM optimisation is the risk of ``over-specialisation'', where parameters become overfitted to the unique noise characteristics of a single trajectory \cite{soaresVARSLAMVisualAdaptive2025}. We implement a Consensus Survival Framework to prioritise reliability across datasets.
 
-In some situations, standard ``Mean-Performance Optimisation'' can hide brittle configurations that perform well on average but fail catastrophically on a single sequence[cite: 17]. However, in this setting, catastrophic failure typically results in excessively high amplitude errors, which effectively inflate the mean normalised error. That being said, some particular parameter configurations can lead to excessive GPU draw, resulting in a runtime CUDA out-of-memory error. If the parameter set does not complete processing the trajectory on any dataset $k$, it is assigned an infinite cost and discarded from the survivor pool[cite: 19]. This ensures the survival of only those configurations that meet the computational requirements of the system[cite: 20].
+In some situations, standard ``Mean-Performance Optimisation'' can hide brittle configurations that perform well on average but fail catastrophically on a single sequence \cite{kandasamyTuningHyperparametersGrad}. However, in this setting, catastrophic failure typically results in excessively high amplitude errors, which effectively inflate the mean normalised error. That being said, some particular parameter configurations can lead to excessive GPU draw, resulting in a runtime CUDA out-of-memory error. If the parameter set does not complete processing the trajectory on any dataset $k$, it is assigned an infinite cost and discarded from the survivor pool. This ensures the survival of only those configurations that meet the computational requirements of the system.
 
-\subparagraph{Formal Objective Function}
+\paragraph{Formal Objective Function}
 For the "surviving" configurations, the objective function $J(\theta)$ is defined as the mean normalized error across the valid sequences \eqref{eq:piecewise_success}:
 \begin{equation}
 \label{eq:piecewise_success}
@@ -196,19 +198,19 @@ J(\theta) =
 
 where $E_k(\theta)$ is the primary performance metric for dataset $k$.
 
-\paragraph{Iterative Region Refinement (IRR)}
-The optimisation proceeds through an ``Iterative Contraction'' or ``Funnel'' strategy \cite{cite:22}. This mirrors the reduction of a search radius in traditional Trust Region Methods, concentrating the sampling density into the most promising basins of attraction \cite{cite:23}.
+\subsubsection{Iterative Region Refinement (IRR)}
+The optimisation proceeds through an ``Iterative Contraction'' or ``Funnel'' strategy. This mirrors the reduction of a search radius in traditional Trust Region Methods, concentrating the sampling density into the most promising basins of attraction.
 
-\subparagraph{Statistical Search Space Contraction}
-At the conclusion of each phase $i$, the top-performing configurations are used to calculate new search boundaries for phase $i+1$ \cite{cite:24}. We employ the 10th and 90th percentiles of the elite set as robust estimators for the update rule in Equation \eqref{eq:quantile_update}:
+\paragraph{Statistical Search Space Contraction}
+At the conclusion of each phase $i$, the top-performing configurations are used to calculate new search boundaries for phase $i+1$. We employ the 10th and 90th percentiles of the elite set as robust estimators for the update rule in Equation \eqref{eq:quantile_update}:
 \begin{equation}
 \label{eq:quantile_update}
 \Omega_{j, i+1} = [P_{10}(\theta_{j, \text{top}}), P_{90}(\theta_{j, \text{top}})].
 \end{equation}
-This quantile-based reduction is superior to using absolute Min/Max values because it is resilient to ``lucky'' outliers --- configurations that may perform well due to noise interactions rather than parameter stability \cite{cite:25}.
+This quantile-based reduction is superior to using absolute Min/Max values because it is resilient to ``lucky'' outliers --- configurations that may perform well due to noise interactions rather than parameter stability.
 
-\subparagraph{Refinement Phase Schedule}
-The optimisation is structured into four phases, increasing the selection pressure (lower survival rate) as the search space contracts \cite{cite:26}, as detailed in Table \ref{tab:phases}:
+\paragraph{Refinement Phase Schedule}
+The optimisation is structured into four phases, increasing the selection pressure (lower survival rate) as the search space contracts, as detailed in \cref{tab:phases}:
 
 \begin{table}[h]
 \centering
@@ -224,11 +226,11 @@ Phase 4 & Fine-tuning & 75 & 1.3\% & Final tuning to find top candidate. \\ \bot
 \end{tabularx}
 \end{table}
 
-This incremental strategy is distinct from Successive Halving (SHA), as it preserves a continuous distribution of potential solutions rather than discarding them in discrete early-stopping steps, which is critical for SLAM where early performance does not always correlate with final drift \cite{cite:28}.
+This incremental strategy is distinct from Successive Halving (SHA), as it preserves a continuous distribution of potential solutions rather than discarding them in discrete early-stopping steps, which is critical for SLAM where early performance does not always correlate with final drift.
 
-\paragraph{Optimisation Metrics}
+\subsubsection{Optimisation Metrics}
 
-For the optimisation of the base GLIM algorithm, the cost function for candidate ranking is the Trajectory Error Percentage ($TEP$), calculated as the percentage of the ratio of Absolute Trajectory Error ($ATE$) to the total trajectory length ($L$) \cite{cite:29}:
+For the optimisation of the base GLIM algorithm, the cost function for candidate ranking is the Trajectory Error Percentage ($TEP$), calculated as the percentage of the ratio of Absolute Trajectory Error ($ATE$) to the total trajectory length ($L$):
 \begin{equation}
 \label{eq:tep}
 TEP = \frac{ATE}{L} \times 100\%.
@@ -240,5 +242,5 @@ For the optimisation of the proposed method, the cost function is a custom metri
 \label{eq:gasp}
 \text{GASP} = w_{\text{drift}} \cdot \left( \frac{ATE}{L} \right) + w_{\text{smoothness}} \cdot \text{Translational RPE}.
 \end{equation}
-The weights $w_{\text{drift}}$ and $w_{\text{smoothness}}$ have been empirically tuned such that each term contributes approximately equally to the total cost. Due to the heuristic nature of these weighting factors, the $GASP$ metric functions as a relative performance index rather than an absolute physical measurement. While individual components possess physical units, their weighted summation yields a unitless scalar used to rank configurations; consequently, a $GASP$ value is only meaningful when benchmarked against a baseline or alternative configurations within the same experimental framework.
+The weights $w_{\text{drift}}$ and $w_{\text{smoothness}}$ have been empirically tuned such that each term contributes approximately equally to the total cost. Because the weighted sum mixes quantities with different units, GASP serves as a relative performance index; its values are meaningful only when compared within the same experimental framework.
 

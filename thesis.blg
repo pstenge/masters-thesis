@@ -27,13 +27,6 @@ Reallocating 'name_of_file' (item size: 1) to 14 items.
 Reallocating 'name_of_file' (item size: 1) to 15 items.
 A level-1 auxiliary file: appendix-a.aux
 Database file #1: MastersThesis.bib
-Warning--I didn't find a database entry for "cite:22"
-Warning--I didn't find a database entry for "cite:23"
-Warning--I didn't find a database entry for "cite:24"
-Warning--I didn't find a database entry for "cite:25"
-Warning--I didn't find a database entry for "cite:26"
-Warning--I didn't find a database entry for "cite:28"
-Warning--I didn't find a database entry for "cite:29"
 Warning: need a key to make a label in 2025MarlboroughVineyard
 Warning: the author shouldn't be empty in 2025MarlboroughVineyard
 Warning: the year shouldn't be empty in 2025MarlboroughVineyard
@@ -46,7 +39,7 @@ Warning: the institution shouldn't be empty in nilssonShakeyRobot1984
 Warning: the booktitle shouldn't be empty in zhangLOAMLidarOdometry2014
 You've used 50 entries,
             1952 wiz_defined-function locations,
-            809 strings with 17633 characters,
+            802 strings with 17584 characters,
 and the built_in function-call counts, 22431 in all, are:
 = -- 2704
 > -- 707
@@ -85,4 +78,3 @@ warning$ -- 0
 while$ -- 117
 width$ -- 56
 write$ -- 594
-(There were 7 warnings)
