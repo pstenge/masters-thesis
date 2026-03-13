@@ -6,7 +6,7 @@ To begin this investigation, we implemented GLIM \cite{koideGLIM3DRangeInertial2
 
 GLIM state estimation is created in the local odometry frame. For our use in the wider research project, we required state estimation in the local ENU reference frame, which is a surveyed-in point at each of our farms. Thus, we needed a procedure to align the GLIM reference frame with the existing local ENU reference frame.
 
-Firstly, we time synchronise the on-board GPS unit with the LiDAR and with the system clock. This allows us to associate corresponding GNSS points with the submaps or keyframes of LiDAR frames that GLIM registers. We aggregate a set of corresponding GNSS coordinates with keyframe coordinates, and then implement the Kabsch algorithm to find the relative transform between the two point sets by minimising the root-mean-square deviation between the two point sets.
+Firstly, we time synchronise the on-board GPS unit with the LiDAR and with the system clock. This allows us to associate corresponding GNSS points with the submaps or keyframes of LiDAR frames that GLIM registers. We aggregate a set of corresponding GNSS coordinates with keyframe coordinates, and then implement the Kabsch algorithm \cite{kabschSolutionBestRotation1976} to find the relative transform between the two point sets by minimising the root-mean-square deviation between the two point sets.
 
 The Kabsch algorithm relies on the least-squares method to minimise the root-mean-square deviation (RMSD) between two point sets. Since the objective function squares the distances between paired points, outliers produce disproportionately large influences on the final transformation matrix. Thus, for global alignment, it is important that outliers are filtered out before executing the Kabsch algorithm.
 
@@ -21,7 +21,7 @@ Let $\{\mathbf{g}_i\}_{i=1}^{N}$ denote GNSS positions expressed in the ENU fram
 \end{equation}
 where $\tau$ is a distance consistency threshold reflecting accepted SLAM error and GNSS noise.
 
-This approach was chosen over stochastic methods like RANSAC or iterative M-estimators because it takes advantage of the invariance of pairwise Euclidean distances under rigid body transformations, which means that the method remains entirely deterministic and independent of any initial pose estimate or probabilistic modelling.
+This approach was chosen over stochastic methods like RANSAC \cite{fischlerRandomSampleConsensus1981} or iterative M-estimators because it takes advantage of the invariance of pairwise Euclidean distances under rigid body transformations, which means that the method remains entirely deterministic and independent of any initial pose estimate or probabilistic modelling.
 
 To formalise the inlier classification, we define a pairwise consistency indicator $c_{ij}$ in Equation \eqref{eq:indicator}:
 \begin{equation}
@@ -38,7 +38,7 @@ A measurement is classified as an inlier if the fraction of other points with wh
 \frac{1}{N-1} \sum_{j \neq i}^{N} c_{ij} > \rho.
 \end{equation}
 
-GNSS multipath errors can often create erroneous clusters of points that are mutually consistent, and therefore are not filtered out by conventional statistical outlier methods. However, the majority-based criterion in Equation \eqref{eq:majority_criterion} ensures that points are only kept if they belong to the global rigid consensus, effectively filtering out clusters of mutually consistent but globally erroneous points. After classification, only inlier GNSS measurements and their corresponding map-frame estimates are preserved for subsequent processing.
+GNSS multipath errors \cite{wenExclusionGNSSNLOS2018} can often create erroneous clusters of points that are mutually consistent, and therefore are not filtered out by conventional statistical outlier methods. However, the majority-based criterion in Equation \eqref{eq:majority_criterion} ensures that points are only kept if they belong to the global rigid consensus, effectively filtering out clusters of mutually consistent but globally erroneous points. After classification, only inlier GNSS measurements and their corresponding map-frame estimates are preserved for subsequent processing.
 \subsection{Planar Geometry Quality Assessment in 2D}
 
 Subsequently to outlier rejection, we assess the geometric quality of the remaining point set under the assumption of planar motion by analysing its distribution in the horizontal plane. This analysis is motivated by the sensitivity of the Kabsch algorithm to degenerate point configurations: near-collinear or poorly distributed trajectories produce ill-conditioned cross-covariance matrices, leading to unstable or biased transformations. By detecting such configurations before alignment, we ensure the SVD is well-conditioned and that the estimated transformation is numerically reliable. In particular, we enforce minimum requirements on translational baseline ($\geq 5.0\,\mathrm{m}$), planar spread, rotational excitation, and numerical conditioning.
@@ -126,7 +126,7 @@ Finally, the translation $\mathbf{t}$ is recovered according to Equation \eqref{
 \mathbf{t} = \boldsymbol{\mu}_B - \mathbf{R}\boldsymbol{\mu}_A.
 \end{equation}
 
-The resulting rigid transformation $(\mathbf{R}, \mathbf{t})$ aligns the source point set to the target point set in a least-squares sense. This static transformation is published to the ROS2 transform tree to link the local ENU frame to the GLIM mapping frame.
+The resulting rigid transformation $(\mathbf{R}, \mathbf{t})$ aligns the source point set to the target point set in a least-squares sense. This static transformation is published to the ROS2 transform tree \cite{macenskiRobotOperatingSystem2022} to link the local ENU frame to the GLIM mapping frame.
 
 \subsection{GNSS Prior Factor Construction}
 
@@ -199,7 +199,7 @@ J(\theta) =
 where $E_k(\theta)$ is the primary performance metric for dataset $k$.
 
 \subsubsection{Iterative Region Refinement (IRR)}
-The optimisation proceeds through an ``Iterative Contraction'' or ``Funnel'' strategy. This mirrors the reduction of a search radius in traditional Trust Region Methods, concentrating the sampling density into the most promising basins of attraction.
+The optimisation proceeds through an ``Iterative Contraction'' or ``Funnel'' strategy. This mirrors the reduction of a search radius in traditional Trust Region Methods \cite{nocedalTrustRegionMethods2006}, concentrating the sampling density into the most promising basins of attraction.
 
 \paragraph{Statistical Search Space Contraction}
 At the conclusion of each phase $i$, the top-performing configurations are used to calculate new search boundaries for phase $i+1$. We employ the 10th and 90th percentiles of the elite set as robust estimators for the update rule in Equation \eqref{eq:quantile_update}:
@@ -226,11 +226,11 @@ Phase 4 & Fine-tuning & 75 & 1.3\% & Final tuning to find top candidate. \\ \bot
 \end{tabularx}
 \end{table}
 
-This incremental strategy is distinct from Successive Halving (SHA), as it preserves a continuous distribution of potential solutions rather than discarding them in discrete early-stopping steps, which is critical for SLAM where early performance does not always correlate with final drift.
+This incremental strategy is distinct from Successive Halving (SHA) \cite{jamiesonNonstochasticBestArm2015}, as it preserves a continuous distribution of potential solutions rather than discarding them in discrete early-stopping steps, which is critical for SLAM where early performance does not always correlate with final drift.
 
 \subsubsection{Optimisation Metrics}
 
-For the optimisation of the base GLIM algorithm, the cost function for candidate ranking is the Trajectory Error Percentage ($TEP$), calculated as the percentage of the ratio of Absolute Trajectory Error ($ATE$) to the total trajectory length ($L$):
+For the optimisation of the base GLIM algorithm, the cost function for candidate ranking is the Trajectory Error Percentage ($TEP$), calculated as the percentage of the ratio of Absolute Trajectory Error ($ATE$) \cite{sturmBenchmarkEvaluationRGBD2012} to the total trajectory length ($L$):
 \begin{equation}
 \label{eq:tep}
 TEP = \frac{ATE}{L} \times 100\%.

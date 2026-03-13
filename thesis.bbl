@@ -53,6 +53,11 @@
   {{Mounted Grapevine Pruning System}}', {\it Journal of Field Robotics},
   Vol.\,42, No.\,4, pp.\,1361--1372.
 
+\bibitem[{Fischler\ and Bolles}~{1981}]{fischlerRandomSampleConsensus1981}
+{\sc Fischler, M.A. and Bolles, R.C.} (1981), `Random sample consensus: A
+  paradigm for model fitting with applications to image analysis and automated
+  cartography', {\it Commun. ACM}, Vol.\,24, No.\,6, June, pp.\,381--395.
+
 \bibitem[{Forster\
   {\citeetal}}~{2017}]{forsterOnManifoldPreintegrationRealTime2017}
 {\sc Forster, C., Carlone, L., Dellaert, F. and Scaramuzza, D.} (2017),
@@ -60,6 +65,11 @@
   {\it IEEE Trans. Robot.}, Vol.\,33, No.\,1, February, pp.\,1--21.
 \newblock Comment: 20 pages, 24 figures, accepted for publication in IEEE
   Transactions on Robotics (TRO) 2016.
+
+\bibitem[{Grisetti\ {\citeetal}}~{2010}]{grisettiTutorialGraphBasedSLAM2010a}
+{\sc Grisetti, G., Kummerle, R., Stachniss, C. and Burgard, W.} (2010), `A
+  {{Tutorial}} on {{Graph-Based SLAM}}', {\it IEEE Intell. Transport. Syst.
+  Mag.}, Vol.\,2, No.\,4, pp.\,31--43.
 
 \bibitem[{Guan\ {\citeetal}}~{2025}]{guanResearchAgriculturalAutonomous2025}
 {\sc Guan, X., Ge, H., Nie, S. and Ding, Y.} (2025), `Research on
@@ -93,6 +103,14 @@
   Industries}} \textbar{} {{NZ Government}}',
   https://www.mpi.govt.nz/resources-and-forms/economic-intelligence/situation-and-outlook-for-primary-industries,
   December.
+
+\bibitem[{Jamieson\ and Talwalkar}~{2015}]{jamiesonNonstochasticBestArm2015}
+{\sc Jamieson, K. and Talwalkar, A.} (2015), `Non-stochastic {{Best Arm
+  Identification}} and {{Hyperparameter Optimization}}', February.
+
+\bibitem[{Kabsch}~{1976}]{kabschSolutionBestRotation1976}
+{\sc Kabsch, W.} (1976), `A solution for the best rotation to relate two sets
+  of vectors', {\it Acta Cryst A}, Vol.\,32, No.\,5, September, pp.\,922--923.
 
 \bibitem[{Kandasamy\ {\citeetal}}~{}]{kandasamyTuningHyperparametersGrad}
 {\sc Kandasamy, K., Vysyaraju, K.R., Neiswanger, W., Paria, B., Collins, C.R.,
@@ -129,6 +147,19 @@
   local frames of data as well as the relative spatial relationships between
   localframes.
 
+\bibitem[{Macenski\ {\citeetal}}~{2022}]{macenskiRobotOperatingSystem2022}
+{\sc Macenski, S., Foote, T., Gerkey, B., Lalancette, C. and Woodall, W.}
+  (2022), `Robot {{Operating System}} 2: {{Design}}, {{Architecture}}, and
+  {{Uses In The Wild}}', {\it Sci. Robot.}, Vol.\,7, No.\,66, May,
+  p.\,eabm6074.
+\newblock Comment: This manuscript has been accepted for publication in Science
+  Robotics. This version has not undergone final editing. Please refer to the
+  complete version of record at
+  https://www.science.org/doi/10.1126/scirobotics.abm6074. The manuscript may
+  not be reproduced or used in any manner that does not fall within the fair
+  use provisions of the Copyright Act without the prior, written permission of
+  AAAS.
+
 \bibitem[{Marzoa~Tanco\
   {\citeetal}}~{2024}]{marzoatancoMAgroDatasetDataset2024}
 {\sc Marzoa~Tanco, M., Trinidad~Barnech, G., Andrade, F., Baliosian, J.,
@@ -153,6 +184,11 @@
 \bibitem[{Nilsson}~{1984}]{nilssonShakeyRobot1984}
 {\sc Nilsson, N.J.} (1984), {\it Shakey the {{Robot}}}, Technical {{Note}}~AIC
   Technical Note, April.
+
+\bibitem[{Nocedal\ and Wright}~{2006}]{nocedalTrustRegionMethods2006}
+ (2006), `Trust-{{Region Methods}}', In {\sc Nocedal, J. and Wright, S.J.}\
+  (Eds.), {\it Numerical {{Optimization}}}, Springer, New York, NY,
+  pp.\,66--100.
 
 \bibitem[{Packham\ and Schmidt}~{2008}]{packhamLatinHypercubeSampling2008}
 {\sc Packham, N. and Schmidt, W.M.} (2008), `Latin hypercube sampling with
@@ -237,6 +273,15 @@
 {\sc {soumyadip}} (2024), `Introduction to {{LiDAR SLAM}}: {{LOAM}} \&
   {{LeGO-LOAM}} - {{Paper}} \& {{Code Explained}} with {{ROS}} 2', August.
 
+\bibitem[{Sturm\ {\citeetal}}~{2012}]{sturmBenchmarkEvaluationRGBD2012}
+{\sc Sturm, J., Engelhard, N., Endres, F., Burgard, W. and Cremers, D.} (2012),
+  `A benchmark for the evaluation of {{RGB-D SLAM}} systems', {\it 2012
+  IEEE/RSJ International Conference on Intelligent Robots and Systems},
+  October, pp.\,573--580.
+\newblock [TLDR] A large set of image sequences from a Microsoft Kinect with
+  highly accurate and time-synchronized ground truth camera poses from a motion
+  capture system is recorded for the evaluation of RGB-D SLAM systems.
+
 \bibitem[{Tang\ {\citeetal}}~{2024}]{tangFruitTreeMappingSystem2024}
 {\sc Tang, B., Guo, Z., Huang, C., Huai, S. and Gai, J.} (2024), `A
   {{Fruit-Tree Mapping System}} for {{Semi-Structured Orchards Based}} on
@@ -258,6 +303,13 @@
 {\sc Wei, H., Wu, P., Zhang, X., Zheng, J., Zhang, J. and Wei, K.} (2026),
   `{{LiDAR}}--{{Visual}}--{{Inertial Multi-UGV Collaborative SLAM Framework}}',
   {\it Drones}, Vol.\,10, No.\,1, January.
+
+\bibitem[{Wen\ {\citeetal}}~{2018}]{wenExclusionGNSSNLOS2018}
+{\sc Wen, W., Zhang, G. and Hsu, L.T.} (2018), `Exclusion of {{GNSS NLOS}}
+  receptions caused by dynamic objects in heavy traffic urban scenarios using
+  real-time {{3D}} point cloud: {{An}} approach without {{3D}} maps', In {\it
+  2018 {{IEEE}}/{{ION Position}}, {{Location}} and {{Navigation Symposium}}
+  ({{PLANS}})}, April, pp.\,158--165.
 
 \bibitem[{Xu\ {\citeetal}}~{2022}]{xuFASTLIO2FastDirect2022}
 {\sc Xu, W., Cai, Y., He, D., Lin, J. and Zhang, F.} (2022), `{{FAST-LIO2}}:

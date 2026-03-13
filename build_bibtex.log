@@ -1,15 +1,7 @@
-bibtex: major issue: So far, you have not checked for MiKTeX updates.
 This is BibTeX, Version 0.99e (MiKTeX 26.2)
 The top-level auxiliary file: thesis.aux
 The style file: electhesis.bst
 Database file #1: MastersThesis.bib
-Warning--I didn't find a database entry for "cite:22"
-Warning--I didn't find a database entry for "cite:23"
-Warning--I didn't find a database entry for "cite:24"
-Warning--I didn't find a database entry for "cite:25"
-Warning--I didn't find a database entry for "cite:26"
-Warning--I didn't find a database entry for "cite:28"
-Warning--I didn't find a database entry for "cite:29"
 Warning: need a key to make a label in 2025MarlboroughVineyard
 Warning: the author shouldn't be empty in 2025MarlboroughVineyard
 Warning: the year shouldn't be empty in 2025MarlboroughVineyard
@@ -19,5 +11,6 @@ Warning: the journal shouldn't be empty in kandasamyTuningHyperparametersGrad
 Warning: the booktitle shouldn't be empty in khanReviewSLAMTechniques2025
 Warning: the journal shouldn't be empty in moravecObstacleAvoidanceNavigatio1980
 Warning: the institution shouldn't be empty in nilssonShakeyRobot1984
+Warning: the authors shouldn't be empty in nocedalTrustRegionMethods2006
 Warning: the booktitle shouldn't be empty in zhangLOAMLidarOdometry2014
-(There were 7 warnings)
+bibtex: major issue: So far, you have not checked for MiKTeX updates.
