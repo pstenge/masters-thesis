@@ -52,6 +52,35 @@
   isbn = {979-8-3503-2365-8}
 }
 
+@misc{aoki3DBBSGlobalLocalization2023,
+  title = {{{3D-BBS}}: {{Global Localization}} for {{3D Point Cloud Scan Matching Using Branch-and-Bound Algorithm}}},
+  shorttitle = {{{3D-BBS}}},
+  author = {Aoki, Koki and Koide, Kenji and Oishi, Shuji and Yokozuka, Masashi and Banno, Atsuhiko and Meguro, Junichi},
+  year = 2023,
+  publisher = {arXiv},
+  doi = {10.48550/ARXIV.2310.10023},
+  urldate = {2026-03-13},
+  abstract = {This paper presents an accurate and fast 3D global localization method, 3D-BBS, that extends the existing branch-and-bound (BnB)-based 2D scan matching (BBS) algorithm. To reduce memory consumption, we utilize a sparse hash table for storing hierarchical 3D voxel maps. To improve the processing cost of BBS in 3D space, we propose an efficient roto-translational space branching. Furthermore, we devise a batched BnB algorithm to fully leverage GPU parallel processing. Through experiments in simulated and real environments, we demonstrated that the 3D-BBS enabled accurate global localization with only a 3D LiDAR scan roughly aligned in the gravity direction and a 3D pre-built map. This method required only 878 msec on average to perform global localization and outperformed state-of-the-art global registration methods in terms of accuracy and processing speed.},
+  copyright = {arXiv.org perpetual, non-exclusive license},
+  keywords = {FOS: Computer and information sciences,Robotics (cs.RO)},
+  note = {\subsection{Other}
+
+IEEE International Conference on Robotics and Automation (ICRA2024)}
+}
+
+@misc{audritoVinePTMapPoleTrunkSemantic2026,
+  title = {{{VinePT-Map}}: {{Pole-Trunk Semantic Mapping}} for {{Resilient Autonomous Robotics}} in {{Vineyards}}},
+  shorttitle = {{{VinePT-Map}}},
+  author = {Audrito, Giorgio and Martini, Mauro and Navone, Alessandro and Galluzzo, Giorgia and Chiaberge, Marcello},
+  year = 2026,
+  publisher = {arXiv},
+  doi = {10.48550/ARXIV.2603.05070},
+  urldate = {2026-03-13},
+  abstract = {Reliable long-term deployment of autonomous robots in agricultural environments remains challenging due to perceptual aliasing, seasonal variability, and the dynamic nature of crop canopies. Vineyards, characterized by repetitive row structures and significant visual changes across phenological stages, represent a pivotal field challenge, limiting the robustness of conventional feature-based localization and mapping approaches. This paper introduces VinePT-Map, a semantic mapping framework that leverages vine trunks and support poles as persistent structural landmarks to enable season-agnostic and resilient robot localization. The proposed method formulates the mapping problem as a factor graph, integrating GPS, IMU, and RGB-D observations through robust geometrical constraints that exploit vineyard structure. An efficient perception pipeline based on instance segmentation and tracking, combined with a clustering filter for outlier rejection and pose refinement, enables accurate landmark detection using low-cost sensors and onboard computation. To validate the pipeline, we present a multi-season dataset for trunk and pole segmentation and tracking. Extensive field experiments conducted across diverse seasons demonstrate the robustness and accuracy of the proposed approach, highlighting its suitability for long-term autonomous operation in agricultural environments.},
+  copyright = {Creative Commons Attribution Non Commercial Share Alike 4.0 International},
+  keywords = {FOS: Computer and information sciences,Robotics (cs.RO)}
+}
+
 @article{beslMethodRegistration3D1992a,
   title = {A Method for Registration of 3-{{D}} Shapes},
   author = {Besl, P.J. and McKay, Neil D.},
@@ -145,6 +174,19 @@
   abstract = {The problem of creating a complete model of a physical object is studied. Although this may be possible using intensity images, the authors use range images which directly provide access to three-dimensional information. The first problem that needs to be solved is to find the transformation between the different views. Previous approaches have either assumed this transformation to be known (which is extremely difficult for a complete model) or computed it with feature matching (which is not accurate enough for integration. The authors propose an approach that works on range data directly and registers successive views with enough overlapping area to get an accurate transformation between views. This is performed by minimizing a functional that does not require point-to-point matches. Details are given of the registration method and modeling procedure, and they are illustrated on range images of complex objects.{$<>$}},
   keywords = {Biological system modeling,Contracts,Data acquisition,Design automation,Intelligent robots,Intelligent systems,Manufacturing automation,Object recognition,Registers,Sensor phenomena and characterization},
   file = {C:\Users\phili\Zotero\storage\H2P2SPH6\132043.html}
+}
+
+@misc{chenSemanticICPIterativeClosest2025,
+  title = {Semantic-{{ICP}}: {{Iterative Closest Point}} for {{Non-rigid Multi-Organ Point Cloud Registration}}},
+  shorttitle = {Semantic-{{ICP}}},
+  author = {Chen, Wanwen and Zeng, Qi and Studders, Carson and Kwon, Jamie J. Y. and Pang, Emily H. T. and Prisman, Eitan and Salcudean, Septimiu E.},
+  year = 2025,
+  publisher = {arXiv},
+  doi = {10.48550/ARXIV.2503.00972},
+  urldate = {2026-03-13},
+  abstract = {Point cloud registration is important in computer-aided interventions (CAI). While learning-based point cloud registration methods have been developed, their clinical application is hampered by issues of generalizability and explainability. Therefore, classical point cloud registration methods, including Iterative Closest Point (ICP), are still widely applied in CAI. ICP methods fail to consider that: (1) the points have well-defined semantic meaning, in that each point can be related to a specific anatomical label; (2) the deformation required for registration needs to follow biomechanical energy constraints. In this paper, we present a novel non-rigid semantic ICP (SemICP) method that handles multiple point labels and uses linear elastic energy regularization. We use semantic labels to improve the robustness of closest point matching and propose a novel point cloud deformation representation that incorporates explicit biomechanical energy regularization. Our experiments on four datasets show that our method significantly improves the Hausdorff distance and mean surface distance compared with other point cloud registration methods. We also demonstrate that integrating deep learning segmentation models with our registration pipeline enables effective alignment of US and MR point clouds.},
+  copyright = {Creative Commons Attribution Non Commercial No Derivatives 4.0 International},
+  keywords = {Computer Vision and Pattern Recognition (cs.CV),FOS: Computer and information sciences}
 }
 
 @article{choiIterativeKClosestPoint2020,
@@ -315,6 +357,36 @@
   abstract = {We propose a visual Simultaneous Localization and Mapping (SLAM) algorithm that integrates target detection and clustering techniques in dynamic scenarios to address the vulnerability of traditional SLAM algorithms to moving targets. The proposed algorithm integrates the target detection module into the front end of the SLAM and identifies dynamic objects within the visual range by improving the YOLOv5. Feature points associated with the dynamic objects are disregarded, and only those that correspond to static targets are utilized for frame-to-frame matching. This approach effectively addresses the camera pose estimation in dynamic environments, enhances system positioning accuracy, and optimizes the visual SLAM performance. Experiments on the TUM public dataset and comparison with the traditional ORB-SLAM3 algorithm and DS-SLAM algorithm validate that the proposed visual SLAM algorithm demonstrates an average improvement of 85.70 and 30.92\% in positioning accuracy in highly dynamic scenarios. In comparison to the DynaSLAM system using MASK-RCNN, our system exhibits superior real-time performance while maintaining a comparable ATE index. These results highlight that our pro-posed SLAM algorithm effectively reduces pose estimation errors, enhances positioning accuracy, and showcases enhanced robustness compared to conventional visual SLAM algorithms.},
   pmcid = {PMC11300432},
   pmid = {39108349}
+}
+
+@article{gene-molaFruitDetection3D2020,
+  title = {Fruit Detection and {{3D}} Location Using Instance Segmentation Neural Networks and Structure-from-Motion Photogrammetry},
+  author = {{Gen{\'e}-Mola}, Jordi and {Sanz-Cortiella}, Ricardo and {Rosell-Polo}, Joan R. and Morros, Josep-Ramon and {Ruiz-Hidalgo}, Javier and Vilaplana, Ver{\'o}nica and Gregorio, Eduard},
+  year = 2020,
+  month = feb,
+  journal = {Computers and Electronics in Agriculture},
+  volume = {169},
+  pages = {105165},
+  issn = {01681699},
+  doi = {10.1016/j.compag.2019.105165},
+  urldate = {2026-03-13},
+  langid = {english},
+  file = {C:\Users\phili\Zotero\storage\DGBLMS8S\Gené-Mola et al. - 2020 - Fruit detection and 3D location using instance segmentation neural networks and structure-from-motio.pdf}
+}
+
+@article{gouDevelopmentStreamDTM2026,
+  title = {Development of a Stream {{DTM}} Generation Methodology Using {{UAV-based SfM}} and {{LiDAR}} Point Cloud},
+  author = {Gou, Jaejun and Lee, Hyeokjin and Park, Jinseok and Jang, Seongju and Lee, Nakyung and Song, Inhong},
+  year = 2026,
+  month = jan,
+  journal = {Sci Rep},
+  volume = {16},
+  number = {1},
+  pages = {5178},
+  issn = {2045-2322},
+  doi = {10.1038/s41598-026-35473-x},
+  urldate = {2026-03-13},
+  langid = {english}
 }
 
 @article{grisettiTutorialGraphBasedSLAM2010a,
@@ -646,6 +718,23 @@
   urldate = {2026-03-13},
   abstract = {At present, many manufacturing enterprises have business systems such as MES, SPC, etc. In the manufacturing process, a large amount of data with periodic time series will be generated. How to evaluate the timeliness of periodically generated data according to a large number of time series is important content in the field of data quality research. At the same time, it can solve the demand of abnormal monitoring of production process faced by manufacturing enterprises based on the regularity change for periodic data timeliness. Most of the existing data timeliness evaluation models are based on a single fixed time stamp, which is not suitable for effective evaluation of periodic data with time series. In addition, the existing data timeliness evaluation methods cannot be applied to the field of process anomaly monitoring. In this paper, the Anomaly Monitoring of Process based on Recurrent Timeliness Rules (AMP-RTR) is proposed to meet the needs of periodic data timeliness evaluation and production process anomaly monitoring. RTR is the Rules defined to evaluate the timeliness of periodically generated data. AMP is to infer the abnormality of the product production process through the abnormality of the regularity change for periodic data timeliness based on RTR. The AMP-RTR model evaluates the timeliness of data in each cycle according to the time series generated periodically. At the same time, after the updated data arrives, the initial timeliness score of the next cycle is calculated. There are two cases in which the evaluation value of timeliness is abnormal. The first case is that the timeliness score value is less than the lower limit after updating. The second case is that the number of times the timeliness score exceeds the upper limit meets the set threshold. The user can dynamically adjust the production process according to the abnormal warning of the model. Finally, in order to verify the applicability of the AMP-RTR, we conducted simulation experiments on synthetic datasets and semiconductor manufacturing datasets. The experimental results show that the AMP-RTR can effectively monitor the abnormal conditions of various production processes in the manufacturing industry by adjusting the parameters of the model.},
   langid = {english}
+}
+
+@article{llorensGeoreferencedLiDAR3D2011,
+  title = {Georeferenced {{LiDAR 3D Vine Plantation Map Generation}}},
+  author = {Llorens, Jordi and Gil, Emilio and Llop, Jordi and Queralt{\'o}, Meritxell},
+  year = 2011,
+  month = jun,
+  journal = {Sensors},
+  volume = {11},
+  number = {6},
+  pages = {6237--6256},
+  issn = {1424-8220},
+  doi = {10.3390/s110606237},
+  urldate = {2026-03-13},
+  abstract = {The use of electronic devices for canopy characterization has recently been widely discussed. Among such devices, LiDAR sensors appear to be the most accurate and precise. Information obtained with LiDAR sensors during reading while driving a tractor along a crop row can be managed and transformed into canopy density maps by evaluating the frequency of LiDAR returns. This paper describes a proposed methodology to obtain a georeferenced canopy map by combining the information obtained with LiDAR with that generated using a GPS receiver installed on top of a tractor. Data regarding the velocity of LiDAR measurements and UTM coordinates of each measured point on the canopy were obtained by applying the proposed transformation process. The process allows overlap of the canopy density map generated with the image of the intended measured area using Google Earth\textregistered, providing accurate information about the canopy distribution and/or location of damage along the rows. This methodology was applied and tested on different vine varieties and crop stages in two important vine production areas in Spain. The results indicate that the georeferenced information obtained with LiDAR sensors appears to be an interesting tool with the potential to improve crop management processes.},
+  langid = {english},
+  file = {C:\Users\phili\Zotero\storage\LSHZNLW3\Llorens et al. - 2011 - Georeferenced LiDAR 3D Vine Plantation Map Generation.pdf}
 }
 
 @article{luGloballyConsistentRange1997,
@@ -989,6 +1078,20 @@
   file = {C:\Users\phili\Zotero\storage\ZSL32XZW\9812419.html}
 }
 
+@article{pavoljozefsafarikuniversityinkosiceSynergisticUseLiDAR2025,
+  title = {Synergistic {{Use}} of {{LiDAR}} and {{Hyperspectral Data}} in {{Vineyard Classification}}: {{A Case Study}} from the {{Tokaj Region}}, {{Slovakia}}},
+  shorttitle = {Synergistic {{Use}} of {{LiDAR}} and {{Hyperspectral Data}} in {{Vineyard Classification}}},
+  author = {{Pavol Jozef \v Saf\'arik University in Ko\v sice} and Cherlinka, Vasyl and Gallay, Michal and {Pavol Jozef \v Saf\'arik University in Ko\v sice} and Ka{\v n}uk, J{\'a}n and {Photomap, s.r.o, Ko\v sice, Slovakia} and Ona{\v c}illov{\'a}, Katar{\'i}na and {Pavol Jozef \v Saf\'arik University in Ko\v sice} and {\v S}a{\v s}ak, J{\'a}n and {Pavol Jozef \v Saf\'arik University in Ko\v sice} and Cherlinka, Liubov and {NGO SSELMB Terra}},
+  year = 2025,
+  journal = {GC},
+  volume = {19},
+  number = {2},
+  issn = {24540005},
+  doi = {10.33542/GC2025-2-02},
+  urldate = {2026-03-13},
+  abstract = {Hyperspectral (HS) and LiDAR sensing provide complementary information for vineyard monitoring. HS imagery captures detailed spectral signals related to canopy physiology and biochemistry but is often affected by contamination from inter-row soil and weeds. LiDAR offers precise measurements of canopy structure yet lacks biochemical sensitivity. Their integration has the potential to overcome these limitations, and remotely piloted (unpiloted) aerial vehicles (UAVs) provide the flexible platform needed to collect both datasets at very high resolution over vineyards. In this study, UAV-based hyperspectral and laser scanning data were collected in the Slovak part of the Tokaj wine region to evaluate their combined potential for distinguishing vine from non-vine areas, producing dense point clouds with more than 600 points per square metre and hyperspectral imagery consisting of 172 bands at 0.1 m spatial resolution. Four datasets were prepared: hyperspectral imagery alone, hyperspectral imagery combined with canopy height, simulated natural colour imagery alone, and simulated natural colour imagery combined with canopy height. All datasets were transformed using principal component analysis, and the resulting features were classified with a supervised maximum likelihood classifier. Accuracy was evaluated using 1,000 field-validated reference points. The classification based only on the hyperspectral data reached 89\% overall accuracy but performed poorly for vine detection, with a producer's accuracy of 48.9\% and an F1-score of 0.61. When canopy height information was included, performance improved to 96\% overall accuracy, a Kappa coefficient of 0.85, and an F1-score of 0.88. Simulated natural-colour imagery combined with canopy height achieved intermediate results, with 93\% overall accuracy and an F1-score of 0.79. These findings confirm that integrating spectral and structural information enhances vineyard mapping and provides a reliable basis for precision viticulture applications.}
+}
+
 @article{polvaraBacchusLongTermBLT2024,
   title = {Bacchus {{Long-Term}} ({{BLT}}) Data Set: {{Acquisition}} of the Agricultural Multimodal {{BLT}} Data Set with Automated Robot Deployment},
   shorttitle = {Bacchus {{Long-Term}} ({{BLT}}) Data Set},
@@ -1190,6 +1293,19 @@
   langid = {english}
 }
 
+@article{shiIterativeClosestPoint2019,
+  title = {The {{Iterative Closest Point Registration Algorithm Based}} on the {{Normal Distribution Transformation}}},
+  author = {Shi, Xiuying and Peng, Jianjun and Li, Jiping and Yan, Pitao and Gong, Hangyu},
+  year = 2019,
+  journal = {Procedia Computer Science},
+  volume = {147},
+  pages = {181--190},
+  issn = {18770509},
+  doi = {10.1016/j.procs.2019.01.219},
+  urldate = {2026-03-13},
+  langid = {english}
+}
+
 @inproceedings{silwalRobustIlluminationInvariantCamera2021,
   title = {A {{Robust Illumination-Invariant Camera System}} for {{Agricultural Applications}}},
   booktitle = {2021 {{IEEE}}/{{RSJ International Conference}} on {{Intelligent Robots}} and {{Systems}} ({{IROS}})},
@@ -1360,6 +1476,19 @@
   abstract = {In this paper, we present a novel benchmark for the evaluation of RGB-D SLAM systems. We recorded a large set of image sequences from a Microsoft Kinect with highly accurate and time-synchronized ground truth camera poses from a motion capture system. The sequences contain both the color and depth images in full sensor resolution (640 \texttimes{} 480) at video frame rate (30 Hz). The ground-truth trajectory was obtained from a motion-capture system with eight high-speed tracking cameras (100 Hz). The dataset consists of 39 sequences that were recorded in an office environment and an industrial hall. The dataset covers a large variety of scenes and camera motions. We provide sequences for debugging with slow motions as well as longer trajectories with and without loop closures. Most sequences were recorded from a handheld Kinect with unconstrained 6-DOF motions but we also provide sequences from a Kinect mounted on a Pioneer 3 robot that was manually navigated through a cluttered indoor environment. To stimulate the comparison of different approaches, we provide automatic evaluation tools both for the evaluation of drift of visual odometry systems and the global pose error of SLAM systems. The benchmark website [1] contains all data, detailed descriptions of the scenes, specifications of the data formats, sample code, and evaluation tools.},
   isbn = {9781467317368 9781467317375 9781467317351},
   note = {[TLDR] A large set of image sequences from a Microsoft Kinect with highly accurate and time-synchronized ground truth camera poses from a motion capture system is recorded for the evaluation of RGB-D SLAM systems.}
+}
+
+@inproceedings{tagarakisDigitalMappingPruning2026,
+  title = {Digital {{Mapping}} of {{Pruning Weight}} in {{Vineyards}} in the {{Framework}} of {{Precision Viticulture}}},
+  booktitle = {The 18th {{International Conference}} of the {{Hellenic Association}} of {{Agricultural Economists}}},
+  author = {Tagarakis, Aristotelis C. and Biniari, Katerina and Daskalakis, Ioannis and Kateris, Dimitrios and Balafoutis, Athanasios and Bochtis, Dionysis},
+  year = 2026,
+  month = jan,
+  pages = {43},
+  publisher = {MDPI},
+  doi = {10.3390/proceedings2026134043},
+  urldate = {2026-03-13},
+  langid = {english}
 }
 
 @article{tamuraUnsupervisedMonocularDepth2025,
@@ -1551,6 +1680,33 @@
   abstract = {Absolute positioning is an essential factor for the arrival of autonomous driving. Global Navigation Satellites System (GNSS) receiver provides absolute localization for it. GNSS solution can provide satisfactory positioning in open or sub-urban areas, however, its performance suffered in super-urbanized area due to the phenomenon which are well-known as multipath effects and NLOS receptions. The effects dominate GNSS positioning performance in the area. The recent proposed 3D map aided (3DMA) GNSS can mitigate most of the multipath effects and NLOS receptions caused by buildings based on 3D city models. However, the same phenomenon caused by moving objects in urban area is currently not modelled in the 3D geographic information system (GIS). Moving objects with tall height, such as the double-decker bus, can also cause NLOS receptions because of the blockage of GNSS signals by surface of objects. Therefore, we present a novel method to exclude the NLOS receptions caused by double-decker bus in highly urbanized area, Hong Kong. To estimate the geometry dimension and orientation relative to GPS receiver, a Euclidean cluster algorithm and a classification method are used to detect the double-decker buses and calculate their relative locations. To increase the accuracy and reliability of the proposed NLOS exclusion method, an NLOS exclusion criterion is proposed to exclude the blocked satellites considering the elevation, signal noise ratio (SNR) and horizontal dilution of precision (HDOP). Finally, GNSS positioning is estimated by weighted least square (WLS) method using the remaining satellites after the NLOS exclusion. A static experiment was performed near a double-decker bus stop in Hong Kong, which verified the effectiveness of the proposed method.},
   keywords = {3D point clouds,Clustering algorithms,Global navigation satellite system,GNSS,GPS,Laser radar,LiDAR,NLOS exclusion,Nonlinear optics,Object detection,Receivers,Satellites,Three-dimensional displays,Urban canyon},
   file = {C:\Users\phili\Zotero\storage\PPGC55CJ\8373377.html}
+}
+
+@article{xiongRealtimeLocalization3D2023,
+  title = {Real-Time Localization and {{3D}} Semantic Map Reconstruction for Unstructured Citrus Orchards},
+  author = {Xiong, Juntao and Liang, Junhao and Zhuang, Yanyun and Hong, Dan and Zheng, Zhenhui and Liao, Shisheng and Hu, Wenxin and Yang, Zhengang},
+  year = 2023,
+  month = oct,
+  journal = {Computers and Electronics in Agriculture},
+  volume = {213},
+  pages = {108217},
+  issn = {01681699},
+  doi = {10.1016/j.compag.2023.108217},
+  urldate = {2026-03-13},
+  langid = {english}
+}
+
+@misc{xuCross3DRegLargescaleRealworld2025,
+  title = {{{Cross3DReg}}: {{Towards}} a {{Large-scale Real-world Cross-source Point Cloud Registration Benchmark}}},
+  shorttitle = {{{Cross3DReg}}},
+  author = {Xu, Zongyi and Lang, Zhongpeng and Chen, Yilong and Zhao, Shanshan and Huang, Xiaoshui and Zuo, Yifan and Zhang, Yan and Zhang, Qianni and Gao, Xinbo},
+  year = 2025,
+  publisher = {arXiv},
+  doi = {10.48550/ARXIV.2509.06456},
+  urldate = {2026-03-13},
+  abstract = {Cross-source point cloud registration, which aims to align point cloud data from different sensors, is a fundamental task in 3D vision. However, compared to the same-source point cloud registration, cross-source registration faces two core challenges: the lack of publicly available large-scale real-world datasets for training the deep registration models, and the inherent differences in point clouds captured by multiple sensors. The diverse patterns induced by the sensors pose great challenges in robust and accurate point cloud feature extraction and matching, which negatively influence the registration accuracy. To advance research in this field, we construct Cross3DReg, the currently largest and real-world multi-modal cross-source point cloud registration dataset, which is collected by a rotating mechanical lidar and a hybrid semi-solid-state lidar, respectively. Moreover, we design an overlap-based cross-source registration framework, which utilizes unaligned images to predict the overlapping region between source and target point clouds, effectively filtering out redundant points in the irrelevant regions and significantly mitigating the interference caused by noise in non-overlapping areas. Then, a visual-geometric attention guided matching module is proposed to enhance the consistency of cross-source point cloud features by fusing image and geometric information to establish reliable correspondences and ultimately achieve accurate and robust registration. Extensive experiments show that our method achieves state-of-the-art registration performance. Our framework reduces the relative rotation error (RRE) and relative translation error (RTE) by \$63.2\textbackslash\%\$ and \$40.2\textbackslash\%\$, respectively, and improves the registration recall (RR) by \$5.4\textbackslash\%\$, which validates its effectiveness in achieving accurate cross-source registration.},
+  copyright = {arXiv.org perpetual, non-exclusive license},
+  keywords = {Computer Vision and Pattern Recognition (cs.CV),FOS: Computer and information sciences}
 }
 
 @article{xuFASTLIO2FastDirect2022,
