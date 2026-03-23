@@ -1,3 +1,9 @@
+---
+name: bib-fixer
+description: "Manages bibliography quality, citation consistency, and BibTeX key hygiene for this LaTeX thesis."
+model: claude-haiku-4.5
+---
+
 # Skill: Bib Fixer
 
 ## Purpose

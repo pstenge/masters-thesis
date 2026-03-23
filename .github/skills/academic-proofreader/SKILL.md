@@ -1,3 +1,9 @@
+---
+name: academic-proofreader
+description: "Proofreads thesis text for grammar, logical flow, and LaTeX structural correctness."
+model: claude-sonnet-4.5
+---
+
 # Skill: Academic Proofreader Workflow
 
 ## Purpose
