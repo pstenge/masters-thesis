@@ -21,6 +21,7 @@ At this critical threshold, the accumulated planar drift distorts the LiDAR map 
 This failure mode is particularly prevalent in the structured and repetitive environments of vineyard rows. Small angular or lateral drifts cause parallel rows in the LiDAR map to diverge or overlap incorrectly. Once this spatial distortion exceeds the scan matcher's convergence radius, the algorithm may incorrectly register the vehicle's current position to an adjacent row. This ``row-skipping'' effect creates a feedback loop of map corruption, where each incorrect match further distorts the global map, rendering recovery unlikely for the remainder of the trajectory.
 
 \subsection{Refined GLIM Performance}
+\label{subsec:slam-discussion-refined}
 
 The transition from the baseline GLIM algorithm to the refined (parameterised) version demonstrates a significant enhancement in localisation stability and drift suppression. While the baseline algorithm frequently succumbed to the failure modes described in previous sections, the refined version exhibits a more controlled error growth profile.
 
@@ -98,6 +99,39 @@ The robustness of this design is confirmed by Dataset 2, where GNSS factor utili
 The planar geometry quality assessment phase, which enforces minimum requirements on translational baseline, spread ratio, rotational excitation, and condition number, ensures that the Kabsch algorithm operates in a numerically stable regime. This preprocessing step prevents ill-conditioned covariance matrices that could yield biased or unstable alignment solutions.
 
 The quintet of measurement from Datasets 0--4 all satisfy the geometry quality thresholds, which explains the consistency of global alignment across the evaluation. In datasets with weakly excited geometry (e.g., highly linear traversals with minimal rotation), this step would conservatively defer global alignment until sufficient geometric excitation is accumulated, preventing premature or inaccurate initialisation.
+
+\subsection{Generalisation to the Evaluation Dataset}
+\label{subsec:slam-generalisation}
+
+Beyond performance on the parameterisation datasets, the three configurations were evaluated on a held-out Evaluation Dataset to assess whether the observed improvements are specific to the training data distribution or generalise to previously unseen routes. The results are reported in \cref{subsec:slam-eval-results}; the analysis here focuses on what they reveal about generalisation behaviour.
+
+\subsubsection{Overall Performance Hierarchy}
+
+The three-tier performance ranking observed across the parameterisation datasets — baseline GLIM performing worst, refined GLIM intermediate, and the proposed method achieving the lowest errors — is broadly preserved on the Evaluation Dataset (see \cref{tab:eval_comparison_key_metrics}). The ordering holds for error percentage per metre and error per metre. For RPE 1\,m translation standard deviation, however, the refined GLIM's mean (0.4019) exceeds that of the baseline (0.1093) due to the influence of at least one catastrophic failure run, which inflates the aggregate statistic beyond the baseline's more uniformly distributed error. The proposed method achieves the lowest value on all three metrics. This overall consistency indicates that neither the parameterisation process nor the GNSS integration architecture produces results that are specific to the routes on which they were developed.
+
+\subsubsection{Baseline GLIM --- Generalisation}
+
+The baseline GLIM mean error percentage per metre on the Evaluation Dataset falls within the range observed on the parameterisation datasets (1.253\%--7.361\%) and is comparable to the middle-tier parameterisation datasets (see \cref{tab:eval_baseline_performance}), indicating no systematic degradation on unseen data. This is expected: the baseline configuration involves no parameter tuning, so there is no mechanism by which its behaviour could be route-specific. The modest run-to-run variability is consistent with the stochastic nature of the scan-matching front-end.
+
+\subsubsection{Refined GLIM --- Generalisation and Instability}
+
+The mean error percentage per metre for the refined GLIM on the Evaluation Dataset is consistent with the parameterisation dataset range (0.608\%--3.615\%), indicating that the optimised parameters transfer well in the mean-performance sense (see \cref{tab:eval_refined_performance}).
+
+However, the results also reveal a significant instability that is not captured by the mean error percentage alone. As reported in \cref{tab:eval_refined_performance}, the maximum 3D positional error exhibits a mean--median discrepancy of approximately threefold (39.59\,m vs.\ 13.09\,m), with a maximum observed value of 148.61\,m. This pattern indicates that at least one of the five runs experienced a catastrophic failure of the type described in \cref{subsec:slam-discussion-refined} — a sudden and irrecoverable collapse of scan-matching alignment leading to unbounded planar drift. The same failure signature is visible in the RPE metrics, where mean values are an order of magnitude larger than the corresponding medians, confirming that the elevated aggregates are driven by a tail event rather than uniformly elevated error.
+
+This apparent bimodal behaviour — the majority of runs performing well, with an occasional catastrophic failure — is arguably a more concerning failure mode in practice than a uniformly elevated error, because it is unpredictable at deployment time. The small sample size ($n = 5$) limits formal distributional characterisation, but the magnitude of the outlier (max positional error exceeding the median by a factor of eleven) is sufficient to establish that the failure mode persists on unseen routes. An operator relying on the refined GLIM cannot distinguish an impending failure run from a well-behaved one prior to the failure event. The parameter optimisation delays the onset of the instability described in the parameterisation dataset analysis but does not eliminate the underlying scan-matching vulnerability in structured vineyard environments. Whether the catastrophic run can be attributed to specific environmental factors along the Evaluation Dataset route — such as a stretch of low-geometric-excitation terrain or a section with reduced inter-row distinctiveness — cannot be determined from aggregate statistics alone and would require per-run trajectory inspection.
+
+\subsubsection{Proposed Method --- Generalisation and Consistency}
+
+The proposed method's Evaluation Dataset performance falls within and is consistent with the parameterisation dataset range of 0.0153\%--0.0501\% for error percentage per metre (see \cref{tab:eval_proposed_performance}). The standard deviation across five runs is less than 2.5\% of the mean value, indicating near-deterministic behaviour. This contrasts sharply with the refined GLIM, where the corresponding metric standard deviation accounts for approximately 17.5\% of the mean. The GASP metric likewise falls within the parameterisation dataset range (0.0274--0.0679), confirming consistent behaviour on both local and global accuracy dimensions.
+
+This near-deterministic behaviour confirms a practically important property of the proposed architecture: the GNSS global constraint effectively suppresses the non-deterministic component of the underlying odometry pipeline. A deploying operator can therefore expect consistent performance across repeated runs rather than a distribution of outcomes that may occasionally include a failure event.
+
+The Evaluation Dataset results provide evidence that the proposed method's improvements are attributable to architectural design — specifically, the introduction of absolute positional observability through GNSS factor graph integration — rather than to incidental tuning of parameters that happen to favour the parameterisation routes. The error percentage per metre on the unseen Evaluation Dataset is directly comparable to the best parameterisation results, with no evidence of performance degradation on the held-out data. It should be noted, however, that because the Evaluation Dataset was collected at the same farm as four of the five parameterisation datasets, these results demonstrate route-level generalisation rather than cross-environment generalisation; performance on structurally different farms or under different seasonal conditions remains untested.
+
+\subsubsection{Summary of Generalisation Assessment}
+
+All three configurations exhibit performance on the Evaluation Dataset that is consistent with the parameterisation datasets, supporting the broader applicability of the reported results. The key differentiator between the configurations is not average trajectory accuracy but run-to-run robustness: the proposed method demonstrates near-deterministic behaviour across all five runs, whereas the refined GLIM retains the risk of catastrophic failure that is indistinguishable from a normal run until after it occurs. This distinction has direct implications for reliable deployment in operational vineyard settings.
 
 \subsection{Implications for Vineyard Robotics}
 

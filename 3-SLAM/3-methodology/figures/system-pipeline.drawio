@@ -1,0 +1,174 @@
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="900" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Sensor Hardware container (dashed) -->
+    <mxCell id="2" value="Sensor Hardware (PTP/Chrony Clock Synchronised)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeColor=#999999;fontColor=#333333;verticalAlign=top;align=center;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="40" y="20" width="820" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- LiDAR -->
+    <mxCell id="3" value="LiDAR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="70" y="40" width="130" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- IMU -->
+    <mxCell id="4" value="IMU" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="230" y="40" width="130" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- GNSS Receiver -->
+    <mxCell id="5" value="GNSS Receiver" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="650" y="40" width="160" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- GLIM -->
+    <mxCell id="6" value="GLIM&#xa;(LiDAR-Inertial Odometry)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="70" y="180" width="230" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- GNSS–Keyframe Time Matching -->
+    <mxCell id="7" value="GNSS–Keyframe&#xa;Time Matching" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="620" y="180" width="230" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- Init section label -->
+    <mxCell id="8" value="&#9654; One-Time Initialisation" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="70" y="295" width="230" height="25" as="geometry" />
+    </mxCell>
+
+    <!-- Accumulate GNSS–Keyframe Pairs -->
+    <mxCell id="9" value="Accumulate GNSS–Keyframe Pairs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="70" y="330" width="230" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- Geometric Consistency Outlier Rejection -->
+    <mxCell id="10" value="Geometric Consistency&#xa;Outlier Rejection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="70" y="440" width="230" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- Sufficient Geometry? diamond -->
+    <mxCell id="11" value="Sufficient&#xa;Geometry?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+      <mxGeometry x="65" y="550" width="240" height="80" as="geometry" />
+    </mxCell>
+
+    <!-- Kabsch Alignment -->
+    <mxCell id="12" value="Kabsch Alignment&#xa;(RMSD Minimisation)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="70" y="690" width="230" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- Publish T_map->ENU to ROS 2 TF Tree -->
+    <mxCell id="13" value="Publish T_map&#x2192;ENU&#xa;to ROS 2 TF Tree" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="70" y="800" width="230" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- Continuous section label -->
+    <mxCell id="14" value="&#9654; Continuous Online Operation" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="620" y="295" width="260" height="25" as="geometry" />
+    </mxCell>
+
+    <!-- GNSS Prior Factor Construction -->
+    <mxCell id="15" value="GNSS Prior Factor&#xa;Construction" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="620" y="330" width="230" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- GLIM Factor Graph -->
+    <mxCell id="16" value="GLIM Factor Graph&#xa;(LiDAR-inertial + GNSS priors)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="620" y="440" width="230" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- ENU-Referenced Trajectory -->
+    <mxCell id="17" value="ENU-Referenced Trajectory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="620" y="550" width="230" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- === CONNECTORS === -->
+
+    <!-- LiDAR -> GLIM -->
+    <mxCell id="18" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="3" target="6" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- IMU -> GLIM -->
+    <mxCell id="19" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="4" target="6" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- GNSS Receiver -> GNSS Time Matching -->
+    <mxCell id="20" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="5" target="7" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- GLIM -> Accumulate Pairs (straight down) -->
+    <mxCell id="21" value="Submaps / keyframes" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="6" target="9" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- GNSS TM -> Accumulate Pairs (C-shape via y=150, above the main boxes) -->
+    <mxCell id="22" value="Matched pairs (init.)" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="7" target="9" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="490" y="210" />
+          <mxPoint x="490" y="360" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Accumulate Pairs -> Outlier Rejection -->
+    <mxCell id="23" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="9" target="10" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Outlier Rejection -> Sufficient Geometry? -->
+    <mxCell id="24" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="10" target="11" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Sufficient Geometry? -> Kabsch (Pass) -->
+    <mxCell id="25" value="Pass" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="11" target="12" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Sufficient Geometry? -> Accumulate Pairs (Fail - retry loop on left) -->
+    <mxCell id="26" value="Fail" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="11" target="9" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="25" y="590" />
+          <mxPoint x="25" y="360" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Kabsch -> Publish T_map->ENU -->
+    <mxCell id="27" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="12" target="13" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Publish T_map->ENU -> GNSS Factor Construction (dashed, enables) -->
+    <mxCell id="28" value="Enables factor insertion" style="edgeStyle=orthogonalEdgeStyle;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="13" target="15" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="490" y="830" />
+          <mxPoint x="490" y="360" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- GNSS TM -> GNSS Factor Construction (continuous time-matched pairs) -->
+    <mxCell id="29" value="Time-matched pairs" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="7" target="15" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- GNSS Factor Construction -> GLIM Factor Graph -->
+    <mxCell id="30" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="15" target="16" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- GLIM Factor Graph -> ENU-Referenced Trajectory -->
+    <mxCell id="31" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="16" target="17" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

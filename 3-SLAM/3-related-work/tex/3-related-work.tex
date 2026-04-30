@@ -6,9 +6,23 @@ The development of Simultaneous Localisation and Mapping (SLAM) has shifted from
 \label{subsec:lidar-slam-architectures}
 The foundation of modern LiDAR SLAM rests on the seminal LOAM (LiDAR Odometry and Mapping) framework \cite{zhangLOAMLidarOdometry2014}, which introduced the critical concept of extracting and registering geometric features, specifically classifying points into ``edge'' and ``planar'' surfaces based on curvature. LOAM's split-process architecture separated high-frequency odometry from low-frequency mapping. Subsequent work, such as LeGO-LOAM \cite{shanLeGOLOAMLightweightGroundOptimized2018}, refined this by optimising ground points separately. However, these systems were loosely-coupled and feature-dependent, leading to inevitable drift over long trajectories and fragility in unstructured environments (e.g., foliage or feature-poor corridors).
 
-The transition to tight-coupling was facilitated by the advancement of IMU Pre-integration theory \cite{forsterOnManifoldPreintegrationRealTime2017}. This re-parameterisation allows IMU integration to be expressed as a relative motion constraint (e.g., $\Delta \mathbf{R}_{ij}$) that is independent of the initial velocity and pose estimate. This innovation decouples the high IMU rate from the optimisation rate, making it computationally feasible for graph-based methods to efficiently optimise state biases and velocities over large time windows.
+The transition to tight-coupling was facilitated by the advancement of IMU Pre-integration theory \cite{forsterOnManifoldPreintegrationRealTime2017}. This re-parameterisation allows IMU integration to be expressed as a relative motion constraint (e.g., $\Delta \mathbf{R}_{ij}$) that is independent of the initial velocity and pose estimate, as illustrated in \cref{fig:imuPreintegration}. This innovation decouples the high IMU rate from the optimisation rate, making it computationally feasible for graph-based methods to efficiently optimise state biases and velocities over large time windows.
 
-The result of this evolution is LIO-SAM \cite{shanLIOSAMTightlycoupledLidar2020}, which established the feature-based factor graph benchmark for global consistency. LIO-SAM builds a factor graph incorporating LiDAR odometry, IMU pre-integration, and explicit loop closure factors. To manage computational complexity, it employs a "sliding window" local map for scan-to-map matching. Despite its accuracy and robustness compared to predecessors, its reliance on LOAM-style feature extraction and a standard KD-tree for neighbor searching limits its performance in geometrically degenerate environments.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{3-SLAM/3-related-work/figures/imuPreintegration.png}
+    \caption{Illustration of on-manifold IMU pre-integration within a sensor-fusion odometry pipeline. Left: raw camera frames and high-frequency inertial measurements arriving asynchronously between keyframes. Right: the equivalent factor graph, in which the batch of intermediate IMU readings between two keyframes is compressed into a single pre-integrated IMU factor, while a structureless vision factor jointly constrains keyframes sharing observations of the same landmark \protect\cite{forsterOnManifoldPreintegrationRealTime2017}.}
+    \label{fig:imuPreintegration}
+\end{figure}
+
+The result of this evolution is LIO-SAM \cite{shanLIOSAMTightlycoupledLidar2020}, which established the feature-based factor graph benchmark for global consistency, as shown in \cref{fig:liosamArchitecture}. LIO-SAM builds a factor graph incorporating LiDAR odometry, IMU pre-integration, and explicit loop closure factors. To manage computational complexity, it employs a "sliding window" local map for scan-to-map matching. Despite its accuracy and robustness compared to predecessors, its reliance on LOAM-style feature extraction and a standard KD-tree for neighbor searching limits its performance in geometrically degenerate environments.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\linewidth]{3-SLAM/3-related-work/figures/LIO_SAM_Archictecture.png}
+    \caption{Architecture of the LIO-SAM tightly-coupled LiDAR-inertial odometry framework. Inputs from a 3D LiDAR, an IMU, and an optional GPS receiver are fused within a factor graph composed of four distinct constraint types: IMU pre-integration factors linking consecutive keyframes, LiDAR odometry factors derived from scan-to-local-map registration, GPS absolute-position factors, and loop closure factors that suppress long-term drift \protect\cite{shanLIOSAMTightlycoupledLidar2020}.}
+    \label{fig:liosamArchitecture}
+\end{figure}
 
 The current state of the art is defined by two architectural tracks: those prioritising extreme computational efficiency via filtering, and those prioritising global consistency and robustness via dense graph optimisation.
 
@@ -20,11 +34,18 @@ FAST-LIO2 \cite{xuFASTLIO2FastDirect2022} is a widely adopted benchmark for comp
 \paragraph{Graph-Based Global Consistency}
 Systems in this track prioritize long-term mapping quality and robustness by leveraging high-performance hardware, particularly embedded GPUs.
 
-GLIM (Global LiDAR Inertial Mapping) \cite{koideGLIM3DRangeInertial2024} represents a distinct departure from CPU-centric design, instead leveraging GPU parallelism to achieve dense, globally consistent mapping. Scan matching in GLIM is implemented via GPU-accelerated Voxelised Generalised Iterative Closest Point (VGICP) factors, which allow the system to incorporate nearly all points per frame and thereby retain geometric constraints that feature-based methods routinely discard. A further key contribution is the Submap Endpoint Mechanism, in which IMU pre-integration factors are inserted as stiff constraints on unobservable degrees of freedom within each submap. This structural guarantee preserves registration quality even when the LiDAR geometry is degenerate — for example in featureless tunnels or elevator shafts. For back-end estimation, GLIM employs a fixed-lag smoother that continuously optimises a bounded window of recent poses, combining the accuracy benefits of iterative re-linearisation with bounded memory consumption, in contrast to full-history SLAM approaches.
+GLIM (Global LiDAR Inertial Mapping) \cite{koideGLIM3DRangeInertial2024} represents a distinct departure from CPU-centric design, instead leveraging GPU parallelism to achieve dense, globally consistent mapping, as shown in \cref{fig:glimFramework}. Scan matching in GLIM is implemented via GPU-accelerated Voxelised Generalised Iterative Closest Point (VGICP) factors, which allow the system to incorporate nearly all points per frame and thereby retain geometric constraints that feature-based methods routinely discard. A further key contribution is the Submap Endpoint Mechanism, in which IMU pre-integration factors are inserted as stiff constraints on unobservable degrees of freedom within each submap. This structural guarantee preserves registration quality even when the LiDAR geometry is degenerate — for example in featureless tunnels or elevator shafts. For back-end estimation, GLIM employs a fixed-lag smoother that continuously optimises a bounded window of recent poses, combining the accuracy benefits of iterative re-linearisation with bounded memory consumption, in contrast to full-history SLAM approaches.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{3-SLAM/3-related-work/figures/glimFramework.png}
+    \caption{Overview of the GLIM framework, comprising a preprocessing module and three tightly coupled range-IMU estimation modules. The odometry estimation module deskews point clouds and estimates sensor motion via fixed-lag smoothing; the local mapping module concatenates frames into submaps; and the global mapping module optimises submap poses for long-term global consistency. Each module runs in a dedicated thread \protect\cite{koideGLIM3DRangeInertial2024}.}
+    \label{fig:glimFramework}
+\end{figure}
 
 This trade-off between computational efficiency and global consistency is summarized in the comparison table below. The most significant recent innovations have occurred in the map data structure domain (iKD-Tree, OctVox) for the filter-based track, and in hardware-software co-design (GLIM's GPU acceleration) for the graph-based track.
 
-\begin{table}[ht]
+\begin{table}[htbp]
 \centering
 \caption{Comparative Analysis of State-of-the-Art LIO Systems}
 \label{tab:comparison}
@@ -54,7 +75,7 @@ The optimisation of SLAM systems has evolved from manual tuning into rigorous hy
 One such method for sampling high-dimensional search spaces is Latin Hypercube Sampling (LHS). LHS, as formally introduced by Michael McKay in 1979, was used as a variance reduction technique to address the inefficiencies of Monte Carlo simulation (MCS) in high-dimensional domains \cite{chrismanLatinHypercubeSampling2014}. In MCS, sample points are generated independently, which often leads to ``clusters'' and ``voids'' in disparate regions, which can neglect critical narrow regions of optimal performance \cite{deutschLatinHypercubeSampling2012}. LHS addresses this by enforcing a stratification of the marginal distributions of each input variable.
 
 LHS divides the range of each of the $d$ variables into $n$ equiprobable intervals. In a standard uniform distribution of $[0, 1]$, these strata are defined as $A_i = \left( \frac{i-1}{n}, \frac{i}{n} \right]$ for $i = 1, \dots, n$ \cite{chrismanLatinHypercubeSampling2014}. To generate a LHS sample, one value is drawn from each interval for each dimension. These values are then combined into vectors such that
-each $n$ sample point is the only representative in each axis-aligned hyperplane. A comparison of LHS, MCS and Grid Search is detailed in Table~\ref{tab:sampling_comparison}.
+each $n$ sample point is the only representative in each axis-aligned hyperplane. A visual comparison of MCS and LHS point distributions is shown in \cref{fig:samplingComparison}, and a comparison of LHS, MCS and Grid Search is detailed in Table~\ref{tab:sampling_comparison}.
 
 \begin{table}[h]
 \centering
@@ -76,6 +97,23 @@ Search Structure & Unstructured & Rigidly structured & Near-random with low disc
 \caption{Comparison of Sampling Strategies}
 \label{tab:sampling_comparison}
 \end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{3-SLAM/3-related-work/figures/MC_dist.png}
+        \label{fig:mcDist}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{3-SLAM/3-related-work/figures/LHS_dist.png}
+        \label{fig:lhsDist}
+    \end{subfigure}
+    \caption{Spatial distribution of 16 sample points drawn in a two-dimensional parameter space, visualised at two grid resolutions. In (a) and (b), pure Monte Carlo sampling populates the space without structural constraint, producing irregular clusters and uncovered voids that persist regardless of grid resolution. In (g) and (h), the optimised Latin Hypercube Sampling stratification guarantee ensures that exactly one sample occupies each row and column of the partition grid, yielding substantially more uniform marginal coverage for the same number of evaluations \protect\cite{deutschLatinHypercubeSampling2012}.}
+    \label{fig:samplingComparison}
+\end{figure}
 
 The advantage of LHS in SLAM parameterisation comes from its capacity to represent the parameter space with fewer samples than traditional methods. In a SLAM system with ten parameters, a grid search with only three levels per parameter would require $3^{10} = 59,049$ evaluations. Testing each sample on a real trajectory quickly becomes time prohibitive. LHS can explore the same search space with fewer points while maintaining that each parameter is tested at different levels \cite{deutschLatinHypercubeSampling2012}. However, while uniformity is guaranteed across each axis, it does not guarantee that the interior of the hypercube is filled uniformly. As a result, researchers have developed Latin Hypercube Sampling with Multidimensional Uniformity (LHSMDU) to address the limitations of univariate stratification \cite{deutschLatinHypercubeSampling2012}. LHSMDU employs a sequential elimination process, where a large pool of MCS candidates are generated, and those that are too close in the multidimensional space are pruned \cite{deutschLatinHypercubeSampling2012}. This method maximises the minimum inter-point distance, maximising the spread of samples throughout the multi-dimensional space.
 

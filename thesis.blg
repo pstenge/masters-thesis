@@ -36,44 +36,44 @@ Warning: the journal shouldn't be empty in moravecObstacleAvoidanceNavigatio1980
 Warning: the institution shouldn't be empty in nilssonShakeyRobot1984
 Warning: the authors shouldn't be empty in nocedalTrustRegionMethods2006
 Warning: the booktitle shouldn't be empty in zhangLOAMLidarOdometry2014
-You've used 89 entries,
+You've used 90 entries,
             1952 wiz_defined-function locations,
-            1051 strings with 29117 characters,
-and the built_in function-call counts, 41926 in all, are:
-= -- 5004
-> -- 1344
+            1056 strings with 29401 characters,
+and the built_in function-call counts, 42315 in all, are:
+= -- 5040
+> -- 1368
 < -- 0
-+ -- 374
-- -- 359
-* -- 3520
-:= -- 8042
-add.period$ -- 104
-call.type$ -- 89
-change.case$ -- 416
-chr.to.int$ -- 88
-cite$ -- 100
-duplicate$ -- 742
++ -- 382
+- -- 366
+* -- 3555
+:= -- 8120
+add.period$ -- 105
+call.type$ -- 90
+change.case$ -- 421
+chr.to.int$ -- 89
+cite$ -- 101
+duplicate$ -- 750
 empty$ -- 0
-format.name$ -- 595
-if$ -- 7832
+format.name$ -- 604
+if$ -- 7896
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 1339
-newline$ -- 285
-num.names$ -- 267
-pop$ -- 180
+missing$ -- 1351
+newline$ -- 288
+num.names$ -- 270
+pop$ -- 182
 preamble$ -- 0
-purify$ -- 267
+purify$ -- 270
 quote$ -- 0
-skip$ -- 1521
+skip$ -- 1532
 stack$ -- 0
-substring$ -- 2566
-swap$ -- 5479
+substring$ -- 2573
+swap$ -- 5537
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 11
 type$ -- 0
 warning$ -- 0
-while$ -- 236
-width$ -- 97
-write$ -- 1068
+while$ -- 237
+width$ -- 98
+write$ -- 1078

@@ -1,0 +1,593 @@
+WRITING IMPLEMENTATION PLAN
+============================
+Task:        Integrate held-out Evaluation Dataset into SLAM chapter (methodology, results, discussion)
+Target files: 3-SLAM/3-methodology/tex/3-methodology.tex
+              3-SLAM/3-results/tex/3-results.tex
+              3-SLAM/3-discussion/tex/3-discussion.tex
+Created:     2026-04-18
+
+---
+
+1. TASK SUMMARY
+
+   A new vineyard dataset (the "Evaluation Dataset") was collected after parameterisation was
+   complete and was not used during the parameter optimisation process. All three methods
+   (baseline GLIM, refined GLIM, proposed method) were evaluated on this dataset across five
+   independent runs, with results aggregated to mitigate the effect of non-deterministic
+   behaviour. This plan details all changes required to: (a) describe all datasets and the
+   evaluation protocol in the methodology; (b) present the Evaluation Dataset results in the
+   results section; and (c) analyse generalisation behaviour in the discussion.
+
+---
+
+2. LOCATION IN THESIS
+
+   Chapter: Chapter 3 — SLAM
+   Files modified: three existing section files (no new files or \input entries needed)
+
+   A. Methodology file:
+      File: 3-SLAM/3-methodology/tex/3-methodology.tex
+      Insert: New \subsection{Experimental Setup} appended after the final subsection
+              (currently "Robust SLAM Parameterisation via Iterative Region Refinement",
+              ending at line 248). This subsection sits within the existing
+              \section{Proposed Methods}.
+      Length: ~500–700 words
+
+   B. Results file:
+      File: 3-SLAM/3-results/tex/3-results.tex
+      Modify: Update the opening paragraph (lines 1–3) to reflect the full dataset split.
+      Insert: New group of subsections appended after the existing content
+              (after the final \subsection{Trajectory Visualisation} block, line 392).
+      Length: ~600–800 words + tables
+
+   C. Discussion file:
+      File: 3-SLAM/3-discussion/tex/3-discussion.tex
+      Insert: New \subsection{Generalisation to the Evaluation Dataset} appended after the
+              final existing subsection ("Implications for Vineyard Robotics", ~line 102).
+      Length: ~600–800 words
+
+---
+
+3. SECTION STRUCTURE
+
+   A. NEW SUBSECTION IN METHODOLOGY — \subsection{Experimental Setup}
+      \label{subsec:slam-experimental-setup}
+
+      \subsubsection{Parameterisation Datasets}
+        - Overview sentence: five datasets used for parameterisation
+        - Dataset 0 — Vineyard. Gradual altitude increase on forward traversal, decrease on return.
+        - Dataset 1 — Apple orchard. Altitude increases then decreases; significantly more
+                       elevation dips and bumps than vineyard datasets.
+        - Dataset 2 — Vineyard. Route starts from the opposite end of the vineyard relative to
+                       the other vineyard datasets; experiences a gradual altitude decrease on
+                       the single traversal. No return pass is included.
+        - Dataset 3 — Vineyard. Same farm as Datasets 0, 2, 4. Gradual altitude increase on
+                       forward traversal, decrease on return.
+        - Dataset 4 — Vineyard. Same farm as Datasets 0, 2, 3. Gradual altitude increase on
+                       forward traversal, decrease on return.
+        [PLACEHOLDER: any additional per-dataset info user supplies — sensor config, distance,
+                       date — should be inserted here once provided]
+
+      \subsubsection{Evaluation Dataset}
+        - Held-out dataset: not used in any stage of parameterisation.
+        - Vineyard dataset at the same farm as Datasets 0, 2, 3, 4.
+        - Route is distinct from those used in parameterisation.
+        - Altitude profile: gradual increase on forward traversal, decrease on return
+          (same profile as Datasets 0, 1, 3, 4).
+        - May differ from parameterisation datasets in GNSS coverage and signal conditions.
+        - Purpose: to provide an unbiased estimate of whether the parameterised configurations
+          generalise to unseen routes, or whether performance gains reflect overfitting to the
+          training data distribution.
+        [PLACEHOLDER: any additional specific info — date, length, location within vineyard]
+
+      \subsubsection{Evaluation Protocol}
+        - Three methods evaluated: baseline GLIM, refined GLIM, proposed method.
+        - Each method is evaluated on all five parameterisation datasets (single run each).
+        - Each method is additionally evaluated on the Evaluation Dataset across FIVE
+          independent runs. Rationale: the SLAM system is non-deterministic due to
+          parallelism and floating-point ordering; a single run risks reporting an outlier
+          that is unrepresentative of typical performance. Aggregate statistics (mean, std,
+          median, min, max) across the five runs are reported.
+        - Performance metrics used: RMSE (per axis and 3D), ATE (mean_abs_pos_err),
+          error percentage per metre, max 3D error, RPE 1 m and 10 m (RMSE, mean, std, max),
+          GASP (proposed method only). Definitions of all metrics are given in
+          \cref{sec:slam-methodology}.
+
+   B. ADDITIONS TO RESULTS SECTION
+
+      Modify opening paragraph:
+        Update the existing first sentence to acknowledge two tiers of evaluation:
+        five parameterisation datasets and the held-out Evaluation Dataset.
+        Suggest phrasing: "...Each configuration was evaluated on five parameterisation
+        datasets; additionally, all three configurations were evaluated on a held-out
+        Evaluation Dataset, described in \cref{subsec:slam-experimental-setup}, to assess
+        generalisation to unseen conditions."
+
+      New subsection group — append after line 392 (end of Trajectory Visualisation):
+
+      \subsection{Evaluation Dataset Results}
+      \label{subsec:slam-eval-results}
+
+        Introductory paragraph: state that this subsection reports performance on the
+        held-out Evaluation Dataset. Each metric cell represents the mean ± std across
+        five independent runs; median, min, and max are listed in full in the table.
+        Reference \cref{subsec:slam-experimental-setup} for dataset and protocol details.
+
+        \subsubsection{Baseline GLIM — Evaluation Dataset}
+          - Table \label{tab:eval_baseline_performance}
+          - Columns: Metric | Mean | Std | Median | Min | Max
+          - Include same row set as existing per-dataset tables
+            (RMSE x/y/z/3D, ATE, max error 3D, error per m, error %, RPE 1m RMSE/mean/std/max,
+             RPE 10m RMSE/mean/std/max)
+          - Values from extra_results.txt "Base glim" block:
+              rmse_pos_3d:     mean=17.4799, std=3.6283, median=17.0259, min=12.2617, max=22.2915
+              mean_abs_pos_err: mean=13.3863, std=3.1436, median=13.5756, min=9.1031, max=17.9034
+              max_pos_err:     mean=35.4544, std=6.6132, median=35.7962, min=24.9744, max=42.6418
+              error_pct:       mean=1.9612,  std=0.4519, median=1.9785,  min=1.3390,  max=2.6050
+              error_per_m:     mean=0.01961, std=0.00452,median=0.01978, min=0.01339, max=0.02605
+              rpe_1m_trans_rmse: mean=0.1153, std=0.0649, median=0.1008, min=0.04656, max=0.2178
+              rpe_1m_trans_mean: mean=0.03497,std=0.00798,median=0.03316,min=0.02531, max=0.04692
+              rpe_1m_trans_std:  mean=0.1093, std=0.0657, median=0.09516,min=0.03908, max=0.2127
+              rpe_1m_trans_max:  mean=1.6539, std=1.0152, median=1.4059, min=0.5472,  max=3.2732
+              rpe_10m_trans_rmse:mean=0.1840, std=0.1104, median=0.1350, min=0.1202,  max=0.3804
+              rpe_10m_trans_mean:mean=0.08290,std=0.03536,median=0.06842,min=0.06403, max=0.1460
+              (remaining values can be read directly from extra_results.txt)
+          - Prose: 2–3 sentences noting mean error_pct (~1.96%), trajectory length (~682 m)
+
+        \subsubsection{Refined GLIM — Evaluation Dataset}
+          - Table \label{tab:eval_refined_performance}
+          - Same column structure
+          - Values from extra_results.txt "Refined GLIM" block:
+              rmse_pos_3d:     mean=5.8987,  std=1.0561, median=6.2477, min=4.1607, max=6.9222
+              mean_abs_pos_err: mean=4.3123,  std=0.7479, median=4.4489, min=3.0535, max=4.9758
+              max_pos_err:     mean=39.594,  std=60.981, median=13.086, min=9.1552, max=148.606
+              error_pct:       mean=0.6215,  std=0.1089, median=0.6501, min=0.4453, max=0.7192
+              rpe_1m_trans_rmse: mean=0.4082, std=0.8182, median=0.04432,min=0.03534,max=1.8718
+              (remaining values can be read directly from extra_results.txt)
+          - NOTE: Very high std on max_pos_err (60.98 m) and rpe_1m_trans_rmse (0.818) indicate
+            at least one run experienced a catastrophic failure event; median values are far
+            more representative of typical performance. The table should make this transparent
+            by including all five statistics.
+          - Prose: 2–3 sentences noting the bimodal behaviour signalled by the wide std,
+            contrasting mean vs median max_pos_err (39.6 m vs 13.1 m).
+
+        \subsubsection{Proposed Method — Evaluation Dataset}
+          - Table \label{tab:eval_proposed_performance}
+          - Same column structure; also include GASP row
+          - Values from extra_results.txt "Proposed Method" block:
+              rmse_pos_3d:     mean=0.14589, std=0.01128, median=0.14932,min=0.12638,max=0.15353
+              mean_abs_pos_err: mean=0.11353, std=0.00270, median=0.11310,min=0.11116,max=0.11788
+              max_pos_err:     mean=0.85729, std=0.12654, median=0.85695,min=0.66308,max=0.97324
+              error_pct:       mean=0.016619,std=0.000354,median=0.016533,min=0.016285,max=0.017201
+              gasp:            mean=0.050793,std=0.008092,median=0.052015,min=0.038507,max=0.060737
+              rpe_1m_trans_rmse: mean=0.05256,std=0.007594,median=0.054179,min=0.041214,max=0.061969
+              (remaining values can be read directly from extra_results.txt)
+          - NOTE: Extremely low std across all metrics — very consistent across all 5 runs.
+          - Prose: 2–3 sentences noting ~0.017% error per metre and tight consistency
+            (std < 0.4% of mean for error_pct).
+
+        \subsubsection{Evaluation Dataset Comparative Summary}
+          - Table \label{tab:eval_comparison_key_metrics}
+          - Mirror structure of existing \cref{tab:comparison_table_key_metrics}
+          - Rows: error percent per metre, RPE 1m translation std, error per metre
+          - Columns: Method | Mean | Std (since there is only one dataset, not 5)
+          - Bold best (lowest mean) per row
+          - Prose: 1–2 sentences summarising the hierarchy.
+
+        [FIGURES — optional, conditional on content needs; see Section 7 of this plan]
+
+   C. NEW SUBSECTION IN DISCUSSION — \subsection{Generalisation to the Evaluation Dataset}
+      \label{subsec:slam-generalisation}
+
+      Insert at end of 3-discussion.tex, after the paragraph ending:
+      "...Chapter 4 will address this limitation by evaluating precise alignment techniques..."
+      (currently the final paragraph of "Implications for Vineyard Robotics")
+
+      Sub-structure:
+        \subsubsection{Overall Performance Hierarchy}
+          - The same three-tier performance ranking observed on the parameterisation datasets
+            (baseline < refined < proposed) is preserved on the unseen Evaluation Dataset.
+          - This indicates that neither the parameterisation nor the GNSS architecture
+            produces results specific to the training routes.
+
+        \subsubsection{Baseline GLIM — Generalisation}
+          - Baseline mean error_pct on Evaluation Dataset (~1.96%) falls within the range
+            observed on parameterisation datasets (1.25%–7.36%), and is comparable to
+            the middle-performing parameterisation datasets.
+          - No sign of worse behaviour on unseen data; baseline performance is already
+            unconstrained (no tuning to training data), so this is expected.
+          - Modest run-to-run variability (std 0.45%) is consistent with the stochastic
+            nature of the scan-matching front-end.
+
+        \subsubsection{Refined GLIM — Generalisation and Instability}
+          - Mean error_pct (~0.62%) is consistent with the parameterisation dataset range
+            (0.61%–3.62%), suggesting the refined parameters transfer well in the
+            mean-performance sense.
+          - However, the high variability in max_pos_err (mean 39.6 m, std 61.0 m,
+            max 148.6 m) and rpe_1m_trans_rmse (mean 0.408, std 0.818) indicates that
+            at least one run experienced a catastrophic failure of the type described
+            in \cref{subsec:slam-discussion-refined} (the "point of no return").
+          - This variability is not observable from mean error_pct alone — the comparison
+            between mean (39.6 m) and median (13.1 m) for max_pos_err illustrates the
+            importance of reporting full statistics rather than scalar summaries.
+          - Discuss: this bimodal behaviour (most runs well-behaved, occasional catastrophic
+            failure) is arguably a larger practical concern than a uniformly elevated error,
+            because it is unpredictable at deployment time. The refined parameters do not
+            eliminate the fundamental instability of scan-matching-only odometry in structured
+            environments; they delay its onset.
+          - Discuss: whether the catastrophic-failure run(s) can be linked to environmental
+            factors (GNSS coverage, route geometry) is unknown without per-run trajectory
+            visualisation — flag this as a limitation.
+
+        \subsubsection{Proposed Method — Generalisation and Consistency}
+          - Mean error_pct on Evaluation Dataset (~0.0166%) is directly comparable to
+            the parameterisation dataset range (0.0153%–0.0501%) and falls within it.
+          - Critically: std across 5 runs is extremely small (0.000354%), indicating
+            near-deterministic behaviour. The GNSS global constraint appears to stabilise
+            the trajectory to the point where the non-determinism of the underlying
+            odometry has negligible effect on the final output.
+          - GASP (mean 0.0508, std 0.0081) is comparable to parameterisation dataset
+            values (0.0274–0.0679), confirming that the GNSS architecture generalises
+            without degradation.
+          - This provides strong evidence against overfitting: the proposed method's
+            improvement is attributable to architectural design (absolute positional
+            observability via GNSS) rather than incidental tuning to training trajectories.
+
+        \subsubsection{Summary of Generalisation Assessment}
+          - 1–2 sentences: all three methods exhibit performance on the Evaluation Dataset
+            that is consistent with the parameterisation datasets, supporting the
+            generalisation of the results. The key differentiator is not average accuracy
+            but robustness: the proposed method is consistent across runs while the refined
+            GLIM retains the risk of catastrophic failure.
+
+---
+
+4. ARGUMENT AND LOGICAL FLOW
+
+   METHODOLOGY SUBSECTION:
+   Opens by establishing the need to distinguish between parameterisation and evaluation
+   data, then describes each dataset concisely (environment, topology, altitude profile).
+   Closes with the evaluation protocol, explaining why 5 runs were used for the Evaluation
+   Dataset and why this matters for interpreting aggregate statistics.
+
+   RESULTS ADDITIONS:
+   The Evaluation Dataset results should be presented factually, mirroring the format of the
+   existing per-dataset results so the reader can directly compare. No interpretive claims
+   in the results prose — just observations (e.g., "the mean error_pct is X%; the high std
+   on max_pos_err for the refined method indicates variability across runs").
+
+   DISCUSSION SUBSECTION:
+   Opens by observing that the performance hierarchy is preserved. Proceeds method by method:
+   baseline (expected, no tuning involved), refined GLIM (average consistency but exposed
+   catastrophic instability), proposed method (near-deterministic, strong generalisation
+   evidence). Closes with a synthetic summary distinguishing average accuracy from run-to-run
+   robustness as the key dimension separating the methods.
+
+   TRANSITIONS:
+   - The new methodology subsection should be preceded by a brief sentence linking it to
+     the parameterisation algorithm just described: "The following subsection describes the
+     datasets and evaluation protocol used to assess the methods presented above."
+   - The results intro paragraph update should naturalistically introduce the two tiers
+     (parameterisation datasets vs. Evaluation Dataset) without repeating methodological
+     detail — simply cross-reference \cref{subsec:slam-experimental-setup}.
+   - The new discussion subsection follows "Implications for Vineyard Robotics" and should
+     open with a bridging sentence, e.g.: "Beyond performance on the parameterisation
+     datasets, the methods were evaluated on a held-out Evaluation Dataset to assess
+     whether the observed improvements are specific to the training data distribution."
+
+---
+
+5. KEY CONTENT POINTS
+
+   METHODOLOGY:
+   [1] Five parameterisation datasets span two environments: one apple orchard (Dataset 1)
+       and one vineyard (Datasets 0, 2, 3, 4). This environmental diversity was deliberate
+       to avoid over-specialisation of the parameterisation.
+   [2] Dataset 2 is distinct because: it starts from the opposite end of the vineyard
+       row compared to the other vineyard datasets, the altitude decreases (not increases)
+       on the forward traversal, and there is no return pass — the route is one-directional.
+   [3] Dataset 1 (apple orchard) has significantly more elevation variation (dips and bumps)
+       than the vineyard datasets, making it more challenging for the altitude axis.
+   [4] Evaluation Dataset: same vineyard as Datasets 0, 2, 3, 4; distinct route; same
+       altitude profile as Datasets 0, 1, 3, 4 (increase then decrease).
+   [5] Evaluation Dataset was withheld from all parameterisation stages. The purpose is to
+       test whether performance improvements are transferrable or route-specific.
+   [6] Five runs per method on the Evaluation Dataset: justified by non-determinism in SLAM
+       (due to parallelism and floating-point ordering). Single runs risk reporting an
+       unrepresentative outlier. Aggregate statistics (mean, std, median, min, max) are
+       reported.
+
+   RESULTS:
+   [7] Baseline GLIM Evaluation Dataset: mean error_pct = 1.96% (std 0.45%); mean RMSE 3D
+       = 17.48 m; mean ATE = 13.39 m. Trajectory length ~682 m.
+   [8] Refined GLIM Evaluation Dataset: mean error_pct = 0.62% (std 0.11%); but max_pos_err
+       mean = 39.6 m with std = 61.0 m and max = 148.6 m (catastrophic failure in ≥1 run).
+       Median max_pos_err = 13.1 m — far more representative of typical performance.
+   [9] Proposed Method Evaluation Dataset: mean error_pct = 0.0166% (std 0.000354%);
+       mean RMSE 3D = 0.146 m; mean ATE = 0.114 m; GASP mean = 0.0508 (std 0.0081).
+       Highly consistent across all five runs.
+
+   DISCUSSION:
+   [10] Performance hierarchy (baseline < refined < proposed) is preserved on unseen data —
+        evidence that results are not artefacts of the training data.
+   [11] Baseline shows expected variability; no overfitting concern since it has no tuning.
+   [12] Refined GLIM: bimodal — mean error_pct comparable to parameterisation datasets, but
+        at least one run hit catastrophic failure (max_pos_err = 148.6 m). Demonstrates that
+        parameter optimisation does not eliminate the fundamental scan-matching instability.
+   [13] The discrepancy between mean (39.6 m) and median (13.1 m) for refined GLIM
+        max_pos_err on the Evaluation Dataset underscores the importance of reporting full
+        run statistics rather than scalar means.
+   [14] Proposed method: near-zero variance across runs confirms that GNSS integration
+        effectively suppresses the non-deterministic component of the odometry pipeline.
+        This is a practically important property — a deploying operator can rely on
+        consistent performance rather than treating any given run as a lottery.
+   [15] The proposed method's Evaluation Dataset error_pct (0.0166%) is consistent with
+        and falls within the parameterisation dataset range (0.0153%–0.0501%), providing
+        strong evidence against overfitting.
+
+---
+
+6. CITATIONS REQUIRED
+
+   No new citations are anticipated for these additions. The following existing citations
+   from MastersThesis.bib are already in scope if referenced from within the new content:
+   - The parameterisation methodology (\cref{sec:slam-methodology}) is already cited in
+     the discussion where relevant.
+   - ATE and RPE definitions already cite \cite{sturmBenchmarkEvaluationRGBD2012} in the
+     existing methodology.
+   - No citation is needed to justify reporting multiple runs; this is standard practice.
+   [MISSING] — If a citation is desired to support the claim that non-determinism in parallel
+              SLAM systems motivates multi-run evaluation, no specific candidate was identified.
+              Flag as optional.
+
+---
+
+7. FIGURES, TABLES, AND EQUATIONS
+
+   TABLES (all new — to be created in 3-results.tex):
+   - Table \label{tab:eval_baseline_performance}
+     Columns: Metric | Mean | Std | Median | Min | Max
+     Rows: same metrics as \cref{tab:baseline_performance}
+     Suggested caption: "Baseline GLIM performance on the Evaluation Dataset (mean, std,
+     median, min, max across five independent runs)"
+
+   - Table \label{tab:eval_refined_performance}
+     Same structure. Include a table note or caption footnote flagging that the high std
+     on max_pos_err and rpe_1m_trans_rmse indicates at least one catastrophic failure run.
+
+   - Table \label{tab:eval_proposed_performance}
+     Same structure; include GASP row.
+
+   - Table \label{tab:eval_comparison_key_metrics}
+     Rows: error percent per metre / RPE 1m translation std / error per metre
+     Columns: Method | Mean | Std
+     Bold the lowest mean in each row.
+
+   FIGURES (optional — conditional use):
+   - Trajectory visualisations for the Evaluation Dataset exist but should ONLY be
+     included if they illuminate a specific point in the prose (e.g., illustrating
+     the catastrophic failure run in the refined GLIM, or showing the proposed method
+     trajectory quality).
+   - Suggested use: one figure showing the xy-trajectory comparison (refined GLIM vs.
+     proposed method vs. ground truth) for the Evaluation Dataset, placed in the
+     results subsection where it is referenced.
+   - Label suggestion: \label{fig:eval_xy} and/or \label{fig:eval_z}
+   - File paths: [OPEN QUESTION — user to confirm exact filenames in the figures directory]
+
+---
+
+8. CROSS-REFERENCES
+
+   New subsection in methodology:
+   - \cref{sec:slam-methodology} — self-reference for metric definitions when writing
+     the evaluation protocol paragraph
+   - No other cross-references needed internally
+
+   Results opening paragraph update:
+   - \cref{subsec:slam-experimental-setup} — cross-reference the new dataset/protocol
+     subsection for full details
+
+   New Evaluation Dataset results subsections:
+   - \cref{subsec:slam-experimental-setup} — in the introductory paragraph of
+     \subsec{Evaluation Dataset Results}
+   - \cref{tab:eval_baseline_performance}, \cref{tab:eval_refined_performance},
+     \cref{tab:eval_proposed_performance}, \cref{tab:eval_comparison_key_metrics}
+     — in the prose of each corresponding subsubsection
+
+   New discussion subsection:
+   - \cref{subsec:slam-experimental-setup} — opening sentence (bridging from results)
+   - \cref{subsec:slam-eval-results} — when referring to the result tables
+   - \cref{tab:eval_refined_performance} — when citing the bimodal max_pos_err values
+   - \cref{tab:eval_proposed_performance} — when citing proposed method consistency
+   - Existing label \cref{sec:slam-discussion} subsubsection on "Refined GLIM Performance"
+     (or use the subsection label if available) — when back-referencing the "point of no
+     return" failure mode described earlier in the discussion
+
+---
+
+9. LATEX CONVENTIONS
+
+   New subsection label (methodology):
+     \label{subsec:slam-experimental-setup}
+     Level: \subsection (within the existing \section{Proposed Methods})
+
+   New subsection label (results):
+     \label{subsec:slam-eval-results}
+     Level: \subsection (within the existing \section{Results})
+
+   New subsection label (discussion):
+     \label{subsec:slam-generalisation}
+     Level: \subsection (within the existing \section{Discussion})
+
+   Table format:
+     Follow the existing pattern using tabularx with \textwidth.
+     For Evaluation Dataset tables the column spec should be:
+       \begin{tabularx}{\textwidth}{lXXXXX}  % Metric | Mean | Std | Median | Min | Max
+     Use \toprule / \midrule / \bottomrule from booktabs (already in use in the chapter).
+
+   Mean ± std inline in prose: use $\bar{x} \pm \sigma$ notation or simply
+   "mean \pm std" with math mode where appropriate.
+
+   Bold best results in comparison table: \textbf{...} (same as existing
+   \cref{tab:comparison_table_key_metrics}).
+
+   Float placement: use [htbp] for tables (consistent with existing tables).
+   Use [H] only if tightly coupled prose requires it (as in existing \cref{tab:comparison_summary}).
+
+---
+
+10. STYLE NOTES
+
+    - Tone: factual and restrained throughout. Results prose should be purely descriptive;
+      interpretive claims belong in the discussion.
+    - In the methodology subsection, use plain declarative sentences for dataset descriptions.
+      Avoid superlatives. Do not editorialize (e.g., "challenging" is acceptable; "very
+      challenging" is not unless quantitatively grounded).
+    - In the discussion, maintain the same analytical register as the existing discussion
+      subsections. Compare numbers directly. Where acknowledging limitations (e.g., not
+      knowing which run was the catastrophic failure), use hedged language: "suggest",
+      "indicate", "may be attributable to".
+    - Terminology: always "Evaluation Dataset" (capitalised) when referring to the held-out
+      set. "Parameterisation datasets" (lower-case) for Datasets 0–4 collectively.
+      Do not use "test set" or "training set" — this is not a machine learning context.
+    - "Non-deterministic" (not "random") when describing run variability.
+    - "Catastrophic failure" is acceptable terminology — it is already used in the existing
+      discussion (line 17: "catastrophic and irrecoverable failure").
+    - Metric names: ATE, RPE, GASP, RMSE — all in caps without expansion after first use.
+    - Do not introduce new acronyms.
+    - Tense: past tense throughout ("was evaluated", "exhibited", "demonstrated").
+    - UK English: "optimisation", "generalisation", "behaviour", "neighbourhood".
+
+---
+
+11. OPEN QUESTIONS
+
+    [OQ1] Additional per-dataset metadata (route length in metres, date collected, specific
+          farm location within vineyard, sensor configuration) — to be provided by the user
+          and inserted into the \subsubsection{Parameterisation Datasets} and
+          \subsubsection{Evaluation Dataset} placeholders.
+
+    [OQ2] Exact filenames of trajectory visualisation figures for the Evaluation Dataset —
+          needed before optional figure inclusion can be implemented. The user confirmed
+          figures exist but did not specify filenames or paths.
+
+    [OQ3] The "catastrophic failure" run(s) in the Refined GLIM results: it would
+          strengthen the discussion to identify which run(s) produced max_pos_err = 148.6 m
+          and whether a trajectory plot is available. If so, including it as a figure in the
+          results or discussion would add concrete evidence for the bimodal behaviour claim.
+
+    [OQ4] The results section currently shows individual per-run values for Datasets 0–4
+          in wide tables (5 dataset columns). The Evaluation Dataset tables will have a
+          different structure (5 statistic columns instead of 5 dataset columns). Consider
+          whether this structural difference warrants a brief explanatory note at the top of
+          the new subsection.
+
+    [OQ5] The Summary section (3-SLAM/3-summary/tex/3-summary.tex) currently reads:
+          "The results across five datasets showed..." — this may need a minor update to
+          acknowledge the Evaluation Dataset evaluation. Decide whether to update this
+          as part of the same implementation pass.
+
+---
+
+12. STEP-BY-STEP IMPLEMENTATION
+
+    === FILE A: 3-SLAM/3-methodology/tex/3-methodology.tex ===
+
+    Step 1: Open 3-SLAM/3-methodology/tex/3-methodology.tex.
+
+    Step 2: Navigate to the end of the file (after line 248, which is the end of
+            the "Robust SLAM Parameterisation" subsection).
+
+    Step 3: Add a transitional sentence immediately before the new subsection, e.g.:
+            "The following subsection describes the datasets used and the evaluation
+            protocol applied to assess the methods presented above."
+
+    Step 4: Insert \subsection{Experimental Setup} with \label{subsec:slam-experimental-setup}.
+
+    Step 5: Inside this subsection, insert \subsubsection{Parameterisation Datasets}.
+            Write one paragraph introducing the five datasets, then describe each
+            (Dataset 0–4) with the detail provided in Section 3 and Section 5 of this plan.
+            Mark placeholders for any metadata not yet supplied (see OQ1).
+
+    Step 6: Insert \subsubsection{Evaluation Dataset}.
+            Describe the held-out dataset using the information in Section 3/5.
+            Mark placeholders for any metadata not yet supplied (see OQ1).
+
+    Step 7: Insert \subsubsection{Evaluation Protocol}.
+            Write the three-part protocol as described in Section 3: three methods,
+            single runs on parameterisation datasets, five runs on Evaluation Dataset
+            with rationale, aggregate statistics reported.
+
+    === FILE B: 3-SLAM/3-results/tex/3-results.tex ===
+
+    Step 8: Open 3-SLAM/3-results/tex/3-results.tex.
+
+    Step 9: Locate the opening paragraph (lines 1–3). Update the sentence
+            "Each configuration was evaluated on five vineyard datasets." to acknowledge
+            both the five parameterisation datasets and the Evaluation Dataset, with a
+            \cref{subsec:slam-experimental-setup} for full details.
+
+    Step 10: Navigate to the end of the file (after line 392, the end of the
+             Trajectory Visualisation subsection).
+
+    Step 11: Insert \subsection{Evaluation Dataset Results} with
+             \label{subsec:slam-eval-results}.
+             Write an introductory paragraph explaining the table format (mean/std/
+             median/min/max across 5 runs) and cross-referencing the protocol in
+             \cref{subsec:slam-experimental-setup}.
+
+    Step 12: Insert \subsubsection{Baseline GLIM — Evaluation Dataset}.
+             Write 2–3 sentences of observation-only prose.
+             Insert Table \label{tab:eval_baseline_performance} using the values from
+             Section 5 / extra_results.txt "Base glim" block.
+             Follow the tabularx format of \cref{tab:baseline_performance}.
+
+    Step 13: Insert \subsubsection{Refined GLIM — Evaluation Dataset}.
+             Write 2–3 sentences noting the mean performance and flagging the high
+             std on max_pos_err and rpe_1m_trans_rmse.
+             Insert Table \label{tab:eval_refined_performance}.
+             Add a caption note about the wide std indicating a catastrophic failure run.
+
+    Step 14: Insert \subsubsection{Proposed Method — Evaluation Dataset}.
+             Write 2–3 sentences noting the tight consistency across runs.
+             Insert Table \label{tab:eval_proposed_performance} (include GASP row).
+
+    Step 15: Insert \subsubsection{Evaluation Dataset Comparative Summary}.
+             Write 1–2 sentences. Insert Table \label{tab:eval_comparison_key_metrics}.
+
+    Step 16 (OPTIONAL — resolve OQ2 and OQ3 first): If suitable trajectory figures
+             are available and their filenames are known, insert a figure at the most
+             appropriate location (likely within the Refined GLIM or Comparative Summary
+             subsubsection) using \label{fig:eval_xy} and/or \label{fig:eval_z}.
+
+    === FILE C: 3-SLAM/3-discussion/tex/3-discussion.tex ===
+
+    Step 17: Open 3-SLAM/3-discussion/tex/3-discussion.tex.
+
+    Step 18: Navigate to the end of the file (after the final paragraph of
+             "Implications for Vineyard Robotics", currently ending with
+             "...Chapter 4 will address this limitation...").
+
+    Step 19: Insert \subsection{Generalisation to the Evaluation Dataset} with
+             \label{subsec:slam-generalisation}.
+             Write a bridging opening sentence as described in Section 4 of this plan.
+
+    Step 20: Write \subsubsection{Overall Performance Hierarchy} per Section 3/5.
+
+    Step 21: Write \subsubsection{Baseline GLIM — Generalisation} per Section 3/5.
+
+    Step 22: Write \subsubsection{Refined GLIM — Generalisation and Instability} per
+             Section 3/5. This is the most analytically substantive subsubsection.
+             Reference \cref{tab:eval_refined_performance} explicitly for the
+             mean vs. median discrepancy on max_pos_err.
+
+    Step 23: Write \subsubsection{Proposed Method — Generalisation and Consistency}
+             per Section 3/5.
+
+    Step 24: Write \subsubsection{Summary of Generalisation Assessment} (2–3 sentences).
+
+    === OPTIONAL ===
+
+    Step 25: Open 3-SLAM/3-summary/tex/3-summary.tex. Update the sentence
+             "The results across five datasets showed..." to reference both the five
+             parameterisation datasets and the Evaluation Dataset evaluation (see OQ5).

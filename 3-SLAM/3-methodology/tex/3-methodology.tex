@@ -7,9 +7,23 @@ To begin this investigation, we implemented GLIM \cite{koideGLIM3DRangeInertial2
 
 GLIM state estimation is created in the local odometry frame. For our use in the wider research project, we required state estimation in the local ENU reference frame, which is a surveyed-in point at each of our farms. Thus, we needed a procedure to align the GLIM reference frame with the existing local ENU reference frame.
 
-Firstly, we time synchronise the on-board GPS unit with the LiDAR and with the system clock. This allows us to associate corresponding GNSS points with the submaps or keyframes of LiDAR frames that GLIM registers. We aggregate a set of corresponding GNSS coordinates with keyframe coordinates, and then implement the Kabsch algorithm \cite{kabschSolutionBestRotation1976} to find the relative transform between the two point sets by minimising the root-mean-square deviation between the two point sets.
+Firstly, we time synchronise the on-board GPS unit with the LiDAR and with the system clock. This allows us to associate corresponding GNSS points with the submaps or keyframes of LiDAR frames that GLIM registers, as illustrated in \cref{fig:time-matching}. We aggregate a set of corresponding GNSS coordinates with keyframe coordinates, and then implement the Kabsch algorithm \cite{kabschSolutionBestRotation1976} to find the relative transform between the two point sets by minimising the root-mean-square deviation between the two point sets.
 
-The Kabsch algorithm relies on the least-squares method to minimise the root-mean-square deviation (RMSD) between two point sets. Since the objective function squares the distances between paired points, outliers produce disproportionately large influences on the final transformation matrix. Thus, for global alignment, it is important that outliers are filtered out before executing the Kabsch algorithm.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{3-SLAM/3-methodology/figures/time-matching}
+    \caption{GNSS-to-frame time matching across both operating phases. During the initialisation phase, each keyframe (KF) is matched to a GNSS measurement within a $\pm5$\,ms window enforced by PTP/Chrony clock synchronisation. A keyframe with no GNSS measurement in its window is discarded. During the continuous phase, submaps are matched using the timestamp of their middle keyframe (\textit{mid}), which approximates the temporal centroid of the submap.}
+    \label{fig:time-matching}
+\end{figure}
+
+The Kabsch algorithm relies on the least-squares method to minimise the root-mean-square deviation (RMSD) between two point sets. Since the objective function squares the distances between paired points, outliers produce disproportionately large influences on the final transformation matrix. Thus, for global alignment, it is important that outliers are filtered out before executing the Kabsch algorithm. \cref{fig:system-pipeline} illustrates the complete proposed pipeline from sensor input to globally consistent ENU trajectory output.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{3-SLAM/3-methodology/figures/system-pipeline}
+    \caption{Overview of the proposed GNSS-augmented SLAM pipeline. The initialisation track (left) performs time synchronisation, outlier rejection, planar geometry quality assessment, and Kabsch alignment to publish the map-to-ENU transform. The continuous track (right) constructs GNSS prior factors and inserts them into the GLIM factor graph for ongoing drift correction. On geometry check failure, initialisation waits and accumulates further GNSS--pose correspondences before retrying.}
+    \label{fig:system-pipeline}
+\end{figure}
 
 \subsection{Geometric Consistency-Based Outlier Rejection}
 
@@ -39,7 +53,15 @@ A measurement is classified as an inlier if the fraction of other points with wh
 \frac{1}{N-1} \sum_{j \neq i}^{N} c_{ij} > \rho.
 \end{equation}
 
-GNSS multipath errors \cite{wenExclusionGNSSNLOS2018} can often create erroneous clusters of points that are mutually consistent, and therefore are not filtered out by conventional statistical outlier methods. However, the majority-based criterion in Equation \eqref{eq:majority_criterion} ensures that points are only kept if they belong to the global rigid consensus, effectively filtering out clusters of mutually consistent but globally erroneous points. After classification, only inlier GNSS measurements and their corresponding map-frame estimates are preserved for subsequent processing.
+GNSS multipath errors \cite{wenExclusionGNSSNLOS2018} can often create erroneous clusters of points that are mutually consistent, and therefore are not filtered out by conventional statistical outlier methods. However, the majority-based criterion in Equation \eqref{eq:majority_criterion} ensures that points are only kept if they belong to the global rigid consensus, effectively filtering out clusters of mutually consistent but globally erroneous points. After classification, only inlier GNSS measurements and their corresponding map-frame estimates are preserved for subsequent processing. \cref{fig:outlier-rejection} illustrates a representative scenario in which inlier measurements lie along the physical trajectory while a multipath cluster is correctly rejected.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\linewidth]{3-SLAM/3-methodology/figures/outlier-rejection}
+    \caption{Geometric consistency-based outlier rejection applied to GNSS measurements. Inlier points (green) are distributed along the estimated trajectory and satisfy pairwise distance consistency with map-frame estimates. Multipath-corrupted points (red) form a spatially compact cluster that is globally inconsistent with the rigid consensus and are therefore rejected, even though they are mutually self-consistent.}
+    \label{fig:outlier-rejection}
+\end{figure}
+
 \subsection{Planar Geometry Quality Assessment in 2D}
 
 Subsequently to outlier rejection, we assess the geometric quality of the remaining point set under the assumption of planar motion by analysing its distribution in the horizontal plane. This analysis is motivated by the sensitivity of the Kabsch algorithm to degenerate point configurations: near-collinear or poorly distributed trajectories produce ill-conditioned cross-covariance matrices, leading to unstable or biased transformations. By detecting such configurations before alignment, we ensure the SVD is well-conditioned and that the estimated transformation is numerically reliable. In particular, we enforce minimum requirements on translational baseline ($\geq 5.0\,\mathrm{m}$), planar spread, rotational excitation, and numerical conditioning.
@@ -76,7 +98,24 @@ which measures how well the trajectory excites both planar directions. A minimum
 
 Rotational excitation is evaluated independently by computing the angular span of the point set in the horizontal plane. The geometry is considered to provide sufficient rotational constraint if the angular span exceeds $45.0^\circ$.
 
-The final geometry quality assessment combines these criteria, reporting whether the point set exhibits sufficient planar spread, adequate rotational excitation, and non-degenerate conditioning. This 2D-based evaluation provides a robust and numerically stable measure of geometric suitability for planar motion scenarios.
+The final geometry quality assessment combines these criteria, reporting whether the point set exhibits sufficient planar spread, adequate rotational excitation, and non-degenerate conditioning. This 2D-based evaluation provides a robust and numerically stable measure of geometric suitability for planar motion scenarios. \cref{fig:geometry-quality} contrasts a degenerate near-collinear configuration against a well-conditioned L-shaped trajectory to illustrate the effect of point distribution on singular value spread.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\linewidth]{3-SLAM/3-methodology/figures/geometry-quality}
+    \caption{Planar geometry quality assessment for two trajectory configurations.
+    \textbf{(a)}~Near-collinear configuration: points lie along a single direction,
+    yielding a large condition number $\kappa \gg 1$, indicating insufficient geometric
+    spread for reliable plane estimation.
+    \textbf{(b)}~Well-conditioned configuration: an L-shaped trajectory distributes
+    points across two directions, yielding $\kappa \approx 1.3$ and $r \approx 0.78$.
+    Orange and purple arrows denote the first and second principal variance directions
+    ($\sigma_1$, $\sigma_2$) obtained from SVD of the centred point set; their
+    orientations reflect directions of maximum and minimum variance across all points
+    and are not constrained to align with individual path segments.}
+    \label{fig:geometry-quality}
+\end{figure}
+
 \subsection{GLIM Reference Frame Alignment with Local ENU}
 
 Given two corresponding point sets $\{\mathbf{a}_i\}_{i=1}^N, \{\mathbf{b}_i\}_{i=1}^N \subset \mathbb{R}^3$, the goal is to estimate a rigid-body transformation $(\mathbf{R}, \mathbf{t}) \in \mathrm{SO}(3) \times \mathbb{R}^3$ that minimises the sum of squared alignment errors as defined in the following objective function:
@@ -127,7 +166,14 @@ Finally, the translation $\mathbf{t}$ is recovered according to Equation \eqref{
 \mathbf{t} = \boldsymbol{\mu}_B - \mathbf{R}\boldsymbol{\mu}_A.
 \end{equation}
 
-The resulting rigid transformation $(\mathbf{R}, \mathbf{t})$ aligns the source point set to the target point set in a least-squares sense. This static transformation is published to the ROS2 transform tree \cite{macenskiRobotOperatingSystem2022} to link the local ENU frame to the GLIM mapping frame.
+The resulting rigid transformation $(\mathbf{R}, \mathbf{t})$ aligns the source point set to the target point set in a least-squares sense, as illustrated in \cref{fig:kabsch-alignment}. This static transformation is published to the ROS2 transform tree \cite{macenskiRobotOperatingSystem2022} to link the local ENU frame to the GLIM mapping frame.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{3-SLAM/3-methodology/figures/kabsch-alignment}
+    \caption{Kabsch point-set alignment between estimated GNSS antenna positions $\{\hat{\mathbf{a}}_i\}$ in the MAP frame (orange) and measured GNSS positions $\{\mathbf{b}_i\}$ in the ENU frame (blue). \textit{Left}: before alignment, dashed lines show the centred vectors $\hat{\mathbf{a}}_i - \boldsymbol{\mu}_A$ and $\mathbf{b}_i - \boldsymbol{\mu}_B$ relative to their respective centroids. The clearly different orientations of the two point sets illustrate that the estimated transformation $(\mathbf{R}, \mathbf{t})$ must account for both a rotation and a translation (Equations~\eqref{eq:kabsch_objective}--\eqref{eq:recovered_translation}). \textit{Right}: after alignment, the transformed MAP-frame positions $\mathbf{R}\hat{\mathbf{a}}_i + \mathbf{t}$ coincide with the ENU measurements up to a small residual.}
+    \label{fig:kabsch-alignment}
+\end{figure}
 
 \subsection{GNSS Prior Factor Construction}
 
@@ -158,7 +204,14 @@ This formulation is valid as the GLIM submap origin is defined at the IMU center
 \mathbf{r}(\mathbf{T}_{\text{map}}^{\text{sub}}) = \left\| \hat{\mathbf{p}}_{\text{map}} - \mathbf{p}_{\text{map}} \right\|^2_{\boldsymbol{\Sigma}_{\text{gps}}}.
 \end{equation}
 
-This factor directly constrains the corresponding submap pose variable in the factor graph, contributing to global consistency and LiDAR-inertial odometry drift correction. In effect, this factor constrains the GLIM-predicted position of the GPS antenna using the measured GNSS position at that time.
+This factor directly constrains the corresponding submap pose variable in the factor graph, contributing to global consistency and LiDAR-inertial odometry drift correction. In effect, this factor constrains the GLIM-predicted position of the GPS antenna using the measured GNSS position at that time. \cref{fig:factor-graph} depicts the resulting factor graph structure, highlighting the asynchronous attachment of GNSS prior factors to submap pose nodes alongside the continuous LiDAR--IMU odometry chain.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\linewidth]{3-SLAM/3-methodology/figures/factor-graph}
+    \caption{GNSS-augmented factor graph structure. Circles denote submap pose variables $X_i$; dark squares represent LiDAR--IMU odometry factors between consecutive submaps; blue squares represent GNSS prior factors attached to corresponding submap poses. GNSS measurements arrive asynchronously and are therefore not associated with every submap (illustrated by the absent factor at $X_3$).}
+    \label{fig:factor-graph}
+\end{figure}
 
 \subsection{Robust SLAM Parameterisation via Iterative Region Refinement}
 
@@ -227,7 +280,26 @@ Phase 4 & Fine-tuning & 75 & 1.3\% & Final tuning to find top candidate. \\ \bot
 \end{tabularx}
 \end{table}
 
-This incremental strategy is distinct from Successive Halving (SHA) \cite{jamiesonNonstochasticBestArm2015}, as it preserves a continuous distribution of potential solutions rather than discarding them in discrete early-stopping steps, which is critical for SLAM where early performance does not always correlate with final drift.
+This incremental strategy is distinct from Successive Halving (SHA) \cite{jamiesonNonstochasticBestArm2015}, as it preserves a continuous distribution of potential solutions rather than discarding them in discrete early-stopping steps, which is critical for SLAM where early performance does not always correlate with final drift. \cref{fig:irr-funnel} visualises the contracting search space across phases, showing how sample density converges toward the optimal configuration.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.57\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{3-SLAM/3-methodology/figures/irr-funnel}
+        \caption{Parameter search space contraction across four optimisation phases. Each coloured band represents the active search bounds for a single parameter dimension (normalised to $[0,1]$); bounds are updated between phases using the $P_{10}$--$P_{90}$ range of the elite survivor set (dashed diagonal lines). Grey dots are sampled configurations; gold dots are elite survivors; the red star marks the final optimum $\Theta^*$.}
+        \label{fig:irr-funnel}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.40\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{3-SLAM/3-methodology/figures/irr-flowchart}
+        \caption{Algorithmic flowchart of the IRR procedure. Each phase samples $N_i$ configurations via LHS, evaluates them on $K$ datasets, discards failures (cost $= \infty$), ranks survivors by $J(\theta)$, retains the elite top $P_i\%$, and contracts the search bounds $\Omega_{j,i+1}$ using the $P_{10}$--$P_{90}$ quantile range.}
+        \label{fig:irr-flowchart}
+    \end{subfigure}
+    \caption{IRR optimisation strategy: \subref{fig:irr-funnel}~contracting parameter search space across phases; \subref{fig:irr-flowchart}~per-phase algorithmic procedure.}
+    \label{fig:irr}
+\end{figure}
 
 \subsubsection{Optimisation Metrics}
 
@@ -244,4 +316,35 @@ For the optimisation of the proposed method, the cost function is a custom metri
 \text{GASP} = w_{\text{drift}} \cdot \left( \frac{ATE}{L} \right) + w_{\text{smoothness}} \cdot \text{Translational RPE}.
 \end{equation}
 The weights $w_{\text{drift}}$ and $w_{\text{smoothness}}$ have been empirically tuned such that each term contributes approximately equally to the total cost. Because the weighted sum mixes quantities with different units, GASP serves as a relative performance index; its values are meaningful only when compared within the same experimental framework.
+
+\subsection{Experimental Setup}
+\label{subsec:slam-experimental-setup}
+
+The following subsection describes the datasets and evaluation protocol used to assess the methods presented above.
+
+\subsubsection{Parameterisation Datasets}
+
+Five datasets were used to parameterise the two optimised configurations — the refined GLIM algorithm and the proposed GNSS-augmented method. The datasets span two distinct agricultural environments: one apple orchard (Dataset~1) and four vineyard traversals (Datasets~0, 2, 3, and~4), the latter all collected at the same farm. This environmental diversity was deliberate, as including a structurally different environment reduces the risk that the parameterised configurations are over-specialised to a single terrain type.
+
+\begin{itemize}
+  \item \textbf{Dataset~0 --- Vineyard.} A forward-and-return traversal. The altitude increases gradually on the forward pass and decreases correspondingly on the return.
+  \item \textbf{Dataset~1 --- Apple orchard.} A forward-and-return traversal of an apple orchard. The altitude profile is more complex than the vineyard datasets, featuring substantially more localised elevation dips and bumps throughout, making this dataset the most challenging for vertical estimation.
+  \item \textbf{Dataset~2 --- Vineyard.} A single-direction traversal with no return pass, starting from the opposite end of the vineyard row relative to all other vineyard datasets. The altitude decreases gradually over the course of the traversal — the inverse of the profile observed in Datasets~0, 3, and~4.
+  \item \textbf{Dataset~3 --- Vineyard.} A forward-and-return traversal at the same farm as Datasets~0, 2, and~4. The altitude profile follows the same gradual increase--decrease pattern as Datasets~0 and~4.
+  \item \textbf{Dataset~4 --- Vineyard.} A forward-and-return traversal at the same farm as Datasets~0, 2, and~3, with the same altitude profile as Datasets~0 and~3.
+\end{itemize}
+
+\subsubsection{Evaluation Dataset}
+
+The Evaluation Dataset is a held-out vineyard traversal that was not used at any stage of the parameterisation process. It was collected at the same farm as Datasets~0, 2, 3, and~4, but follows a distinct route not present in the parameterisation data. The altitude profile is consistent with that of Datasets~0, 1, 3, and~4: a gradual increase on the forward traversal and a corresponding decrease on the return. The dataset may differ from the parameterisation datasets in GNSS coverage and signal conditions, depending on the canopy density and geometry of the specific route.
+
+The purpose of this dataset is to provide an unbiased estimate of whether the performance improvements observed during parameterisation reflect genuine algorithmic improvement, or whether they are artefacts specific to the routes on which parameters were tuned.
+
+\subsubsection{Evaluation Protocol}
+
+Three configurations were evaluated: the baseline GLIM algorithm, the refined GLIM algorithm with optimised parameters, and the proposed GNSS-augmented method. Each configuration was evaluated on each of the five parameterisation datasets using a single run per dataset.
+
+For the Evaluation Dataset, each configuration was evaluated across five independent runs. This repetition is motivated by the non-deterministic behaviour of the SLAM system: internal parallelism and floating-point operation ordering cause run-to-run variation in the generated trajectory, even under identical input conditions. A single run on an unseen dataset therefore risks reporting an uncharacteristic outcome. For each metric, the mean, standard deviation, median, minimum, and maximum across the five runs are reported.
+
+Performance is assessed using the metrics defined in \cref{sec:slam-methodology}: RMSE (per axis and aggregate 3D), ATE, maximum 3D positional error, error per metre, error percentage per metre, RPE at displacement intervals of 1\,m and 10\,m (RMSE, mean, standard deviation, and maximum translation error), and, for the proposed method, GASP.
 

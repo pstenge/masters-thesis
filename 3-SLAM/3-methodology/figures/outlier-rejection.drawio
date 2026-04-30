@@ -1,0 +1,146 @@
+<mxGraphModel dx="1422" dy="762" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="700" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Axis anchors (invisible 1x1 cells) -->
+    <mxCell id="2" value="" style="opacity=0;fillColor=none;strokeColor=none;pointerEvents=0;" vertex="1" parent="1">
+      <mxGeometry x="70" y="619" width="1" height="1" as="geometry" />
+    </mxCell>
+    <mxCell id="3" value="" style="opacity=0;fillColor=none;strokeColor=none;pointerEvents=0;" vertex="1" parent="1">
+      <mxGeometry x="940" y="619" width="1" height="1" as="geometry" />
+    </mxCell>
+    <mxCell id="4" value="" style="opacity=0;fillColor=none;strokeColor=none;pointerEvents=0;" vertex="1" parent="1">
+      <mxGeometry x="70" y="49" width="1" height="1" as="geometry" />
+    </mxCell>
+
+    <!-- East (horizontal) axis -->
+    <mxCell id="5" value="" style="endArrow=block;endFill=1;startArrow=none;edgeStyle=none;strokeColor=#000000;strokeWidth=1.5;" edge="1" source="2" target="3" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <!-- North (vertical) axis -->
+    <mxCell id="6" value="" style="endArrow=block;endFill=1;startArrow=none;edgeStyle=none;strokeColor=#000000;strokeWidth=1.5;" edge="1" source="2" target="4" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Axis labels -->
+    <mxCell id="7" value="East (m)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="944" y="609" width="70" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="8" value="North (m)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;fontSize=12;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="14" y="325" width="80" height="22" as="geometry" />
+    </mxCell>
+
+    <!-- Trajectory anchors (invisible) -->
+    <mxCell id="9" value="" style="opacity=0;fillColor=none;strokeColor=none;pointerEvents=0;" vertex="1" parent="1">
+      <mxGeometry x="129" y="534" width="1" height="1" as="geometry" />
+    </mxCell>
+    <mxCell id="10" value="" style="opacity=0;fillColor=none;strokeColor=none;pointerEvents=0;" vertex="1" parent="1">
+      <mxGeometry x="849" y="244" width="1" height="1" as="geometry" />
+    </mxCell>
+
+    <!-- Estimated trajectory (dashed grey line) -->
+    <mxCell id="11" value="" style="edgeStyle=none;dashed=1;dashPattern=8 5;strokeColor=#999999;strokeWidth=1.5;endArrow=none;startArrow=none;" edge="1" source="9" target="10" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Trajectory label (rotated to match slope ~-21 deg) -->
+    <mxCell id="12" value="Estimated trajectory" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=10;fontColor=#999999;rotation=-21;" vertex="1" parent="1">
+      <mxGeometry x="590" y="278" width="150" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- ===== INLIER POINTS (green circles) ===== -->
+    <!-- g1: center (130, 535) -->
+    <mxCell id="13" value="g1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="119" y="524" width="22" height="22" as="geometry" />
+    </mxCell>
+    <!-- g2: center (248, 488) -->
+    <mxCell id="14" value="g2" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="237" y="477" width="22" height="22" as="geometry" />
+    </mxCell>
+    <!-- g3: center (390, 430) -->
+    <mxCell id="15" value="g3" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="379" y="419" width="22" height="22" as="geometry" />
+    </mxCell>
+    <!-- g4: center (530, 375) -->
+    <mxCell id="16" value="g4" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="519" y="364" width="22" height="22" as="geometry" />
+    </mxCell>
+    <!-- g5: center (680, 318) -->
+    <mxCell id="17" value="g5" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="669" y="307" width="22" height="22" as="geometry" />
+    </mxCell>
+    <!-- g6: center (840, 255) -->
+    <mxCell id="18" value="g6" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="829" y="244" width="22" height="22" as="geometry" />
+    </mxCell>
+
+    <!-- ===== OUTLIER CLUSTER ===== -->
+    <!-- Dashed red ellipse around cluster -->
+    <mxCell id="19" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2f2;strokeColor=#b85450;strokeWidth=2;dashed=1;dashPattern=6 4;" vertex="1" parent="1">
+      <mxGeometry x="382" y="520" width="148" height="88" as="geometry" />
+    </mxCell>
+    <!-- Outlier points (red, no label) -->
+    <mxCell id="20" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+      <mxGeometry x="400" y="537" width="16" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="21" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+      <mxGeometry x="430" y="530" width="16" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="22" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+      <mxGeometry x="418" y="556" width="16" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="23" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+      <mxGeometry x="450" y="548" width="16" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="24" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+      <mxGeometry x="436" y="572" width="16" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- Multipath cluster label -->
+    <mxCell id="25" value="Multipath cluster" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=11;fontColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="363" y="612" width="168" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- ===== PAIRWISE DISTANCE ANNOTATIONS ===== -->
+    <!-- Consistent pair: g3 (center 390,430) to g4 (center 530,375) -->
+    <!-- Source/target are the inlier cells (15, 16) -->
+    <mxCell id="26" value="d_ENU ≈ d_map  ✓" style="edgeStyle=none;startArrow=block;startFill=0;endArrow=block;endFill=0;strokeColor=#82b366;strokeWidth=1.5;fontColor=#4a8c4a;fontSize=10;fontStyle=1;labelBackgroundColor=#ffffff;" edge="1" source="15" target="16" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint as="offset" x="0" y="-22" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Anchor at outlier cluster centre for inconsistency arrow target -->
+    <mxCell id="27" value="" style="opacity=0;fillColor=none;strokeColor=none;pointerEvents=0;" vertex="1" parent="1">
+      <mxGeometry x="455" y="563" width="1" height="1" as="geometry" />
+    </mxCell>
+
+    <!-- Inconsistent pair: g4 (center 530,375) to outlier cluster centre (~456,564) -->
+    <mxCell id="28" value="d_ENU ≠ d_map  ✗" style="edgeStyle=none;startArrow=block;startFill=0;endArrow=block;endFill=0;strokeColor=#b85450;strokeWidth=1.5;fontColor=#b85450;fontSize=10;fontStyle=1;labelBackgroundColor=#ffffff;" edge="1" source="16" target="27" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint as="offset" x="28" y="0" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ===== LEGEND ===== -->
+    <mxCell id="29" value="Legend" style="swimlane;startSize=24;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="758" y="60" width="200" height="95" as="geometry" />
+    </mxCell>
+    <!-- Inlier swatch -->
+    <mxCell id="30" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="29">
+      <mxGeometry x="14" y="33" width="18" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="31" value="Inlier measurement" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="29">
+      <mxGeometry x="38" y="33" width="150" height="18" as="geometry" />
+    </mxCell>
+    <!-- Outlier swatch -->
+    <mxCell id="32" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="29">
+      <mxGeometry x="14" y="61" width="18" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="33" value="Outlier (multipath)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="29">
+      <mxGeometry x="38" y="61" width="150" height="18" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

@@ -1,0 +1,181 @@
+SUGGESTED FIGURES — Robot Localisation & Vineyard Pruning Sections
+Generated: 2026-04-24
+========================================================================
+
+These suggestions are organised by section. For each figure, a source
+paper is listed where an appropriate figure can be retrieved. arXiv
+papers are freely available; IEEE/Springer papers may require
+institutional access.
+
+========================================================================
+SECTION: 2-robot-localisation.tex
+========================================================================
+
+FIGURE 1 — Dead-reckoning drift vs. corrected trajectory
+----------------------------------------------------------
+What: Side-by-side comparison of a robot path under pure odometry
+      (showing compounding drift) vs. a SLAM-corrected trajectory. Makes
+      the "Limits of Deterministic Localisation" subsection concrete.
+Where to get it:
+  - Ramezani et al. (2020), "Online LiDAR-SLAM for Legged Robots",
+    Figure showing odometric vs. SLAM-corrected map.
+    arXiv: https://arxiv.org/pdf/2001.10249v1
+  - Alternatively, Figure 1 of Hroob et al. (2021) (vineyard SLAM
+    benchmark) shows per-row drift in agricultural settings.
+    arXiv: https://arxiv.org/pdf/2107.05283v1
+
+FIGURE 2 — Smith–Cheeseman covariance ellipses (compounding & merging)
+-----------------------------------------------------------------------
+What: Diagram showing a robot pose with an uncertainty ellipse, and how
+      composing two uncertain transforms grows the ellipse (compounding),
+      vs. fusing two independent estimates shrinking it (merging). Directly
+      illustrates the "Uncertainty Representation and Sensor Fusion"
+      subsection.
+Where to get it:
+  - Original: Smith & Cheeseman (1987), "On the Representation and
+    Estimation of Spatial Uncertainty", Int. Journal of Robotics Research.
+    Not on arXiv, but widely reproduced. DOI: 10.1177/027836498700600301
+  - Good reproduction in: Thrun, Burgard & Fox (2005), "Probabilistic
+    Robotics", Chapter 3 (available as PDF from authors' website).
+
+FIGURE 3 — ICP alignment iterations (point cloud registration)
+--------------------------------------------------------------
+What: Step-by-step visualisation of ICP converging two overlapping point
+      clouds — source vs. target before alignment, mid-iteration, and
+      final registered result. Supports the "Point Cloud Registration"
+      subsection.
+Where to get it:
+  - Semantic-ICP paper (Chen et al., 2025), Fig. 1 and Fig. 3 show
+    point-to-point correspondence and alignment stages.
+    arXiv: https://arxiv.org/pdf/2503.00972v3
+  - Single-tree cloud registration (Ren et al., 2024) has clear before/
+    after registration visuals with tree point clouds (arguably more
+    relevant to a vineyard context).
+    arXiv: https://arxiv.org/pdf/2411.13069v1
+
+FIGURE 4 — Pose graph with loop-closure correction
+---------------------------------------------------
+What: Schematic of a pose graph (nodes = poses, edges = constraints)
+      before and after a loop closure is detected, showing how the
+      correction propagates backward through the trajectory. Core to the
+      "Pose Graph Optimisation and Global Consistency" subsection.
+Where to get it:
+  - Denniston et al. (2022), "Loop Closure Prioritization for Efficient
+    and Scalable Multi-Robot SLAM", has clear pose-graph diagrams.
+    arXiv: https://arxiv.org/pdf/2205.12402v2
+  - Ghanta & Parasuraman (2025), "Policies over Poses: RL-based
+    Distributed PGO for Multi-Robot SLAM", Fig. 1 shows graph structure.
+    arXiv: https://arxiv.org/pdf/2510.22740v1
+  - Ramezani et al. (2020, above) Fig. 2 shows the factor-graph layout
+    used in LiDAR-SLAM with loop closure.
+    arXiv: https://arxiv.org/pdf/2001.10249v1
+
+
+========================================================================
+SECTION: 2-vineyard-pruning.tex (Robot Localisation in Vineyard Pruning)
+========================================================================
+
+FIGURE 5 — Dormant vineyard scene with LiDAR point cloud overlay
+-----------------------------------------------------------------
+What: A photograph or render of a bare-cane winter vineyard alongside
+      (or overlaid with) the corresponding LiDAR scan, visually showing
+      the sparse point density that motivates the difficulty statement in
+      the opening paragraph of the section.
+Where to get it:
+  - Bertoglio et al. (2023), "A Map-Free LiDAR-Based System for
+    Autonomous Navigation in Vineyards", Figs. 4–6 show the in-field
+    LiDAR scan data of actual vineyard rows.
+    arXiv: https://arxiv.org/pdf/2307.03080v1
+  - Hroob et al. (2021), "Benchmark of Visual and 3D LiDAR SLAM in
+    Vineyards", Figs. 1–2 show the simulated and real vineyard
+    environments with visible sensor data.
+    arXiv: https://arxiv.org/pdf/2107.05283v1
+
+FIGURE 6 — 3D skeletal reconstruction of a dormant grapevine
+-------------------------------------------------------------
+What: A rendered 3D point cloud or mesh skeleton of a single grapevine
+      structure (showing trunk, cordons, and canes). Illustrates what the
+      robot's sensors actually see and what must be registered.
+Where to get it:
+  - Schneider et al. (2023), "3D Skeletonization of Complex Grapevines
+    for Robotic Pruning", Figs. 4–7 show dense real-world grapevine
+    point clouds and their skeletons.
+    arXiv: https://arxiv.org/pdf/2307.11706v1
+  - Dobbs et al. (2025), "Accurate 3D Grapevine Structure Extraction
+    from High-Resolution Point Clouds", Figs. 2–4 show skeleton
+    extraction on real-world scans.
+    arXiv: https://arxiv.org/pdf/2502.20417v1
+
+FIGURE 7 — Pruning-point detection via semantic segmentation
+------------------------------------------------------------
+What: An image of a dormant vine with a neural segmentation mask
+      overlaid, highlighting detected canes and candidate cut points.
+      Supports the discussion of deep panoptic segmentation systems
+      (Navone et al., Archie Jnr).
+Where to get it:
+  - Fernandes et al. (2021), "Towards Precise Pruning Points Detection
+    using Semantic-Instance-Aware Plant Models", Figs. 3–5 show
+    segmentation masks with detected pruning points marked.
+    arXiv: https://arxiv.org/pdf/2109.07247v1
+  - Fernandes et al. (2021), "Grapevine Winter Pruning Automation…
+    2D Plant Modeling", Figs. 4–6 show the earlier version of the
+    pipeline from raw image to point candidates.
+    arXiv: https://arxiv.org/pdf/2106.04208v1
+
+FIGURE 8 — Vineyard row template / LiDAR-based row localisation
+---------------------------------------------------------------
+What: A top-down view of a robot traversing a vineyard row with the
+      LiDAR scan overlaid, showing how the row geometry is used for
+      lateral and heading localisation. Relevant to the LiDAR-based
+      approach of Felicetti et al. and motivates the map-building work
+      in Chapter 3.
+Where to get it:
+  - Fei & Vougioukas (2021), "Row-Sensing Templates: A Generic 3D
+    Sensor-Based Approach to Robot Localisation in Orchards", Figs. 3–6
+    show point clouds and matching results in a real vineyard.
+    arXiv: https://arxiv.org/pdf/2107.01321v1
+  - Bertoglio et al. (2023, above) Figs. 7–9 show the navigation path
+    within rows with error plots.
+    arXiv: https://arxiv.org/pdf/2307.03080v1
+
+FIGURE 9 — Autonomous robotic pruning platform in the field
+-----------------------------------------------------------
+What: A photograph of a robotic pruning platform operating in a
+      vineyard, providing visual context for the systems discussed
+      (Botterill's robot, Archie Jnr, or similar). Useful as an
+      introductory or contextualising figure for the section.
+Where to get it:
+  - Navone et al. (2025), "Autonomous Robotic Pruning in Orchards and
+    Vineyards: a Review", Fig. 1 and throughout shows multiple platform
+    photographs from the literature.
+    arXiv: https://arxiv.org/pdf/2505.07318v1
+  - Milburn et al. (2023), "Computer-Vision Based Vineyard Navigation
+    for Quadruped Robots", Fig. 1 shows the HyQReal quadruped in a
+    vineyard.
+    arXiv: https://arxiv.org/pdf/2301.00887v1
+
+FIGURE 10 — SLAM benchmark results in a vineyard (trajectory comparison)
+-------------------------------------------------------------------------
+What: A quantitative trajectory accuracy comparison across SLAM methods
+      (e.g., LIO-SAM, ORB-SLAM2, RTAB-MAP) in a vineyard environment,
+      demonstrating that SLAM performance in this domain is non-trivial
+      and motivating the Chapter 3 system design.
+Where to get it:
+  - Hroob et al. (2021), "Benchmark of Visual and 3D LiDAR SLAM Systems
+    in Simulation Environment for Vineyards", Figs. 5–8 show estimated
+    trajectories and error tables across methods.
+    arXiv: https://arxiv.org/pdf/2107.05283v1
+
+========================================================================
+NOTES
+========================================================================
+- Always verify a figure's licence before reproduction. IEEE and Springer
+  figures typically require written permission; arXiv preprint figures
+  are generally safe to reproduce with attribution, but check the
+  journal version's copyright before submission.
+- Where a figure is from a non-arXiv paper (Figs 1-original, 2, 3-ICP),
+  consider creating a hand-drawn schematic diagram instead — this avoids
+  copyright issues and can be tailored exactly to the thesis argument.
+- Use \cite{} keys already present in MastersThesis.bib where possible
+  rather than citing new papers.
+========================================================================

@@ -2,46 +2,61 @@
 \citation{solheimPropagationDelaysGPSSignals1999}
 \citation{nievinskiForwardModelingGPSMultipath2014}
 \citation{wielgoszAnalysisNetworkRTKIonospheric2005}
-\@writefile{toc}{\contentsline {chapter}{\numberline {\uppercase {Chapter\ 3}}\uppercase {SLAM}}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {\uppercase {Chapter\ 3}}\uppercase {SLAM}}{15}{}\protected@file@percent }
 \@writefile{lof}{\addvspace {10pt}}
 \@writefile{lot}{\addvspace {10pt}}
-\newlabel{chap:SLAM}{{3}{12}{}{chapter.3}{}}
-\newlabel{chap:SLAM@cref}{{[chapter][3][]3}{[1][12][]12}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Introduction}{12}{}\protected@file@percent }
-\newlabel{sec:slam-intro}{{3.1}{12}{}{section.3.1}{}}
-\newlabel{sec:slam-intro@cref}{{[section][1][3]3.1}{[1][12][]12}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Motivation}{12}{}\protected@file@percent }
-\newlabel{subsec:slam-motivation}{{3.1.1}{12}{}{subsection.3.1.1}{}}
-\newlabel{subsec:slam-motivation@cref}{{[subsection][1][3,1]3.1.1}{[1][12][]12}{}{}{}}
+\newlabel{chap:SLAM}{{3}{15}{}{chapter.3}{}}
+\newlabel{chap:SLAM@cref}{{[chapter][3][]3}{[1][15][]15}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Introduction}{15}{}\protected@file@percent }
+\newlabel{sec:slam-intro}{{3.1}{15}{}{section.3.1}{}}
+\newlabel{sec:slam-intro@cref}{{[section][1][3]3.1}{[1][15][]15}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Motivation}{15}{}\protected@file@percent }
+\newlabel{subsec:slam-motivation}{{3.1.1}{15}{}{subsection.3.1.1}{}}
+\newlabel{subsec:slam-motivation@cref}{{[subsection][1][3,1]3.1.1}{[1][15][]15}{}{}{}}
 \citation{koideGLIM3DRangeInertial2024}
 \citation{zhangLOAMLidarOdometry2014}
 \citation{shanLeGOLOAMLightweightGroundOptimized2018}
 \citation{forsterOnManifoldPreintegrationRealTime2017}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Related Work}{13}{}\protected@file@percent }
-\newlabel{sec:slam-related-work}{{3.2}{13}{}{section.3.2}{}}
-\newlabel{sec:slam-related-work@cref}{{[section][2][3]3.2}{[1][13][]13}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Modern LiDAR-SLAM Architectures}{13}{}\protected@file@percent }
-\newlabel{subsec:lidar-slam-architectures}{{3.2.1}{13}{}{subsection.3.2.1}{}}
-\newlabel{subsec:lidar-slam-architectures@cref}{{[subsection][1][3,2]3.2.1}{[1][13][]13}{}{}{}}
+\citation{forsterOnManifoldPreintegrationRealTime2017}
+\citation{forsterOnManifoldPreintegrationRealTime2017}
 \citation{shanLIOSAMTightlycoupledLidar2020}
+\citation{shanLIOSAMTightlycoupledLidar2020}
+\citation{shanLIOSAMTightlycoupledLidar2020}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Related Work}{17}{}\protected@file@percent }
+\newlabel{sec:slam-related-work}{{3.2}{17}{}{section.3.2}{}}
+\newlabel{sec:slam-related-work@cref}{{[section][2][3]3.2}{[1][17][]17}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Modern LiDAR-SLAM Architectures}{17}{}\protected@file@percent }
+\newlabel{subsec:lidar-slam-architectures}{{3.2.1}{17}{}{subsection.3.2.1}{}}
+\newlabel{subsec:lidar-slam-architectures@cref}{{[subsection][1][3,2]3.2.1}{[1][17][]17}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Illustration of on-manifold IMU pre-integration within a sensor-fusion odometry pipeline. Left: raw camera frames and high-frequency inertial measurements arriving asynchronously between keyframes. Right: the equivalent factor graph, in which the batch of intermediate IMU readings between two keyframes is compressed into a single pre-integrated IMU factor, while a structureless vision factor jointly constrains keyframes sharing observations of the same landmark \cite {forsterOnManifoldPreintegrationRealTime2017}.}}{18}{}\protected@file@percent }
+\newlabel{fig:imuPreintegration}{{3.1}{18}{}{figure.3.1}{}}
+\newlabel{fig:imuPreintegration@cref}{{[figure][1][3]3.1}{[1][17][]18}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Architecture of the LIO-SAM tightly-coupled LiDAR-inertial odometry framework. Inputs from a 3D LiDAR, an IMU, and an optional GPS receiver are fused within a factor graph composed of four distinct constraint types: IMU pre-integration factors linking consecutive keyframes, LiDAR odometry factors derived from scan-to-local-map registration, GPS absolute-position factors, and loop closure factors that suppress long-term drift \cite {shanLIOSAMTightlycoupledLidar2020}.}}{18}{}\protected@file@percent }
+\newlabel{fig:liosamArchitecture}{{3.2}{18}{}{figure.3.2}{}}
+\newlabel{fig:liosamArchitecture@cref}{{[figure][2][3]3.2}{[1][17][]18}{}{}{}}
 \citation{xuFASTLIO2FastDirect2022}
 \citation{hePointLIORobustHighBandwidth2023}
 \citation{wangSuperLIORobustEfficient2025}
 \citation{koideGLIM3DRangeInertial2024}
-\@writefile{toc}{\contentsline {paragraph}{Filter-Based Direct Odometry}{14}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Graph-Based Global Consistency}{14}{}\protected@file@percent }
+\citation{koideGLIM3DRangeInertial2024}
+\citation{koideGLIM3DRangeInertial2024}
+\@writefile{toc}{\contentsline {paragraph}{Filter-Based Direct Odometry}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Graph-Based Global Consistency}{19}{}\protected@file@percent }
 \citation{weiLiDARVisualInertial2026}
 \citation{hanMultiObjectiveOptimizationLoop2020}
 \citation{hanMultiObjectiveOptimizationLoop2020}
 \citation{chrismanLatinHypercubeSampling2014}
 \citation{deutschLatinHypercubeSampling2012}
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Comparative Analysis of State-of-the-Art LIO Systems}}{15}{}\protected@file@percent }
-\newlabel{tab:comparison}{{3.1}{15}{}{table.3.1}{}}
-\newlabel{tab:comparison@cref}{{[table][1][3]3.1}{[1][15][]15}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}SLAM Hyperparameter Optimisation}{15}{}\protected@file@percent }
-\newlabel{subsec:slam-hyperparameter}{{3.2.2}{15}{}{subsection.3.2.2}{}}
-\newlabel{subsec:slam-hyperparameter@cref}{{[subsection][2][3,2]3.2.2}{[1][15][]15}{}{}{}}
-\@writefile{toc}{\contentsline {paragraph}{Search Space Sampling}{15}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Overview of the GLIM framework, comprising a preprocessing module and three tightly coupled range-IMU estimation modules. The odometry estimation module deskews point clouds and estimates sensor motion via fixed-lag smoothing; the local mapping module concatenates frames into submaps; and the global mapping module optimises submap poses for long-term global consistency. Each module runs in a dedicated thread \cite {koideGLIM3DRangeInertial2024}.}}{20}{}\protected@file@percent }
+\newlabel{fig:glimFramework}{{3.3}{20}{}{figure.3.3}{}}
+\newlabel{fig:glimFramework@cref}{{[figure][3][3]3.3}{[1][19][]20}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Comparative Analysis of State-of-the-Art LIO Systems}}{20}{}\protected@file@percent }
+\newlabel{tab:comparison}{{3.1}{20}{}{table.3.1}{}}
+\newlabel{tab:comparison@cref}{{[table][1][3]3.1}{[1][19][]20}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}SLAM Hyperparameter Optimisation}{20}{}\protected@file@percent }
+\newlabel{subsec:slam-hyperparameter}{{3.2.2}{20}{}{subsection.3.2.2}{}}
+\newlabel{subsec:slam-hyperparameter@cref}{{[subsection][2][3,2]3.2.2}{[1][20][]20}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{Search Space Sampling}{20}{}\protected@file@percent }
 \citation{chrismanLatinHypercubeSampling2014}
 \citation{chrismanLatinHypercubeSampling2014}
 \citation{deutschLatinHypercubeSampling2012}
@@ -50,10 +65,23 @@
 \citation{deutschLatinHypercubeSampling2012}
 \citation{deutschLatinHypercubeSampling2012}
 \citation{deutschLatinHypercubeSampling2012}
+\citation{deutschLatinHypercubeSampling2012}
+\citation{deutschLatinHypercubeSampling2012}
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of Sampling Strategies}}{21}{}\protected@file@percent }
+\newlabel{tab:sampling_comparison}{{3.2}{21}{}{table.3.2}{}}
+\newlabel{tab:sampling_comparison@cref}{{[table][2][3]3.2}{[1][21][]21}{}{}{}}
+\newlabel{fig:mcDist}{{\caption@xref {??}{ on input line 106}}{21}{}{table.3.2}{}}
+\newlabel{fig:mcDist@cref}{{[subsection][2][3,2]3.2.2}{[1][21][]21}{}{}{}}
+\newlabel{sub@fig:mcDist}{{}{21}{}{table.3.2}{}}
+\newlabel{sub@fig:mcDist@cref}{{[subsection][2][3,2]3.2.2}{[1][21][]21}{}{}{}}
+\newlabel{fig:lhsDist}{{\caption@xref {??}{ on input line 112}}{21}{}{table.3.2}{}}
+\newlabel{fig:lhsDist@cref}{{[subsection][2][3,2]3.2.2}{[1][21][]21}{}{}{}}
+\newlabel{sub@fig:lhsDist}{{}{21}{}{table.3.2}{}}
+\newlabel{sub@fig:lhsDist@cref}{{[subsection][2][3,2]3.2.2}{[1][21][]21}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Spatial distribution of 16 sample points drawn in a two-dimensional parameter space, visualised at two grid resolutions. In (a) and (b), pure Monte Carlo sampling populates the space without structural constraint, producing irregular clusters and uncovered voids that persist regardless of grid resolution. In (g) and (h), the optimised Latin Hypercube Sampling stratification guarantee ensures that exactly one sample occupies each row and column of the partition grid, yielding substantially more uniform marginal coverage for the same number of evaluations \cite {deutschLatinHypercubeSampling2012}.}}{21}{}\protected@file@percent }
+\newlabel{fig:samplingComparison}{{3.4}{21}{}{figure.3.4}{}}
+\newlabel{fig:samplingComparison@cref}{{[figure][4][3]3.4}{[1][21][]21}{}{}{}}
 \citation{packhamLatinHypercubeSampling2008}
-\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of Sampling Strategies}}{16}{}\protected@file@percent }
-\newlabel{tab:sampling_comparison}{{3.2}{16}{}{table.3.2}{}}
-\newlabel{tab:sampling_comparison@cref}{{[table][2][3]3.2}{[1][16][]16}{}{}{}}
 \citation{soaresVARSLAMVisualAdaptive2025}
 \citation{soumyadipIntroductionLiDARSLAM2024}
 \citation{soaresVARSLAMVisualAdaptive2025}
@@ -65,195 +93,259 @@
 \citation{soumyadipIntroductionLiDARSLAM2024}
 \citation{xuTKOSLAMVisualSLAM2024}
 \citation{kandasamyTuningHyperparametersGrad}
-\@writefile{toc}{\contentsline {paragraph}{Robustness, Generalisation and Overfitting}{17}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Impact of Environmental Factors on SLAM Performance}}{17}{}\protected@file@percent }
-\newlabel{tab:slam_failure_modes}{{3.3}{17}{}{table.3.3}{}}
-\newlabel{tab:slam_failure_modes@cref}{{[table][3][3]3.3}{[1][17][]17}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{Robustness, Generalisation and Overfitting}{22}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Impact of Environmental Factors on SLAM Performance}}{23}{}\protected@file@percent }
+\newlabel{tab:slam_failure_modes}{{3.3}{23}{}{table.3.3}{}}
+\newlabel{tab:slam_failure_modes@cref}{{[table][3][3]3.3}{[1][22][]23}{}{}{}}
 \citation{koideGLIM3DRangeInertial2024}
 \citation{kabschSolutionBestRotation1976}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Proposed Methods}{24}{}\protected@file@percent }
+\newlabel{sec:slam-methodology}{{3.3}{24}{}{section.3.3}{}}
+\newlabel{sec:slam-methodology@cref}{{[section][3][3]3.3}{[1][24][]24}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces GNSS-to-frame time matching across both operating phases. During the initialisation phase, each keyframe (KF) is matched to a GNSS measurement within a $\pm 5$\,ms window enforced by PTP/Chrony clock synchronisation. A keyframe with no GNSS measurement in its window is discarded. During the continuous phase, submaps are matched using the timestamp of their middle keyframe (\textit  {mid}), which approximates the temporal centroid of the submap.}}{24}{}\protected@file@percent }
+\newlabel{fig:time-matching}{{3.5}{24}{}{figure.3.5}{}}
+\newlabel{fig:time-matching@cref}{{[figure][5][3]3.5}{[1][24][]24}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Overview of the proposed GNSS-augmented SLAM pipeline. The initialisation track (left) performs time synchronisation, outlier rejection, planar geometry quality assessment, and Kabsch alignment to publish the map-to-ENU transform. The continuous track (right) constructs GNSS prior factors and inserts them into the GLIM factor graph for ongoing drift correction. On geometry check failure, initialisation waits and accumulates further GNSS--pose correspondences before retrying.}}{25}{}\protected@file@percent }
+\newlabel{fig:system-pipeline}{{3.6}{25}{}{figure.3.6}{}}
+\newlabel{fig:system-pipeline@cref}{{[figure][6][3]3.6}{[1][25][]25}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Geometric Consistency-Based Outlier Rejection}{25}{}\protected@file@percent }
 \citation{fischlerRandomSampleConsensus1981}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Proposed Methods}{18}{}\protected@file@percent }
-\newlabel{sec:slam-methodology}{{3.3}{18}{}{section.3.3}{}}
-\newlabel{sec:slam-methodology@cref}{{[section][3][3]3.3}{[1][17][]18}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Geometric Consistency-Based Outlier Rejection}{18}{}\protected@file@percent }
-\newlabel{eq:consistency_check}{{3.1}{18}{}{equation.3.1}{}}
-\newlabel{eq:consistency_check@cref}{{[equation][1][3]3.1}{[1][18][]18}{}{}{}}
 \citation{wenExclusionGNSSNLOS2018}
-\newlabel{eq:indicator}{{3.2}{19}{}{equation.3.2}{}}
-\newlabel{eq:indicator@cref}{{[equation][2][3]3.2}{[1][19][]19}{}{}{}}
-\newlabel{eq:majority_criterion}{{3.3}{19}{}{equation.3.3}{}}
-\newlabel{eq:majority_criterion@cref}{{[equation][3][3]3.3}{[1][19][]19}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Planar Geometry Quality Assessment in 2D}{19}{}\protected@file@percent }
-\newlabel{eq:data_matrix}{{3.4}{19}{}{equation.3.4}{}}
-\newlabel{eq:data_matrix@cref}{{[equation][4][3]3.4}{[1][19][]19}{}{}{}}
-\newlabel{eq:svd}{{3.5}{19}{}{equation.3.5}{}}
-\newlabel{eq:svd@cref}{{[equation][5][3]3.5}{[1][19][]19}{}{}{}}
-\newlabel{eq:condition_number}{{3.6}{20}{}{equation.3.6}{}}
-\newlabel{eq:condition_number@cref}{{[equation][6][3]3.6}{[1][20][]20}{}{}{}}
-\newlabel{eq:spread_ratio}{{3.7}{20}{}{equation.3.7}{}}
-\newlabel{eq:spread_ratio@cref}{{[equation][7][3]3.7}{[1][20][]20}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}GLIM Reference Frame Alignment with Local ENU}{20}{}\protected@file@percent }
-\newlabel{eq:kabsch_objective}{{3.8}{20}{}{equation.3.8}{}}
-\newlabel{eq:kabsch_objective@cref}{{[equation][8][3]3.8}{[1][20][]20}{}{}{}}
-\newlabel{eq:centroids}{{3.9}{20}{}{equation.3.9}{}}
-\newlabel{eq:centroids@cref}{{[equation][9][3]3.9}{[1][20][]20}{}{}{}}
-\newlabel{eq:centering}{{3.10}{20}{}{equation.3.10}{}}
-\newlabel{eq:centering@cref}{{[equation][10][3]3.10}{[1][20][]20}{}{}{}}
+\newlabel{eq:consistency_check}{{3.1}{26}{}{equation.3.1}{}}
+\newlabel{eq:consistency_check@cref}{{[equation][1][3]3.1}{[1][26][]26}{}{}{}}
+\newlabel{eq:indicator}{{3.2}{26}{}{equation.3.2}{}}
+\newlabel{eq:indicator@cref}{{[equation][2][3]3.2}{[1][26][]26}{}{}{}}
+\newlabel{eq:majority_criterion}{{3.3}{26}{}{equation.3.3}{}}
+\newlabel{eq:majority_criterion@cref}{{[equation][3][3]3.3}{[1][26][]26}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Planar Geometry Quality Assessment in 2D}{26}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Geometric consistency-based outlier rejection applied to GNSS measurements. Inlier points (green) are distributed along the estimated trajectory and satisfy pairwise distance consistency with map-frame estimates. Multipath-corrupted points (red) form a spatially compact cluster that is globally inconsistent with the rigid consensus and are therefore rejected, even though they are mutually self-consistent.}}{27}{}\protected@file@percent }
+\newlabel{fig:outlier-rejection}{{3.7}{27}{}{figure.3.7}{}}
+\newlabel{fig:outlier-rejection@cref}{{[figure][7][3]3.7}{[1][26][]27}{}{}{}}
+\newlabel{eq:data_matrix}{{3.4}{27}{}{equation.3.4}{}}
+\newlabel{eq:data_matrix@cref}{{[equation][4][3]3.4}{[1][27][]27}{}{}{}}
+\newlabel{eq:svd}{{3.5}{27}{}{equation.3.5}{}}
+\newlabel{eq:svd@cref}{{[equation][5][3]3.5}{[1][27][]27}{}{}{}}
+\newlabel{eq:condition_number}{{3.6}{27}{}{equation.3.6}{}}
+\newlabel{eq:condition_number@cref}{{[equation][6][3]3.6}{[1][27][]27}{}{}{}}
+\newlabel{eq:spread_ratio}{{3.7}{27}{}{equation.3.7}{}}
+\newlabel{eq:spread_ratio@cref}{{[equation][7][3]3.7}{[1][27][]27}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Planar geometry quality assessment for two trajectory configurations. \textbf  {(a)}~Near-collinear configuration: points lie along a single direction, yielding a large condition number $\kappa \gg 1$, indicating insufficient geometric spread for reliable plane estimation. \textbf  {(b)}~Well-conditioned configuration: an L-shaped trajectory distributes points across two directions, yielding $\kappa \approx 1.3$ and $r \approx 0.78$. Orange and purple arrows denote the first and second principal variance directions ($\sigma _1$, $\sigma _2$) obtained from SVD of the centred point set; their orientations reflect directions of maximum and minimum variance across all points and are not constrained to align with individual path segments.}}{28}{}\protected@file@percent }
+\newlabel{fig:geometry-quality}{{3.8}{28}{}{figure.3.8}{}}
+\newlabel{fig:geometry-quality@cref}{{[figure][8][3]3.8}{[1][28][]28}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}GLIM Reference Frame Alignment with Local ENU}{28}{}\protected@file@percent }
+\newlabel{eq:kabsch_objective}{{3.8}{28}{}{equation.3.8}{}}
+\newlabel{eq:kabsch_objective@cref}{{[equation][8][3]3.8}{[1][28][]28}{}{}{}}
 \citation{macenskiRobotOperatingSystem2022}
 \citation{grisettiTutorialGraphBasedSLAM2010a}
-\newlabel{eq:cross_covariance}{{3.11}{21}{}{equation.3.11}{}}
-\newlabel{eq:cross_covariance@cref}{{[equation][11][3]3.11}{[1][20][]21}{}{}{}}
-\newlabel{eq:kabsch_svd}{{3.12}{21}{}{equation.3.12}{}}
-\newlabel{eq:kabsch_svd@cref}{{[equation][12][3]3.12}{[1][21][]21}{}{}{}}
-\newlabel{eq:reflection_correction}{{3.13}{21}{}{equation.3.13}{}}
-\newlabel{eq:reflection_correction@cref}{{[equation][13][3]3.13}{[1][21][]21}{}{}{}}
-\newlabel{eq:optimal_rotation}{{3.14}{21}{}{equation.3.14}{}}
-\newlabel{eq:optimal_rotation@cref}{{[equation][14][3]3.14}{[1][21][]21}{}{}{}}
-\newlabel{eq:recovered_translation}{{3.15}{21}{}{equation.3.15}{}}
-\newlabel{eq:recovered_translation@cref}{{[equation][15][3]3.15}{[1][21][]21}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}GNSS Prior Factor Construction}{21}{}\protected@file@percent }
-\newlabel{eq:enu_to_map}{{3.16}{21}{}{equation.3.16}{}}
-\newlabel{eq:enu_to_map@cref}{{[equation][16][3]3.16}{[1][21][]21}{}{}{}}
+\newlabel{eq:centroids}{{3.9}{29}{}{equation.3.9}{}}
+\newlabel{eq:centroids@cref}{{[equation][9][3]3.9}{[1][28][]29}{}{}{}}
+\newlabel{eq:centering}{{3.10}{29}{}{equation.3.10}{}}
+\newlabel{eq:centering@cref}{{[equation][10][3]3.10}{[1][29][]29}{}{}{}}
+\newlabel{eq:cross_covariance}{{3.11}{29}{}{equation.3.11}{}}
+\newlabel{eq:cross_covariance@cref}{{[equation][11][3]3.11}{[1][29][]29}{}{}{}}
+\newlabel{eq:kabsch_svd}{{3.12}{29}{}{equation.3.12}{}}
+\newlabel{eq:kabsch_svd@cref}{{[equation][12][3]3.12}{[1][29][]29}{}{}{}}
+\newlabel{eq:reflection_correction}{{3.13}{29}{}{equation.3.13}{}}
+\newlabel{eq:reflection_correction@cref}{{[equation][13][3]3.13}{[1][29][]29}{}{}{}}
+\newlabel{eq:optimal_rotation}{{3.14}{29}{}{equation.3.14}{}}
+\newlabel{eq:optimal_rotation@cref}{{[equation][14][3]3.14}{[1][29][]29}{}{}{}}
+\newlabel{eq:recovered_translation}{{3.15}{29}{}{equation.3.15}{}}
+\newlabel{eq:recovered_translation@cref}{{[equation][15][3]3.15}{[1][29][]29}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}GNSS Prior Factor Construction}{29}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Kabsch point-set alignment between estimated GNSS antenna positions $\{\hat  {\mathbf  {a}}_i\}$ in the MAP frame (orange) and measured GNSS positions $\{\mathbf  {b}_i\}$ in the ENU frame (blue). \textit  {Left}: before alignment, dashed lines show the centred vectors $\hat  {\mathbf  {a}}_i - \boldsymbol  {\mu }_A$ and $\mathbf  {b}_i - \boldsymbol  {\mu }_B$ relative to their respective centroids. The clearly different orientations of the two point sets illustrate that the estimated transformation $(\mathbf  {R}, \mathbf  {t})$ must account for both a rotation and a translation (Equations~\eqref  {eq:kabsch_objective}--\eqref  {eq:recovered_translation}). \textit  {Right}: after alignment, the transformed MAP-frame positions $\mathbf  {R}\hat  {\mathbf  {a}}_i + \mathbf  {t}$ coincide with the ENU measurements up to a small residual.}}{30}{}\protected@file@percent }
+\newlabel{fig:kabsch-alignment}{{3.9}{30}{}{figure.3.9}{}}
+\newlabel{fig:kabsch-alignment@cref}{{[figure][9][3]3.9}{[1][29][]30}{}{}{}}
+\newlabel{eq:enu_to_map}{{3.16}{30}{}{equation.3.16}{}}
+\newlabel{eq:enu_to_map@cref}{{[equation][16][3]3.16}{[1][30][]30}{}{}{}}
+\newlabel{eq:gps_noise}{{3.17}{30}{}{equation.3.17}{}}
+\newlabel{eq:gps_noise@cref}{{[equation][17][3]3.17}{[1][30][]30}{}{}{}}
+\newlabel{eq:predicted_gps}{{3.18}{30}{}{equation.3.18}{}}
+\newlabel{eq:predicted_gps@cref}{{[equation][18][3]3.18}{[1][30][]30}{}{}{}}
+\newlabel{eq:gnss_factor}{{3.19}{30}{}{equation.3.19}{}}
+\newlabel{eq:gnss_factor@cref}{{[equation][19][3]3.19}{[1][30][]30}{}{}{}}
 \citation{hanMultiObjectiveOptimizationLoop2020}
 \citation{deutschLatinHypercubeSampling2012}
 \citation{chrismanLatinHypercubeSampling2014}
 \citation{chrismanLatinHypercubeSampling2014}
 \citation{deutschLatinHypercubeSampling2012}
 \citation{packhamLatinHypercubeSampling2008}
-\newlabel{eq:gps_noise}{{3.17}{22}{}{equation.3.17}{}}
-\newlabel{eq:gps_noise@cref}{{[equation][17][3]3.17}{[1][21][]22}{}{}{}}
-\newlabel{eq:predicted_gps}{{3.18}{22}{}{equation.3.18}{}}
-\newlabel{eq:predicted_gps@cref}{{[equation][18][3]3.18}{[1][22][]22}{}{}{}}
-\newlabel{eq:gnss_factor}{{3.19}{22}{}{equation.3.19}{}}
-\newlabel{eq:gnss_factor@cref}{{[equation][19][3]3.19}{[1][22][]22}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}Robust SLAM Parameterisation via Iterative Region Refinement}{22}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5.1}Problem Formulation}{22}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces GNSS-augmented factor graph structure. Circles denote submap pose variables $X_i$; dark squares represent LiDAR--IMU odometry factors between consecutive submaps; blue squares represent GNSS prior factors attached to corresponding submap poses. GNSS measurements arrive asynchronously and are therefore not associated with every submap (illustrated by the absent factor at $X_3$).}}{31}{}\protected@file@percent }
+\newlabel{fig:factor-graph}{{3.10}{31}{}{figure.3.10}{}}
+\newlabel{fig:factor-graph@cref}{{[figure][10][3]3.10}{[1][31][]31}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}Robust SLAM Parameterisation via Iterative Region Refinement}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5.1}Problem Formulation}{31}{}\protected@file@percent }
 \citation{deutschLatinHypercubeSampling2012}
 \citation{soaresVARSLAMVisualAdaptive2025}
 \citation{kandasamyTuningHyperparametersGrad}
 \citation{nocedalTrustRegionMethods2006}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5.2}Sampling via Latin Hypercube Strategy}{23}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Implementation and Normalisation}{23}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5.3}The Multi-Dataset Consensus Framework}{23}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Formal Objective Function}{23}{}\protected@file@percent }
-\newlabel{eq:piecewise_success}{{3.22}{23}{}{equation.3.22}{}}
-\newlabel{eq:piecewise_success@cref}{{[equation][22][3]3.22}{[1][23][]23}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5.2}Sampling via Latin Hypercube Strategy}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Implementation and Normalisation}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5.3}The Multi-Dataset Consensus Framework}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formal Objective Function}{32}{}\protected@file@percent }
+\newlabel{eq:piecewise_success}{{3.22}{32}{}{equation.3.22}{}}
+\newlabel{eq:piecewise_success@cref}{{[equation][22][3]3.22}{[1][32][]32}{}{}{}}
 \citation{jamiesonNonstochasticBestArm2015}
 \citation{sturmBenchmarkEvaluationRGBD2012}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5.4}Iterative Region Refinement (IRR)}{24}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Statistical Search Space Contraction}{24}{}\protected@file@percent }
-\newlabel{eq:quantile_update}{{3.23}{24}{}{equation.3.23}{}}
-\newlabel{eq:quantile_update@cref}{{[equation][23][3]3.23}{[1][24][]24}{}{}{}}
-\@writefile{toc}{\contentsline {paragraph}{Refinement Phase Schedule}{24}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.4}{\ignorespaces Evolutionary Phases of the Sampling Algorithm}}{24}{}\protected@file@percent }
-\newlabel{tab:phases}{{3.4}{24}{}{table.3.4}{}}
-\newlabel{tab:phases@cref}{{[table][4][3]3.4}{[1][24][]24}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5.5}Optimisation Metrics}{24}{}\protected@file@percent }
-\newlabel{eq:tep}{{3.24}{24}{}{equation.3.24}{}}
-\newlabel{eq:tep@cref}{{[equation][24][3]3.24}{[1][24][]24}{}{}{}}
-\newlabel{eq:gasp}{{3.25}{25}{}{equation.3.25}{}}
-\newlabel{eq:gasp@cref}{{[equation][25][3]3.25}{[1][25][]25}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Results}{25}{}\protected@file@percent }
-\newlabel{sec:slam-results}{{3.4}{25}{}{section.3.4}{}}
-\newlabel{sec:slam-results@cref}{{[section][4][3]3.4}{[1][25][]25}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Baseline GLIM Performance}{25}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Refined GLIM Performance}{25}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.3}Proposed Method Performance}{25}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.5}{\ignorespaces Baseline GLIM performance over the five test datasets}}{26}{}\protected@file@percent }
-\newlabel{tab:baseline_performance}{{3.5}{26}{}{table.3.5}{}}
-\newlabel{tab:baseline_performance@cref}{{[table][5][3]3.5}{[1][25][]26}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.6}{\ignorespaces Refined GLIM performance over the five datasets}}{26}{}\protected@file@percent }
-\newlabel{tab:refined_performance}{{3.6}{26}{}{table.3.6}{}}
-\newlabel{tab:refined_performance@cref}{{[table][6][3]3.6}{[1][25][]26}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.7}{\ignorespaces Proposed method performance over the 5 test datasets}}{27}{}\protected@file@percent }
-\newlabel{tab:proposed_performance}{{3.7}{27}{}{table.3.7}{}}
-\newlabel{tab:proposed_performance@cref}{{[table][7][3]3.7}{[1][25][]27}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.4}Comparative Summary}{27}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.5}GNSS Factor Utilisation}{27}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.6}Parameter Optimisation Progression}{27}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.8}{\ignorespaces Comparison Table of the Key Metrics (Best results in bold)}}{28}{}\protected@file@percent }
-\newlabel{tab:comparison_table_key_metrics}{{3.8}{28}{}{table.3.8}{}}
-\newlabel{tab:comparison_table_key_metrics@cref}{{[table][8][3]3.8}{[1][27][]28}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.9}{\ignorespaces Statistics on the number of GNSS factors used for the proposed method}}{28}{}\protected@file@percent }
-\newlabel{tab:gnss_stats}{{3.9}{28}{}{table.3.9}{}}
-\newlabel{tab:gnss_stats@cref}{{[table][9][3]3.9}{[1][27][]28}{}{}{}}
-\newlabel{fig:baseline_error_dist}{{3.1a}{29}{}{subfigure.3.1.1}{}}
-\newlabel{fig:baseline_error_dist@cref}{{[subfigure][1][3,1]3.1a}{[1][27][]29}{}{}{}}
-\newlabel{sub@fig:baseline_error_dist}{{a}{29}{}{subfigure.3.1.1}{}}
-\newlabel{sub@fig:baseline_error_dist@cref}{{[subfigure][1][3,1]3.1a}{[1][27][]29}{}{}{}}
-\newlabel{fig:proposed_error_dist}{{3.1b}{29}{}{subfigure.3.1.2}{}}
-\newlabel{fig:proposed_error_dist@cref}{{[subfigure][2][3,1]3.1b}{[1][27][]29}{}{}{}}
-\newlabel{sub@fig:proposed_error_dist}{{b}{29}{}{subfigure.3.1.2}{}}
-\newlabel{sub@fig:proposed_error_dist@cref}{{[subfigure][2][3,1]3.1b}{[1][27][]29}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Error distribution (log scale) over optimisation stages for baseline tuning (error = error percentage) and proposed method tuning (error = GASP).}}{29}{}\protected@file@percent }
-\newlabel{fig:comparison_dist}{{3.1}{29}{}{figure.3.1}{}}
-\newlabel{fig:comparison_dist@cref}{{[figure][1][3]3.1}{[1][27][]29}{}{}{}}
-\newlabel{fig:baseline_progression}{{3.2a}{30}{}{subfigure.3.2.1}{}}
-\newlabel{fig:baseline_progression@cref}{{[subfigure][1][3,2]3.2a}{[1][27][]30}{}{}{}}
-\newlabel{sub@fig:baseline_progression}{{a}{30}{}{subfigure.3.2.1}{}}
-\newlabel{sub@fig:baseline_progression@cref}{{[subfigure][1][3,2]3.2a}{[1][27][]30}{}{}{}}
-\newlabel{fig:proposed_progression}{{3.2b}{30}{}{subfigure.3.2.2}{}}
-\newlabel{fig:proposed_progression@cref}{{[subfigure][2][3,2]3.2b}{[1][27][]30}{}{}{}}
-\newlabel{sub@fig:proposed_progression}{{b}{30}{}{subfigure.3.2.2}{}}
-\newlabel{sub@fig:proposed_progression@cref}{{[subfigure][2][3,2]3.2b}{[1][27][]30}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Consensus error over optimisation stages for baseline tuning (error = error percentage) and proposed method tuning (error = GASP).}}{30}{}\protected@file@percent }
-\newlabel{fig:comparison_progression}{{3.2}{30}{}{figure.3.2}{}}
-\newlabel{fig:comparison_progression@cref}{{[figure][2][3]3.2}{[1][27][]30}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.7}Multi-Metric Radar Comparison}{31}{}\protected@file@percent }
-\newlabel{fig:spider_epm}{{3.3a}{31}{}{subfigure.3.3.1}{}}
-\newlabel{fig:spider_epm@cref}{{[subfigure][1][3,3]3.3a}{[1][31][]31}{}{}{}}
-\newlabel{sub@fig:spider_epm}{{a}{31}{}{subfigure.3.3.1}{}}
-\newlabel{sub@fig:spider_epm@cref}{{[subfigure][1][3,3]3.3a}{[1][31][]31}{}{}{}}
-\newlabel{fig:spider_ep}{{3.3b}{31}{}{subfigure.3.3.2}{}}
-\newlabel{fig:spider_ep@cref}{{[subfigure][2][3,3]3.3b}{[1][31][]31}{}{}{}}
-\newlabel{sub@fig:spider_ep}{{b}{31}{}{subfigure.3.3.2}{}}
-\newlabel{sub@fig:spider_ep@cref}{{[subfigure][2][3,3]3.3b}{[1][31][]31}{}{}{}}
-\newlabel{fig:spider_ATE}{{3.3c}{31}{}{subfigure.3.3.3}{}}
-\newlabel{fig:spider_ATE@cref}{{[subfigure][3][3,3]3.3c}{[1][31][]31}{}{}{}}
-\newlabel{sub@fig:spider_ATE}{{c}{31}{}{subfigure.3.3.3}{}}
-\newlabel{sub@fig:spider_ATE@cref}{{[subfigure][3][3,3]3.3c}{[1][31][]31}{}{}{}}
-\newlabel{fig:spider_RPE_std}{{3.3d}{31}{}{subfigure.3.3.4}{}}
-\newlabel{fig:spider_RPE_std@cref}{{[subfigure][4][3,3]3.3d}{[1][31][]31}{}{}{}}
-\newlabel{sub@fig:spider_RPE_std}{{d}{31}{}{subfigure.3.3.4}{}}
-\newlabel{sub@fig:spider_RPE_std@cref}{{[subfigure][4][3,3]3.3d}{[1][31][]31}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Spider plot comparisons of the glim baseline, refined and proposed methods for various key performance metrics.}}{31}{}\protected@file@percent }
-\newlabel{fig:comparison_spider}{{3.3}{31}{}{figure.3.3}{}}
-\newlabel{fig:comparison_spider@cref}{{[figure][3][3]3.3}{[1][31][]31}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.8}Trajectory Visualisation}{31}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Trajectories in XY plane from baseline GLIM and the proposed method.}}{32}{}\protected@file@percent }
-\newlabel{fig:large_grid_xy}{{3.4}{32}{}{figure.3.4}{}}
-\newlabel{fig:large_grid_xy@cref}{{[figure][4][3]3.4}{[1][31][]32}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Trajectories in Z plane from baseline GLIM and the proposed method.}}{33}{}\protected@file@percent }
-\newlabel{fig:large_grid_z}{{3.5}{33}{}{figure.3.5}{}}
-\newlabel{fig:large_grid_z@cref}{{[figure][5][3]3.5}{[1][31][]33}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Discussion}{34}{}\protected@file@percent }
-\newlabel{sec:slam-discussion}{{3.5}{34}{}{section.3.5}{}}
-\newlabel{sec:slam-discussion@cref}{{[section][5][3]3.5}{[1][31][]34}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Baseline GLIM Performance Analysis}{34}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1.1}Vertical Drift and Altitude Recovery}{34}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1.2}Planar Failure and the 'Point of No Return'}{34}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Refined GLIM Performance}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2.1}Magnitude of Error Reduction}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2.2}Relative Pose Stability}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2.3}Drift Suppression per Meter}{35}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.10}{\ignorespaces Comparative Performance: Baseline vs. Refined GLIM}}{36}{}\protected@file@percent }
-\newlabel{tab:comparison_summary}{{3.10}{36}{}{table.3.10}{}}
-\newlabel{tab:comparison_summary@cref}{{[table][10][3]3.10}{[1][35][]36}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.3}Proposed Method: GNSS-Augmented Localisation}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3.1}GNSS Integration and Global Constraint}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3.2}Dataset-Specific Performance Variability}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3.3}Relative Pose Error and Short-Horizon Consistency}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3.4}GASP Metric Behaviour and Optimisation Dynamics}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.4}Comparative Analysis and Mechanisms of Improvement}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.4.1}Parametrisation vs. Sensor Fusion}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.4.2}Role of Outlier Rejection}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.4.3}Geometric Quality Assessment and Kabsch Stability}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.5}Implications for Vineyard Robotics}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.6}Summary}{40}{}\protected@file@percent }
-\newlabel{sec:slam-summary}{{3.6}{40}{}{section.3.6}{}}
-\newlabel{sec:slam-summary@cref}{{[section][6][3]3.6}{[1][40][]40}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5.4}Iterative Region Refinement (IRR)}{33}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Statistical Search Space Contraction}{33}{}\protected@file@percent }
+\newlabel{eq:quantile_update}{{3.23}{33}{}{equation.3.23}{}}
+\newlabel{eq:quantile_update@cref}{{[equation][23][3]3.23}{[1][33][]33}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{Refinement Phase Schedule}{33}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.4}{\ignorespaces Evolutionary Phases of the Sampling Algorithm}}{33}{}\protected@file@percent }
+\newlabel{tab:phases}{{3.4}{33}{}{table.3.4}{}}
+\newlabel{tab:phases@cref}{{[table][4][3]3.4}{[1][33][]33}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5.5}Optimisation Metrics}{33}{}\protected@file@percent }
+\newlabel{eq:tep}{{3.24}{33}{}{equation.3.24}{}}
+\newlabel{eq:tep@cref}{{[equation][24][3]3.24}{[1][33][]33}{}{}{}}
+\newlabel{fig:irr-funnel}{{3.11a}{34}{}{subfigure.3.11.1}{}}
+\newlabel{fig:irr-funnel@cref}{{[subfigure][1][3,11]3.11a}{[1][33][]34}{}{}{}}
+\newlabel{sub@fig:irr-funnel}{{a}{34}{}{subfigure.3.11.1}{}}
+\newlabel{sub@fig:irr-funnel@cref}{{[subfigure][1][3,11]3.11a}{[1][33][]34}{}{}{}}
+\newlabel{fig:irr-flowchart}{{3.11b}{34}{}{subfigure.3.11.2}{}}
+\newlabel{fig:irr-flowchart@cref}{{[subfigure][2][3,11]3.11b}{[1][33][]34}{}{}{}}
+\newlabel{sub@fig:irr-flowchart}{{b}{34}{}{subfigure.3.11.2}{}}
+\newlabel{sub@fig:irr-flowchart@cref}{{[subfigure][2][3,11]3.11b}{[1][33][]34}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces IRR optimisation strategy: \subref  {fig:irr-funnel}~contracting parameter search space across phases; \subref  {fig:irr-flowchart}~per-phase algorithmic procedure.}}{34}{}\protected@file@percent }
+\newlabel{fig:irr}{{3.11}{34}{}{figure.3.11}{}}
+\newlabel{fig:irr@cref}{{[figure][11][3]3.11}{[1][33][]34}{}{}{}}
+\newlabel{eq:gasp}{{3.25}{35}{}{equation.3.25}{}}
+\newlabel{eq:gasp@cref}{{[equation][25][3]3.25}{[1][35][]35}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.6}Experimental Setup}{35}{}\protected@file@percent }
+\newlabel{subsec:slam-experimental-setup}{{3.3.6}{35}{}{subsection.3.3.6}{}}
+\newlabel{subsec:slam-experimental-setup@cref}{{[subsection][6][3,3]3.3.6}{[1][35][]35}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.6.1}Parameterisation Datasets}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.6.2}Evaluation Dataset}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.6.3}Evaluation Protocol}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Results}{37}{}\protected@file@percent }
+\newlabel{sec:slam-results}{{3.4}{37}{}{section.3.4}{}}
+\newlabel{sec:slam-results@cref}{{[section][4][3]3.4}{[1][37][]37}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Baseline GLIM Performance}{37}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.5}{\ignorespaces Baseline GLIM performance over the five test datasets}}{37}{}\protected@file@percent }
+\newlabel{tab:baseline_performance}{{3.5}{37}{}{table.3.5}{}}
+\newlabel{tab:baseline_performance@cref}{{[table][5][3]3.5}{[1][37][]37}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Refined GLIM Performance}{37}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.6}{\ignorespaces Refined GLIM performance over the five datasets}}{38}{}\protected@file@percent }
+\newlabel{tab:refined_performance}{{3.6}{38}{}{table.3.6}{}}
+\newlabel{tab:refined_performance@cref}{{[table][6][3]3.6}{[1][37][]38}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.3}Proposed Method Performance}{38}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.4}Comparative Summary}{38}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.5}GNSS Factor Utilisation}{38}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.6}Parameter Optimisation Progression}{38}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.7}{\ignorespaces Proposed method performance over the 5 test datasets}}{39}{}\protected@file@percent }
+\newlabel{tab:proposed_performance}{{3.7}{39}{}{table.3.7}{}}
+\newlabel{tab:proposed_performance@cref}{{[table][7][3]3.7}{[1][38][]39}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.8}{\ignorespaces Comparison Table of the Key Metrics (Best results in bold)}}{39}{}\protected@file@percent }
+\newlabel{tab:comparison_table_key_metrics}{{3.8}{39}{}{table.3.8}{}}
+\newlabel{tab:comparison_table_key_metrics@cref}{{[table][8][3]3.8}{[1][38][]39}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.9}{\ignorespaces Statistics on the number of GNSS factors used for the proposed method}}{40}{}\protected@file@percent }
+\newlabel{tab:gnss_stats}{{3.9}{40}{}{table.3.9}{}}
+\newlabel{tab:gnss_stats@cref}{{[table][9][3]3.9}{[1][38][]40}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.7}Multi-Metric Radar Comparison}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.8}Trajectory Visualisation}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.9}Evaluation Dataset Results}{40}{}\protected@file@percent }
+\newlabel{subsec:slam-eval-results}{{3.4.9}{40}{}{subsection.3.4.9}{}}
+\newlabel{subsec:slam-eval-results@cref}{{[subsection][9][3,4]3.4.9}{[1][40][]40}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.9.1}Baseline GLIM --- Evaluation Dataset}{40}{}\protected@file@percent }
+\newlabel{fig:baseline_error_dist}{{3.12a}{41}{}{subfigure.3.12.1}{}}
+\newlabel{fig:baseline_error_dist@cref}{{[subfigure][1][3,12]3.12a}{[1][38][]41}{}{}{}}
+\newlabel{sub@fig:baseline_error_dist}{{a}{41}{}{subfigure.3.12.1}{}}
+\newlabel{sub@fig:baseline_error_dist@cref}{{[subfigure][1][3,12]3.12a}{[1][38][]41}{}{}{}}
+\newlabel{fig:proposed_error_dist}{{3.12b}{41}{}{subfigure.3.12.2}{}}
+\newlabel{fig:proposed_error_dist@cref}{{[subfigure][2][3,12]3.12b}{[1][38][]41}{}{}{}}
+\newlabel{sub@fig:proposed_error_dist}{{b}{41}{}{subfigure.3.12.2}{}}
+\newlabel{sub@fig:proposed_error_dist@cref}{{[subfigure][2][3,12]3.12b}{[1][38][]41}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces Error distribution (log scale) over optimisation stages for baseline tuning (error = error percentage) and proposed method tuning (error = GASP).}}{41}{}\protected@file@percent }
+\newlabel{fig:comparison_dist}{{3.12}{41}{}{figure.3.12}{}}
+\newlabel{fig:comparison_dist@cref}{{[figure][12][3]3.12}{[1][38][]41}{}{}{}}
+\newlabel{fig:baseline_progression}{{3.13a}{42}{}{subfigure.3.13.1}{}}
+\newlabel{fig:baseline_progression@cref}{{[subfigure][1][3,13]3.13a}{[1][40][]42}{}{}{}}
+\newlabel{sub@fig:baseline_progression}{{a}{42}{}{subfigure.3.13.1}{}}
+\newlabel{sub@fig:baseline_progression@cref}{{[subfigure][1][3,13]3.13a}{[1][40][]42}{}{}{}}
+\newlabel{fig:proposed_progression}{{3.13b}{42}{}{subfigure.3.13.2}{}}
+\newlabel{fig:proposed_progression@cref}{{[subfigure][2][3,13]3.13b}{[1][40][]42}{}{}{}}
+\newlabel{sub@fig:proposed_progression}{{b}{42}{}{subfigure.3.13.2}{}}
+\newlabel{sub@fig:proposed_progression@cref}{{[subfigure][2][3,13]3.13b}{[1][40][]42}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces Consensus error over optimisation stages for baseline tuning (error = error percentage) and proposed method tuning (error = GASP).}}{42}{}\protected@file@percent }
+\newlabel{fig:comparison_progression}{{3.13}{42}{}{figure.3.13}{}}
+\newlabel{fig:comparison_progression@cref}{{[figure][13][3]3.13}{[1][40][]42}{}{}{}}
+\newlabel{fig:spider_epm}{{3.14a}{43}{}{subfigure.3.14.1}{}}
+\newlabel{fig:spider_epm@cref}{{[subfigure][1][3,14]3.14a}{[1][40][]43}{}{}{}}
+\newlabel{sub@fig:spider_epm}{{a}{43}{}{subfigure.3.14.1}{}}
+\newlabel{sub@fig:spider_epm@cref}{{[subfigure][1][3,14]3.14a}{[1][40][]43}{}{}{}}
+\newlabel{fig:spider_ep}{{3.14b}{43}{}{subfigure.3.14.2}{}}
+\newlabel{fig:spider_ep@cref}{{[subfigure][2][3,14]3.14b}{[1][40][]43}{}{}{}}
+\newlabel{sub@fig:spider_ep}{{b}{43}{}{subfigure.3.14.2}{}}
+\newlabel{sub@fig:spider_ep@cref}{{[subfigure][2][3,14]3.14b}{[1][40][]43}{}{}{}}
+\newlabel{fig:spider_ATE}{{3.14c}{43}{}{subfigure.3.14.3}{}}
+\newlabel{fig:spider_ATE@cref}{{[subfigure][3][3,14]3.14c}{[1][40][]43}{}{}{}}
+\newlabel{sub@fig:spider_ATE}{{c}{43}{}{subfigure.3.14.3}{}}
+\newlabel{sub@fig:spider_ATE@cref}{{[subfigure][3][3,14]3.14c}{[1][40][]43}{}{}{}}
+\newlabel{fig:spider_RPE_std}{{3.14d}{43}{}{subfigure.3.14.4}{}}
+\newlabel{fig:spider_RPE_std@cref}{{[subfigure][4][3,14]3.14d}{[1][40][]43}{}{}{}}
+\newlabel{sub@fig:spider_RPE_std}{{d}{43}{}{subfigure.3.14.4}{}}
+\newlabel{sub@fig:spider_RPE_std@cref}{{[subfigure][4][3,14]3.14d}{[1][40][]43}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.14}{\ignorespaces Spider plot comparisons of the glim baseline, refined and proposed methods for various key performance metrics.}}{43}{}\protected@file@percent }
+\newlabel{fig:comparison_spider}{{3.14}{43}{}{figure.3.14}{}}
+\newlabel{fig:comparison_spider@cref}{{[figure][14][3]3.14}{[1][40][]43}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.15}{\ignorespaces Trajectories in XY plane from baseline GLIM and the proposed method.}}{44}{}\protected@file@percent }
+\newlabel{fig:large_grid_xy}{{3.15}{44}{}{figure.3.15}{}}
+\newlabel{fig:large_grid_xy@cref}{{[figure][15][3]3.15}{[1][40][]44}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.16}{\ignorespaces Trajectories in Z plane from baseline GLIM and the proposed method.}}{45}{}\protected@file@percent }
+\newlabel{fig:large_grid_z}{{3.16}{45}{}{figure.3.16}{}}
+\newlabel{fig:large_grid_z@cref}{{[figure][16][3]3.16}{[1][40][]45}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.10}{\ignorespaces Baseline GLIM performance on the Evaluation Dataset (mean, std, median, min, and max across five independent runs)}}{46}{}\protected@file@percent }
+\newlabel{tab:eval_baseline_performance}{{3.10}{46}{}{table.3.10}{}}
+\newlabel{tab:eval_baseline_performance@cref}{{[table][10][3]3.10}{[1][46][]46}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.9.2}Refined GLIM --- Evaluation Dataset}{46}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.9.3}Proposed Method --- Evaluation Dataset}{46}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.11}{\ignorespaces Refined GLIM performance on the Evaluation Dataset (mean, std, median, min, and max across five independent runs). The high standard deviation on max error 3D, RPE 1\,m RMSE/std, and RPE 10\,m RMSE/std indicates that at least one run experienced a catastrophic localisation failure; median values are more representative of typical performance.}}{47}{}\protected@file@percent }
+\newlabel{tab:eval_refined_performance}{{3.11}{47}{}{table.3.11}{}}
+\newlabel{tab:eval_refined_performance@cref}{{[table][11][3]3.11}{[1][46][]47}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.12}{\ignorespaces Proposed method performance on the Evaluation Dataset (mean, std, median, min, and max across five independent runs)}}{47}{}\protected@file@percent }
+\newlabel{tab:eval_proposed_performance}{{3.12}{47}{}{table.3.12}{}}
+\newlabel{tab:eval_proposed_performance@cref}{{[table][12][3]3.12}{[1][46][]47}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.9.4}Evaluation Dataset Comparative Summary}{48}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.13}{\ignorespaces Comparison of key metrics on the Evaluation Dataset (mean, std, and median across five independent runs; best mean per row in bold)}}{48}{}\protected@file@percent }
+\newlabel{tab:eval_comparison_key_metrics}{{3.13}{48}{}{table.3.13}{}}
+\newlabel{tab:eval_comparison_key_metrics@cref}{{[table][13][3]3.13}{[1][48][]48}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Discussion}{49}{}\protected@file@percent }
+\newlabel{sec:slam-discussion}{{3.5}{49}{}{section.3.5}{}}
+\newlabel{sec:slam-discussion@cref}{{[section][5][3]3.5}{[1][49][]49}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Baseline GLIM Performance Analysis}{49}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1.1}Vertical Drift and Altitude Recovery}{49}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1.2}Planar Failure and the 'Point of No Return'}{49}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Refined GLIM Performance}{50}{}\protected@file@percent }
+\newlabel{subsec:slam-discussion-refined}{{3.5.2}{50}{}{subsection.3.5.2}{}}
+\newlabel{subsec:slam-discussion-refined@cref}{{[subsection][2][3,5]3.5.2}{[1][50][]50}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2.1}Magnitude of Error Reduction}{50}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2.2}Relative Pose Stability}{50}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2.3}Drift Suppression per Meter}{50}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.14}{\ignorespaces Comparative Performance: Baseline vs. Refined GLIM}}{51}{}\protected@file@percent }
+\newlabel{tab:comparison_summary}{{3.14}{51}{}{table.3.14}{}}
+\newlabel{tab:comparison_summary@cref}{{[table][14][3]3.14}{[1][50][]51}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.3}Proposed Method: GNSS-Augmented Localisation}{51}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3.1}GNSS Integration and Global Constraint}{51}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3.2}Dataset-Specific Performance Variability}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3.3}Relative Pose Error and Short-Horizon Consistency}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3.4}GASP Metric Behaviour and Optimisation Dynamics}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.4}Comparative Analysis and Mechanisms of Improvement}{53}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.4.1}Parametrisation vs. Sensor Fusion}{53}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.4.2}Role of Outlier Rejection}{54}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.4.3}Geometric Quality Assessment and Kabsch Stability}{54}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.5}Generalisation to the Evaluation Dataset}{54}{}\protected@file@percent }
+\newlabel{subsec:slam-generalisation}{{3.5.5}{54}{}{subsection.3.5.5}{}}
+\newlabel{subsec:slam-generalisation@cref}{{[subsection][5][3,5]3.5.5}{[1][54][]54}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.5.1}Overall Performance Hierarchy}{55}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.5.2}Baseline GLIM --- Generalisation}{55}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.5.3}Refined GLIM --- Generalisation and Instability}{55}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.5.4}Proposed Method --- Generalisation and Consistency}{56}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.5.5}Summary of Generalisation Assessment}{56}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.6}Implications for Vineyard Robotics}{57}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.6}Summary}{58}{}\protected@file@percent }
+\newlabel{sec:slam-summary}{{3.6}{58}{}{section.3.6}{}}
+\newlabel{sec:slam-summary@cref}{{[section][6][3]3.6}{[1][58][]58}{}{}{}}
 \@setckpt{3-SLAM/SLAM}{
-\setcounter{page}{41}
+\setcounter{page}{59}
 \setcounter{equation}{25}
 \setcounter{enumi}{3}
 \setcounter{enumii}{0}
@@ -268,8 +360,8 @@
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{5}
-\setcounter{table}{10}
+\setcounter{figure}{16}
+\setcounter{table}{14}
 \setcounter{parentequation}{0}
 \setcounter{caption@flags}{2}
 \setcounter{continuedfloat}{0}

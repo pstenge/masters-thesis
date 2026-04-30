@@ -4,7 +4,14 @@ Pruning typically occurs in the dormant season (winter), which introduces a uniq
 
 \subsection{Spatial Alignment Modalities for Pruning Vines}
 \label{subsec:spatial-alignment-modalities}
-While traditional passive vision remains the baseline for high-resolution 3D modelling, it faces significant geometric and environmental hurdles. To address the ill-conditioned configurations of binocular systems -- specifically when linear canes align with the stereo baseline -- Botterill et al. employ a trinocular rig consisting of three 1.3-megapixel cameras arranged in a triangular configuration \cite{botterillRobotSystemPruning2017}. This allows for the dynamic selection of the mathematically optimal camera pair for specific cane segments, a level of geometric robustness that passive binocular systems lack.
+While traditional passive vision remains the baseline for high-resolution 3D modelling, it faces significant geometric and environmental hurdles. To address the ill-conditioned configurations of binocular systems -- specifically when linear canes align with the stereo baseline -- Botterill et al. employ a trinocular rig consisting of three 1.3-megapixel cameras arranged in a triangular configuration, housed within a vine-straddling mobile platform (\cref{fig:botterilRobot}) \cite{botterillRobotSystemPruning2017}. This allows for the dynamic selection of the mathematically optimal camera pair for specific cane segments, a level of geometric robustness that passive binocular systems lack.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.85\linewidth]{2-background/figures/botterilRobot.png}
+    \caption{The vine-straddling mobile platform developed by Botterill et al., shown from outside (left) and inside (right). The enclosed structure shields the workspace from ambient sunlight, while the interior houses the trinocular camera array, high-intensity LED illumination, a six degree-of-freedom robot arm, and an on-board PC for real-time processing \protect\cite{botterillRobotSystemPruning2017}.}
+    \label{fig:botterilRobot}
+\end{figure}
 
 However, even optimised trinocular systems remain vulnerable to outdoor lighting variability. This necessitates a shift toward active sensing, either through illumination or direct range-finding. Systems like ``Bumblebee'' integrate active light stereo cameras to generate dual point clouds, which are then refined via Iterative Closest Point (ICP) algorithms to maintain invariance against ambient shadows \cite{navoneAutonomousRoboticPruning2025, silwalRobustIlluminationInvariantCamera2021}. In contrast, Felicetti et al. bypass the lighting and correspondence problem entirely by utilising downward-facing 3D LiDAR \cite{felicettiTractorMountedGrapevine2025}. By applying a minimalist depth-thresholding algorithm within a specific range ($D_{min}$ to $D_{max}$, typically 250--500 mm), this approach sacrifices the fine-grained topological ``expert system'' understanding provided by Botterill's trinocular rig in favour of raw speed, processing a vine in just 7.3 seconds \cite{felicettiTractorMountedGrapevine2025, botterillRobotSystemPruning2017}.
 

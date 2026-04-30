@@ -13,18 +13,18 @@ The precise-alignment pipeline operates as a one-shot refinement: when the robot
 Two independent sensing modalities are evaluated. The stereo vision pipeline accepts rectified image pairs from one or two ZED stereo cameras, applies the FoundationStereo foundation model~\cite{wenFoundationStereoZeroShot2025}
 to estimate dense disparity maps, and derives coloured 3D point clouds that are segmented to retain vine trunk structure. The LiDAR pipeline operates on dense point clouds accumulated from a Livox solid-state sensor over a commanded interval, removing the ground plane with Patchwork++ and applying a multi-stage filtering sequence to isolate vine wood. Both pipelines share the same ICP registration module and the same pose correction mechanism; they differ only in their preprocessing steps, which are tailored to the noise characteristics and geometric coverage of the respective sensor.
 
-The initial pose estimate consumed by the pipeline is provided by the ENU-aligned SLAM system described in \cref{sec:slam-methodology}. This pose locates the robot within the global coordinate frame and is used both to select candidate viewpoints for 3DGS rendering and to anchor the final corrected transform in the global frame.
+The initial pose estimate consumed by the pipeline is provided by the ENU-aligned SLAM system described in \cref{sec:slam-methodology}. This pose locates the robot within the global coordinate frame and is used both to select candidate viewpoints for 3DGS rendering and to anchor the final corrected transform in the global frame. The complete pipeline dataflow is illustrated in \cref{fig:pa-pipeline-overview}.
 
-% TODO: insert system-level pipeline dataflow figure here
-% \begin{figure}[htbp]
-%   \centering
-%   % \includegraphics[width=\textwidth]{4-precise-alignment/figures/pa-pipeline-overview}
-%   \caption{System-level dataflow of the precise-alignment pipeline. The stereo and LiDAR
-%            preprocessing branches are shown in parallel, converging at the shared ICP
-%            registration stage. The corrected pose is applied to the ROS~2 TF tree via
-%            the mechanism described in \cref{subsec:pa-pose-correction}.}
-%   \label{fig:pa-pipeline-overview}
-% \end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{4-precise-alignment/4-methodology/figures/pa-pipeline-overview}
+  \caption{System-level dataflow of the precise-alignment pipeline. The stereo
+           vision branch (left) and LiDAR branch (right) are shown in parallel;
+           both converge on the shared ICP registration stage. The corrected pose
+           is applied to the ROS~2 TF tree via the mechanism described in
+           \cref{subsec:pa-pose-correction}.}
+  \label{fig:pa-pipeline-overview}
+\end{figure}
 
 % ---------------------------------------------------------------
 \subsection{Reference Model: 3D Gaussian Splatting}
@@ -43,7 +43,7 @@ After rendering, the point cloud is filtered to retain only points within a spec
 \label{subsec:pa-stereo-pipeline}
 % ---------------------------------------------------------------
 
-The stereo vision pipeline converts raw rectified image pairs from the ZED stereo camera into a filtered point cloud of the vine trunk, suitable for registration against the 3DGS target described in \cref{subsec:pa-reference-model}. The pipeline proceeds through three sequential stages: dense depth estimation from the stereo pair, optional fusion of clouds from a front and rear camera pair, and trunk segmentation to remove non-structural points. The output is passed directly to the shared ICP registration stage described in \cref{subsec:pa-icp-registration}.
+The stereo vision pipeline converts raw rectified image pairs from the ZED stereo camera into a filtered point cloud of the vine trunk, suitable for registration against the 3DGS target described in \cref{subsec:pa-reference-model}. The pipeline proceeds through three sequential stages: dense depth estimation from the stereo pair, optional fusion of point clouds from a laterally offset camera pair, and trunk segmentation to remove non-structural points. The output is passed directly to the shared ICP registration stage described in \cref{subsec:pa-icp-registration}.
 
 \subsubsection{Depth Estimation}
 \label{subsubsec:pa-depth-estimation}
@@ -68,21 +68,49 @@ Each pixel for which a valid depth estimate is available is back-projected into 
 \subsubsection{Dual-Camera Point Cloud Fusion}
 \label{subsubsec:pa-dual-camera}
 
-The system supports an optional dual-camera configuration in which a second ZED camera is mounted at the rear of the robot platform, oriented toward the vine from the opposite side. When this configuration is enabled, separate point clouds are produced for the front and rear cameras and merged into a unified observation before trunk segmentation.
+The system supports an optional dual-camera configuration in which a second ZED stereo camera (ZED~2) is mounted alongside the primary camera (ZED~1) on the vine-facing side of the robot platform, approximately 30\,cm laterally offset with no rotation between the two units. Both cameras are directed toward the same face of the vine structure, producing overlapping point clouds from slightly different lateral vantage points.
 
-The extrinsic relationship between the two cameras is expressed as a rigid transform from the rear camera frame to the front camera frame. Given the transform from the front camera to a common reference frame, $T_{\mathrm{front} \to \mathrm{ref}}$, and the corresponding transform from the rear camera, $T_{\mathrm{back} \to \mathrm{ref}}$, the back-to-front transform is computed as:
+This configuration serves two complementary purposes. First, the lateral offset provides marginally different viewing angles of the vine surface, yielding a denser and more representative composite point cloud than either camera alone. Second, the substantial overlap between the two clouds enables consistency-based outlier rejection: depth estimates that appear in one cloud but are absent or inconsistent in the other are likely to represent erroneous stereo returns and can be discarded before registration. This stands in contrast to a configuration in which the two cameras view the vine from opposite or widely separated directions, where each cloud would need to be trusted independently with no means of cross-validation.
+
+The extrinsic relationship between the two cameras is expressed as a rigid transform from the secondary camera frame (ZED~2) to the primary camera frame (ZED~1). Given the transform from the primary camera to a common reference frame, $T_{\mathrm{cam1} \to \mathrm{ref}}$, and the corresponding transform from the secondary camera, $T_{\mathrm{cam2} \to \mathrm{ref}}$, the inter-camera transform is computed as:
 %
 \begin{equation}
-    T_{\mathrm{back} \to \mathrm{front}} = T_{\mathrm{front} \to \mathrm{ref}}^{-1} \cdot T_{\mathrm{back} \to \mathrm{ref}}.
+    T_{\mathrm{cam2} \to \mathrm{cam1}} = T_{\mathrm{cam1} \to \mathrm{ref}}^{-1} \cdot T_{\mathrm{cam2} \to \mathrm{ref}}.
     \label{eq:dual-camera-extrinsic}
 \end{equation}
 %
-The rear camera point cloud is transformed into the front camera frame using $T_{\mathrm{back} \to \mathrm{front}}$, and the two clouds are concatenated. The merged cloud provides greater angular coverage of the vine structure than either camera alone, which is particularly beneficial when vine geometry extends behind the plane of the front camera or when obstruction limits the coverage from a single viewpoint.
+The secondary camera point cloud is transformed into the primary camera frame using $T_{\mathrm{cam2} \to \mathrm{cam1}}$, and the two clouds are concatenated (\cref{fig:pa-dual-camera}). Since both cameras share the same pointing direction, the rotation component of $T_{\mathrm{cam2} \to \mathrm{cam1}}$ is the identity in the nominal configuration, reducing the transform to a pure lateral translation of approximately 30\,cm.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{4-precise-alignment/4-methodology/figures/pa-dual-camera}
+  \caption{Dual-camera point cloud fusion. Both ZED cameras are mounted side by side
+           on the vine-facing side of the robot, approximately 30\,cm apart with no
+           rotation between them, and directed toward the same face of the vine (Part~A).
+           The secondary camera's point cloud is transformed into the primary camera
+           frame using $T_{\mathrm{cam2} \to \mathrm{cam1}}$ (\cref{eq:dual-camera-extrinsic}),
+           and the two clouds are concatenated (Part~B). The high degree of overlap
+           between the clouds enables consistency-based outlier rejection before the
+           merged cloud is passed to trunk segmentation.}
+  \label{fig:pa-dual-camera}
+\end{figure}
 
 \subsubsection{Trunk Segmentation}
 \label{subsubsec:pa-trunk-segmentation}
 
-A custom trunk segmentation pipeline developed for this work is applied to the merged (or single-camera) point cloud to isolate the vine trunk from background vegetation, noise, and ground returns. The pipeline comprises three sequential stages.
+A custom trunk segmentation pipeline developed for this work is applied to the merged (or single-camera) point cloud to isolate the vine trunk from background vegetation, noise, and ground returns; the three sequential stages are summarised in \cref{fig:pa-trunk-segmentation}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\linewidth]{4-precise-alignment/4-methodology/figures/pa-trunk-segmentation}
+  \caption{Stereo trunk segmentation pipeline. The merged point cloud passes through
+           three sequential stages --- morphological closing, DBSCAN clustering, and
+           voxel density filtering --- to isolate the vine trunk from background
+           vegetation, ground returns, and noise.}
+  \label{fig:pa-trunk-segmentation}
+\end{figure}
+
+The pipeline comprises three sequential stages.
 
 \textbf{Morphological closing.} A voxel-based morphological closing operation fills gaps in the trunk surface caused by specular reflections or missing depth estimates. The input cloud is voxelised at a resolution of 0.02\,m, and a spherical closing kernel of radius 0.005\,m is applied.
 % TODO: review parameter justification: voxel size 0.02 m and closing radius 0.005 m were selected to bridge typical surface gaps in stereo depth reconstructions of vine bark; review against observed gap statistics
@@ -154,7 +182,18 @@ The processing range is bounded to 0.1--3.0\,m to discard returns either too clo
 \subsubsection{Point Cloud Processing}
 \label{subsubsec:pa-lidar-processing}
 
-Following ground removal, the non-ground point cloud is passed through a custom multi-stage filtering pipeline developed for this work. The five sequential stages are described below.
+Following ground removal, the non-ground point cloud is passed through a custom multi-stage filtering pipeline developed for this work; the five sequential stages are illustrated in \cref{fig:pa-lidar-filtering}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\linewidth]{4-precise-alignment/4-methodology/figures/pa-lidar-filtering}
+  \caption{LiDAR point cloud filtering pipeline. Five sequential stages process the
+           non-ground Livox cloud to isolate vine wood structure prior to ICP
+           registration.}
+  \label{fig:pa-lidar-filtering}
+\end{figure}
+
+The five sequential stages are described below.
 
 \textbf{Statistical outlier removal.} Each point is evaluated against its $k$-nearest neighbourhood; points whose mean neighbour distance exceeds the population mean by more than $\lambda$ standard deviations are classified as outliers and removed. With $k = 16$ and $\lambda = 2.0$,
 % TODO: review parameter justification: these values provide conservative outlier rejection without eliminating genuine surface points; review against observed noise characteristics
@@ -223,7 +262,18 @@ Both the stereo and LiDAR preprocessing branches deliver a filtered source point
 % TODO: describe the candidate viewpoint sampling strategy in detail (OQ1): how are the perturbations defined --- in translation, rotation, or both? What is the sampling distribution (grid, random, etc.)?
 Each candidate represents a plausible refined pose from which the 3DGS model is rendered for registration.
 
-\textbf{(c) Reference cloud rendering.} The 3DGS model is rendered at each candidate viewpoint as described in \cref{subsec:pa-reference-model}, yielding $N$ target point clouds.
+\textbf{(c) Reference cloud rendering.} The 3DGS model is rendered at each candidate viewpoint as described in \cref{subsec:pa-reference-model}, yielding $N$ target point clouds. The candidate sampling and selection procedure is illustrated in \cref{fig:pa-icp-candidates}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{4-precise-alignment/4-methodology/figures/pa-icp-candidates}
+  \caption{ICP candidate viewpoint sampling and selection. $N = 5$ candidate poses are
+           sampled in the neighbourhood of the initial SLAM pose; the 3DGS model is
+           rendered at each candidate to produce a reference point cloud. ICP is run
+           independently for each candidate, and the result with the highest fitness
+           score and lowest RMSE is selected as the final alignment.}
+  \label{fig:pa-icp-candidates}
+\end{figure}
 
 \textbf{(d) Downsampling.} Both the source cloud and each target cloud are independently downsampled using a voxel grid filter with voxel side length $v = 0.0075$\,m. This step reduces the computational cost of each ICP iteration while retaining sufficient geometric detail for convergence.
 
@@ -297,17 +347,19 @@ A custom TF correction mechanism developed for this work inserts a correction fr
     \label{eq:tf-correction}
 \end{equation}
 %
-where $T_{\mathrm{base} \to \mathrm{sensor}}$ is the fixed extrinsic transform from the base link to the sensor frame. The resulting base-frame correction is then inserted into the appropriate location in the transform chain and published as a static transform.
+where $T_{\mathrm{base} \to \mathrm{sensor}}$ is the fixed extrinsic transform from the base link to the sensor frame. The resulting base-frame correction is then inserted into the appropriate location in the transform chain and published as a static transform, as illustrated in \cref{fig:pa-tf-correction}.
 
-% TODO: insert TF tree diagram showing the original and corrected transform chains
-% \begin{figure}[htbp]
-%   \centering
-%   % \includegraphics[width=0.8\textwidth]{4-precise-alignment/figures/pa-tf-correction}
-%   \caption{ROS~2 TF tree before (left) and after (right) insertion of the pose correction
-%            frame. The correction frame is inserted between \texttt{odom} and the downstream
-%            planning frames, preserving the original SLAM transform chain.}
-%   \label{fig:pa-tf-correction}
-% \end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{4-precise-alignment/4-methodology/figures/pa-tf-correction}
+  \caption{ROS~2 TF transform tree before (left) and after (right) insertion of the pose
+           correction frame. The correction is introduced between the SLAM-published
+           \texttt{odom} frame and downstream planning frames without modifying the SLAM
+           system's own publications. $T_{\mathrm{correction,base}}$ is derived from the
+           ICP result via the extrinsic $T_{\mathrm{base} \to \mathrm{sensor}}$
+           (\cref{eq:tf-correction}).}
+  \label{fig:pa-tf-correction}
+\end{figure}
 
 Because the correction is published as a static transform, it does not require a continuous update loop and is non-disruptive to the SLAM publishers. The correction mechanism supports both automatic triggering --- applied immediately upon successful ICP convergence --- and manual triggering, in which the operator confirms before the correction is broadcast to the transform tree. The appropriate mode is selected at launch via a configuration parameter.
 
@@ -316,7 +368,19 @@ Because the correction is published as a static transform, it does not require a
 \label{subsec:pa-execution-model}
 % ---------------------------------------------------------------
 
-Each localisation request is encapsulated as an ordered sequence of command objects following the command design pattern. Each processing stage --- depth estimation, point cloud preprocessing, 3DGS rendering, ICP registration, and pose correction --- is implemented as an \texttt{AsyncCommand} with a well-defined input contract and output contract. Commands are submitted to an asynchronous task queue, which executes them sequentially within a dedicated worker thread pool. This design decouples the processing pipeline from the ROS~2 executor event loop: computationally intensive operations such as FoundationStereo inference and Open3D ICP run in non-blocking threads, avoiding latency spikes in the ROS~2 message-handling callbacks.
+Each localisation request is encapsulated as an ordered sequence of command objects following the command design pattern. Each processing stage --- depth estimation, point cloud preprocessing, 3DGS rendering, ICP registration, and pose correction --- is implemented as an \texttt{AsyncCommand} with a well-defined input contract and output contract. Commands are submitted to an asynchronous task queue, which executes them sequentially within a dedicated worker thread pool. This design decouples the processing pipeline from the ROS~2 executor event loop: computationally intensive operations such as FoundationStereo inference and Open3D ICP run in non-blocking threads, avoiding latency spikes in the ROS~2 message-handling callbacks. The execution architecture is illustrated in \cref{fig:pa-execution-model}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{4-precise-alignment/4-methodology/figures/pa-execution-model}
+  \caption{Pipeline execution model. Each localisation request is dispatched as a
+           sequence of \texttt{AsyncCommand} objects to an asynchronous task queue,
+           which executes them in a dedicated worker thread pool. GPU-resident stages
+           (FoundationStereo inference and 3DGS rendering) are protected by a semaphore
+           concurrency guard. Incoming requests are queued independently, ensuring each
+           observation is processed in full.}
+  \label{fig:pa-execution-model}
+\end{figure}
 
 GPU-resident operations --- specifically FoundationStereo inference and 3DGS rendering --- are governed by a semaphore-based concurrency guard that prevents simultaneous kernel execution from exceeding available GPU memory. When a new localisation request arrives while a prior job is still processing, the new job is queued independently and executes after the in-progress job completes, ensuring that each sensor observation is processed in full without resource contention. This execution model supports both the stereo and LiDAR pipelines without modification, as the modality-specific processing difference is captured entirely within the command sequence submitted for each observation type.
 

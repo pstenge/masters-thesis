@@ -196,6 +196,11 @@
   {{IROS}} '91:{{IEEE}}/{{RSJ International Workshop}} on {{Intelligent
   Robots}} and {{Systems}} '91}, November, pp.\,1442--1447 vol.3.
 
+\bibitem[{Liao\ {\citeetal}}~{2024}]{liaoRealtimeDegeneracySensing2024}
+{\sc Liao, Z., Zhang, X., Zhang, T., Li, Z., Zheng, Z., Wen, Z. and Li, Y.}
+  (2024), `A {{Real-time Degeneracy Sensing}} and {{Compensation Method}} for
+  {{Enhanced LiDAR SLAM}}', December.
+
 \bibitem[{Llorens\ {\citeetal}}~{2011}]{llorensGeoreferencedLiDAR3D2011}
 {\sc Llorens, J., Gil, E., Llop, J. and Queralt{\'o}, M.} (2011),
   `Georeferenced {{LiDAR 3D Vine Plantation Map Generation}}', {\it Sensors},
