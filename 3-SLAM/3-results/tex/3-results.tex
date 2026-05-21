@@ -396,7 +396,7 @@ Percent of GNSS points used & 0.69 & 0.72 & 0.65 & 0.78 & 0.75 \\ \bottomrule
 
 The following subsections report performance on the held-out Evaluation Dataset as described in \cref{subsec:slam-experimental-setup}. Each configuration was evaluated across five independent runs; each table cell reports the aggregate statistic over those runs (mean, standard deviation, median, minimum, and maximum). This structure differs from the parameterisation dataset tables above, which report a single run per dataset.
 
-\subsubsection{Baseline GLIM --- Evaluation Dataset}
+\subsubsection{Baseline GLIM: Evaluation Dataset}
 
 \cref{tab:eval_baseline_performance} reports the baseline GLIM performance on the Evaluation Dataset. The mean error percentage per metre is 1.9612\% (std 0.4519\%), which falls within the range observed across the five parameterisation datasets (1.253\%--7.361\%). The mean RMSE 3D is 17.4799\,m and the mean ATE is 13.3863\,m, with the trajectory length averaging approximately 682\,m across the five runs.
 
@@ -426,7 +426,7 @@ RPE\ 10m\ translation\ max\  & 1.8315 & 1.2155 & 1.3836 & 1.0030 & 3.9561 \\ \bo
 \end{tabularx}
 \end{table}
 
-\subsubsection{Refined GLIM --- Evaluation Dataset}
+\subsubsection{Refined GLIM: Evaluation Dataset}
 
 \cref{tab:eval_refined_performance} reports the refined GLIM performance on the Evaluation Dataset. The mean error percentage per metre is 0.6215\% (std 0.1089\%), consistent with the parameterisation dataset range of 0.608\%--3.615\%. Yet the maximum 3D positional error exhibits a mean of 39.5938\,m with a standard deviation of 60.9811\,m and a maximum of 148.6057\,m, against a median of only 13.0861\,m. This large discrepancy between mean and median indicates that at least one run experienced a catastrophic failure, with the median providing a more representative estimate of typical performance. The same instability is evident in the RPE metrics, where the mean and standard deviation are far in excess of the corresponding median values.
 
@@ -456,7 +456,7 @@ RPE\ 10m\ translation\ max\  & 30.3526 & 66.1113 & 0.8106  & 0.5282 & 148.6158 \
 \end{tabularx}
 \end{table}
 
-\subsubsection{GLIM-GNSS --- Evaluation Dataset}
+\subsubsection{GLIM-GNSS: Evaluation Dataset}
 
 \cref{tab:eval_proposed_performance} reports the GLIM-GNSS system's performance on the Evaluation Dataset. The mean error percentage per metre is 0.0166\% with a standard deviation of 0.0004\%, indicating highly consistent performance across all five runs. The mean RMSE 3D is 0.1459\,m and the mean ATE is 0.1135\,m. The GASP metric has a mean of 0.0508 (std 0.0081), which is consistent with the range observed on the parameterisation datasets (0.0274--0.0679).
 
@@ -524,4 +524,4 @@ First, the distributions are entirely non-overlapping on the primary metric (err
 
 Second, applying a $t$-based 95\% confidence interval to the GLIM-GNSS system's error percentage per metre yields $0.0166 \pm t_{0.025,4} \cdot 0.0004/\sqrt{5} = [0.0161\%,\; 0.0171\%]$. The corresponding interval for the refined GLIM is $[0.4864\%,\; 0.7566\%]$ and for the baseline $[1.4003\%,\; 2.5221\%]$. These intervals do not overlap, confirming that the observed differences exceed what could be attributed to run-to-run variability.
 
-Third, the effect size between GLIM-GNSS and the refined GLIM, measured by Cohen's $d$ using the pooled standard deviation, exceeds $d = 7.8$ --- well beyond the threshold conventionally considered ``large'' ($d = 0.8$). The practical magnitude of the improvement (approximately one order of magnitude relative to the refined GLIM, and two orders relative to the untuned baseline) is therefore unambiguous regardless of the limited sample size.
+Third, the effect size between GLIM-GNSS and the refined GLIM, measured by Cohen's $d$ using the pooled standard deviation, exceeds $d = 7.8$, well beyond the threshold conventionally considered ``large'' ($d = 0.8$). The practical magnitude of the improvement (approximately one order of magnitude relative to the refined GLIM, and two orders relative to the untuned baseline) is therefore unambiguous regardless of the limited sample size.
