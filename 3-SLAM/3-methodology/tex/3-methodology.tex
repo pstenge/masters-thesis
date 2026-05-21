@@ -225,7 +225,7 @@ We define the SLAM system as a complex function $f(X,\theta)$, where $X$ represe
 where $\mathcal{J}$ is a robust objective function representing the consensus performance across $K$ distinct motion profiles.
 
 \subsubsection{Sampling via Latin Hypercube Strategy}
-To explore the initial parameter manifold, we utilise Latin Hypercube Sampling (LHS) as an alternative to traditional grid search or independent Monte Carlo (MC) sampling \cite{deutschLatinHypercubeSampling2012}. LHS is technically categorised as a stratified sampling design \cite{chrismanLatinHypercubeSampling2014}. For a sample size $N$ in $d$ dimensions, the range of each parameter $\theta_j$ is partitioned into $N$ equiprobable intervals for $j=1, \dots, d$ \cite{chrismanLatinHypercubeSampling2014}. The mathematical constraint --- ensuring exactly one sample per row and column of the grid --- minimises the ``clustering'' phenomenon common in pure random sampling \cite{deutschLatinHypercubeSampling2012}. This stratification ensures that the marginal distribution of each parameter is sampled uniformly, achieving a lower variance than independent Monte Carlo sampling for the same sample size \cite{packhamLatinHypercubeSampling2008}.
+To explore the initial parameter manifold, we utilise Latin Hypercube Sampling (LHS) as an alternative to traditional grid search or independent Monte Carlo (MC) sampling \cite{deutschLatinHypercubeSampling2012}. LHS is technically categorised as a stratified sampling design \cite{chrismanLatinHypercubeSampling2014}. For a sample size $N$ in $d$ dimensions, the range of each parameter $\theta_j$ is partitioned into $N$ equiprobable intervals for $j=1, \dots, d$ \cite{chrismanLatinHypercubeSampling2014}. The mathematical constraint (ensuring exactly one sample per row and column of the grid) minimises the ``clustering'' phenomenon common in pure random sampling \cite{deutschLatinHypercubeSampling2012}. This stratification ensures that the marginal distribution of each parameter is sampled uniformly, achieving a lower variance than independent Monte Carlo sampling for the same sample size \cite{packhamLatinHypercubeSampling2008}.
 
 \paragraph{Implementation and Normalisation}
 Parameter vectors are first normalised to the unit hypercube $[0, 1]^d$ \cite{deutschLatinHypercubeSampling2012}. To ensure reproducibility, the pseudo-random permutations used to construct the hypercube are seeded deterministically. The samples are subsequently scaled to physical ranges using:
@@ -261,7 +261,7 @@ At the conclusion of each phase $i$, the top-performing configurations are used 
 \label{eq:quantile_update}
 \Omega_{j, i+1} = [P_{10}(\theta_{j, \text{top}}), P_{90}(\theta_{j, \text{top}})].
 \end{equation}
-This quantile-based reduction is superior to using absolute Min/Max values because it is resilient to ``lucky'' outliers --- configurations that may perform well due to noise interactions rather than parameter stability.
+This quantile-based reduction is superior to using absolute Min/Max values because it is resilient to ``lucky'' outliers, specifically configurations that may perform well due to noise interactions rather than parameter stability.
 
 \paragraph{Refinement Phase Schedule}
 The optimisation is structured into four phases, increasing the selection pressure (lower survival rate) as the search space contracts, as detailed in \cref{tab:phases}:
@@ -327,11 +327,11 @@ The following subsection describes the datasets and evaluation protocol used to 
 Five datasets were used to parameterise the two optimised configurations — the refined GLIM algorithm and GLIM-GNSS. The datasets span two distinct agricultural environments: one apple orchard (Dataset~1) and four vineyard traversals (Datasets~0, 2, 3, and~4), the latter all collected at the same farm. This environmental diversity was deliberate, as including a structurally different environment reduces the risk that the parameterised configurations are over-specialised to a single terrain type.
 
 \begin{itemize}
-  \item \textbf{Dataset~0 --- Vineyard.} A forward-and-return traversal. The altitude increases gradually on the forward pass and decreases correspondingly on the return.
-  \item \textbf{Dataset~1 --- Apple orchard.} A forward-and-return traversal of an apple orchard. The altitude profile is more complex than the vineyard datasets, featuring substantially more localised elevation dips and bumps throughout, making this dataset the most challenging for vertical estimation.
-  \item \textbf{Dataset~2 --- Vineyard.} A single-direction traversal with no return pass, starting from the opposite end of the vineyard row relative to all other vineyard datasets. The altitude decreases gradually over the course of the traversal — the inverse of the profile observed in Datasets~0, 3, and~4.
-  \item \textbf{Dataset~3 --- Vineyard.} A forward-and-return traversal at the same farm as Datasets~0, 2, and~4. The altitude profile follows the same gradual increase--decrease pattern as Datasets~0 and~4.
-  \item \textbf{Dataset~4 --- Vineyard.} A forward-and-return traversal at the same farm as Datasets~0, 2, and~3, with the same altitude profile as Datasets~0 and~3.
+  \item \textbf{Dataset~0: Vineyard.} A forward-and-return traversal. The altitude increases gradually on the forward pass and decreases correspondingly on the return.
+  \item \textbf{Dataset~1: Apple orchard.} A forward-and-return traversal of an apple orchard. The altitude profile is more complex than the vineyard datasets, featuring substantially more localised elevation dips and bumps throughout, making this dataset the most challenging for vertical estimation.
+  \item \textbf{Dataset~2: Vineyard.} A single-direction traversal with no return pass, starting from the opposite end of the vineyard row relative to all other vineyard datasets. The altitude decreases gradually over the course of the traversal — the inverse of the profile observed in Datasets~0, 3, and~4.
+  \item \textbf{Dataset~3: Vineyard.} A forward-and-return traversal at the same farm as Datasets~0, 2, and~4. The altitude profile follows the same gradual increase--decrease pattern as Datasets~0 and~4.
+  \item \textbf{Dataset~4: Vineyard.} A forward-and-return traversal at the same farm as Datasets~0, 2, and~3, with the same altitude profile as Datasets~0 and~3.
 \end{itemize}
 
 \subsubsection{Evaluation Dataset}

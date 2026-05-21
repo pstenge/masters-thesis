@@ -1,0 +1,42 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.synctex(busy)
+*.run.xml
+*.bcf
+*.nav
+*.snm
+*.vrb
+*.idx
+*.ilg
+*.ind
+*.glo
+*.gls
+*.glg
+*.ist
+
+# Compiled PDF (uncomment if you want to track it)
+# thesis.pdf
+
+# Editor/OS junk
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build logs from scripts
+build_*.log
+
+# Raw results data
+4-precise-alignment/4-results/results/
