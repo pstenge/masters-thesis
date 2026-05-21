@@ -11,7 +11,7 @@ The research pursues the following sub-objectives:
 
     \item Design a precise-alignment pipeline that refines the SLAM pose to sub-centimetre accuracy by registering live sensor data against a 3D Gaussian Splatting reference model using point cloud registration.
 
-    \item Evaluate two sensing modalities --- stereo vision and LiDAR --- for the precise-alignment stage, comparing their registration accuracy and failure modes under vineyard field conditions.
+    \item Evaluate two sensing modalities (stereo vision and LiDAR) for the precise-alignment stage, comparing their registration accuracy and failure modes under vineyard field conditions.
 
     \item Integrate both localisation stages into a hierarchical architecture that provides pose estimates suitable for downstream robotic manipulation, such that the corrected pose feeds directly into the pruning arm's path planner.
 
@@ -23,13 +23,9 @@ The research pursues the following sub-objectives:
 This thesis makes the following contributions:
 
 \begin{enumerate}
-    % TODO: Fill in contributions once results and discussion chapters are complete.
-    % Each item should state an accomplished outcome with quantitative evidence where possible.
-    % Suggested structure:
-    %   1. A multi-sensor SLAM system for [context], achieving [metric].
-    %   2. A precise-alignment pipeline that [does X], demonstrating [Y].
-    %   3. An experimental evaluation showing [Z].
-    \item \textbf{TODO:} Contribution 1 --- SLAM system contribution and headline result.
-    \item \textbf{TODO:} Contribution 2 --- Precise-alignment pipeline contribution and headline result.
-    \item \textbf{TODO:} Contribution 3 --- Experimental evaluation or additional contribution.
+    \item A LiDAR-inertial SLAM system augmented with sparse GNSS factor injection (GLIM-GNSS) that achieves 71--174\,mm absolute trajectory error across five vineyard datasets while utilising less than 1\% of available GNSS measurements, demonstrating that sub-decimetre localisation is attainable in repetitive row-crop environments without continuous RTK coverage.
+
+    \item A precise-alignment pipeline that registers live point cloud data against a pre-built 3D Gaussian Splatting reference model via Generalised Iterative Closest Point, achieving centimetre-scale pose refinement (15.51\,mm mean inlier RMSE for stereo; 33.25\,mm median inlier RMSE for LiDAR) from a coarse SLAM initialisation.
+
+    \item A comparative evaluation of LiDAR and stereo vision modalities for vine-scale registration, characterising their convergence--accuracy trade-off: LiDAR achieves 100\% condition-level convergence while stereo produces lower RMSE (78\% convergence), with both modalities confirming that the SLAM-derived pose lies within the registration algorithm's convergence basin.
 \end{enumerate}

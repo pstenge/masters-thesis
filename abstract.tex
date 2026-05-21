@@ -1,4 +1,10 @@
 \chapter*{Abstract}
 
-This thesis is bloody brilliant.
+Autonomous vineyard pruning demands millimetre-level localisation to guide a robotic arm to individual canes, yet GNSS-degraded row-crop corridors with repetitive geometric structure present fundamental challenges for conventional pose estimation. Even well-tuned LiDAR-inertial odometry accumulates decimetres of drift in such environments, an order of magnitude too coarse for selective cane removal. The operational workflow further complicates the problem: a high-fidelity 3D Gaussian Splatting model is constructed offline from a prior vineyard visit, and the robot must re-localise against this pre-built reference on subsequent passes. This offline-model re-alignment scenario remains under-addressed by existing vineyard pruning approaches, which predominantly construct reference representations in real-time.
+
+This thesis presents a two-stage hierarchical localisation architecture for this domain. The first stage employs a LiDAR-inertial SLAM system augmented with sparse GNSS factor injection (GLIM-GNSS) to produce a sub-decimetre global pose estimate. The second stage refines this estimate through Generalised Iterative Closest Point registration of live sensor data against the pre-built 3D Gaussian Splatting model. Both LiDAR and stereo vision are evaluated as sensing modalities for the refinement stage across a factorial experimental design varying sensor-to-vine distance and approach angle.
+
+The SLAM system achieves absolute trajectory errors of 71--174\,mm across five vineyard datasets (0.013--0.050\% error per metre). For precise alignment, the LiDAR pipeline achieves 100\% condition-level convergence with a median inlier RMSE of 33.25\,mm, while the stereo pipeline converges in seven of nine conditions (78\%) with a mean inlier RMSE of 15.51\,mm, approaching 12--13\,mm at 80\,cm operating distance. The applied ICP corrections (47--165\,mm) fall within the SLAM system's error bounds, confirming that the coarse pose reliably places the robot within the registration algorithm's convergence basin.
+
+These results validate the two-stage design premise for vine-scale localisation: LiDAR provides superior convergence reliability while stereo achieves lower registration error, informing modality selection for field deployment of pruning robots.
 
