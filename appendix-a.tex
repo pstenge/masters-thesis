@@ -7,9 +7,7 @@ This appendix presents additional figures that support the analysis in the main 
 \section{SLAM Parameter Optimisation}
 \label{app:slam-optimisation-figures}
 
-\cref{fig:comparison_dist} shows the distribution of per-iteration errors across the four optimisation stages. \cref{fig:baseline_error_dist} plots the error percentage per metre for the baseline GLIM tuning, and \cref{fig:proposed_error_dist} plots the GASP metric for GLIM-GNSS tuning. Both plots use a logarithmic horizontal axis.
-
-\begin{figure}[htbp]
+\begin{figure}[H]
      \centering
      \begin{subfigure}[b]{0.8\textwidth}
          \centering
@@ -31,9 +29,7 @@ This appendix presents additional figures that support the analysis in the main 
      \label{fig:comparison_dist}
 \end{figure}
 
-\cref{fig:comparison_progression} plots the best consensus error at the end of each optimisation stage. \cref{fig:baseline_progression} tracks the error percentage for the baseline GLIM, and \cref{fig:proposed_progression} tracks the GASP metric for GLIM-GNSS.
-
-\begin{figure}[htbp]
+\begin{figure}[H]
      \centering
      \begin{subfigure}[b]{0.8\textwidth}
          \centering
@@ -55,13 +51,12 @@ This appendix presents additional figures that support the analysis in the main 
      \label{fig:comparison_progression}
 \end{figure}
 
+\clearpage
 % ===== SLAM: Trajectory Grids =====
 \section{SLAM Trajectory Visualisations}
 \label{app:slam-trajectory-figures}
 
-\cref{fig:large_grid_xy} presents the planar ($x$--$y$) trajectories for each dataset. The left column shows the refined GLIM output and the right column shows GLIM-GNSS output, both plotted against the RTK~GNSS ground truth.
-
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     % --- ROW 1 ---
     \begin{subfigure}[b]{0.48\textwidth}
@@ -137,13 +132,13 @@ This appendix presents additional figures that support the analysis in the main 
         \caption{GLIM-GNSS | Dataset 4}
     \end{subfigure}
 
-    \caption{Trajectories in XY plane from baseline GLIM and GLIM-GNSS.}
+    \caption{Trajectories in XY plane from baseline GLIM and GLIM-GNSS. Left column: refined GLIM; right column: GLIM-GNSS; both compared against RTK~GNSS ground truth.}
     \label{fig:large_grid_xy}
 \end{figure}
 
-\cref{fig:large_grid_z} presents the altitude ($z$-axis) trajectories for each dataset in the same layout, with the refined GLIM estimates on the left and GLIM-GNSS estimates on the right, both compared against RTK~GNSS ground truth.
+\clearpage
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     % --- ROW 1 ---
     \begin{subfigure}[b]{0.48\textwidth}
@@ -219,22 +214,23 @@ This appendix presents additional figures that support the analysis in the main 
         \caption{GLIM-GNSS | Dataset 4}
     \end{subfigure}
 
-    \caption{Trajectories in Z plane from baseline GLIM and GLIM-GNSS.}
+    \caption{Trajectories in Z plane from baseline GLIM and GLIM-GNSS. Left column: refined GLIM; right column: GLIM-GNSS; both compared against RTK~GNSS ground truth.}
     \label{fig:large_grid_z}
 \end{figure}
 
+\clearpage
 % ===== Precise Alignment: LiDAR Heatmap =====
 \section{Precise Alignment Supplementary Figures}
 \label{app:pa-supplementary-figures}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=\linewidth]{4-precise-alignment/4-results/figures/lidar_icp_heatmap}
   \caption{ICP fitness heatmap across all 315 LiDAR hypotheses. Each row corresponds to one condition (ordered by distance); each column to one perturbation hypothesis. Colour intensity indicates fitness score. The D110A0 row was excluded from analysis as it exceeded the stereo pipeline's depth clipping threshold.}
   \label{fig:pa-lidar-heatmap}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \begin{subfigure}[b]{0.32\linewidth}
     \centering
