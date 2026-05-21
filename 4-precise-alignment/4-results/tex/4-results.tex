@@ -283,14 +283,7 @@ For all nine conditions, preprocessing requires 0.61--0.82\,s, per-hypothesis IC
 \label{subsec:pa-results-lidar-visual}
 % ---------------------------------------------------------------------------
 
-\Cref{fig:pa-lidar-heatmap} presents a heatmap of ICP fitness across all 315 hypotheses (9 conditions $\times$ 35 perturbations), providing an overview of registration success across the experimental matrix.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{4-precise-alignment/4-results/figures/lidar_icp_heatmap}
-  \caption{ICP fitness heatmap across all hypotheses. Each row corresponds to one condition (ordered by distance); each column to one perturbation hypothesis. Colour intensity indicates fitness score. The D110A0 row visible in this figure was excluded from analysis as it exceeded the stereo pipeline's depth clipping threshold.}
-  \label{fig:pa-lidar-heatmap}
-\end{figure}
+A heatmap of ICP fitness across all 315 hypotheses is presented in \cref{app:pa-supplementary-figures} (\cref{fig:pa-lidar-heatmap}).
 
 \Cref{fig:pa-lidar-alignment-examples} presents representative alignment visualisations for selected conditions spanning the distance range.
 
@@ -531,58 +524,7 @@ Total pipeline latency ranges from 11.82\,s (D80A$-$15) to 20.28\,s (D80A0), wit
   \label{fig:pa-stereo-icp-comparison}
 \end{figure}
 
-\Cref{fig:pa-stereo-converged-overlay} presents the final alignment for all seven converging conditions.
-
-\begin{figure}[htbp]
-  \centering
-  \begin{subfigure}[b]{0.32\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{4-precise-alignment/4-results/figures/stereo_D40Am15_5b_icp_final_side}
-    \caption{D40A$-$15}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.32\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{4-precise-alignment/4-results/figures/stereo_D40A0_5b_icp_final_side}
-    \caption{D40A0}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.32\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{4-precise-alignment/4-results/figures/stereo_D60Am15_5b_icp_final_side}
-    \caption{D60A$-$15}
-  \end{subfigure}
-
-  \vspace{0.5em}
-
-  \begin{subfigure}[b]{0.32\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{4-precise-alignment/4-results/figures/stereo_D60A0_5b_icp_final_side}
-    \caption{D60A0}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.32\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{4-precise-alignment/4-results/figures/stereo_D60Ap15_5b_icp_final_side}
-    \caption{D60A$+$15}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.32\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{4-precise-alignment/4-results/figures/stereo_D80A0_5b_icp_final_side}
-    \caption{D80A0}
-  \end{subfigure}
-
-  \vspace{0.5em}
-
-  \begin{subfigure}[b]{0.32\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{4-precise-alignment/4-results/figures/stereo_D80Ap15_5b_icp_final_side}
-    \caption{D80A$+$15}
-  \end{subfigure}
-  \caption{Final stereo ICP alignment (vine-face view) for all seven converging conditions. Green: 3DGS reference cloud; red: registered stereo source cloud.}
-  \label{fig:pa-stereo-converged-overlay}
-\end{figure}
+\Cref{fig:pa-stereo-converged-overlay} in \cref{app:pa-supplementary-figures} presents the final alignment for all seven converging conditions.
 
 % ---------------------------------------------------------------------------
 \subsection{Cross-Modal Comparison}
