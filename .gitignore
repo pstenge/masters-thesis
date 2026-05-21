@@ -37,3 +37,6 @@ desktop.ini
 
 # Build logs from scripts
 build_*.log
+
+# Raw results data
+4-precise-alignment/4-results/results/
