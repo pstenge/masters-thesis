@@ -42,7 +42,7 @@ Relative pose estimation between sensor frames requires a method for aligning ob
 %
 by alternating between assigning each source point to its nearest neighbour in the target cloud and solving for the transformation via singular value decomposition. Monotonic convergence of the cost function is guaranteed; however, the solution is sensitive to initial conditions and requires sufficient geometric overlap between the two clouds. Subsequent variants, notably point-to-plane error metrics~\cite{chenObjectModelingRegistration1991} and the probabilistic Generalised-ICP formulation~\cite{segalGeneralizedICP2009}, improved convergence speed and robustness by exploiting locally planar surface structure present in the scene.
 
-ICP is the direct registration engine used in the precise-alignment pipeline described in \cref{chap:precise-alignment}, where a real-time point cloud of a physical vine is aligned against the SfM-derived reference geometry extracted from a 3D Gaussian Splatting model. The sensitivity of ICP to initialisation and partial overlap is a central practical constraint addressed in that chapter.
+ICP is the direct registration engine used in the precise-alignment pipeline described in \cref{chap:precise-alignment}, where a real-time point cloud of a physical vine is aligned against the Structure from Motion (SfM)-derived reference geometry extracted from a 3D Gaussian Splatting model. The sensitivity of ICP to initialisation and partial overlap is a central practical constraint addressed in that chapter.
 
 \subsection{Pose Graph Optimisation and Global Consistency}
 \label{subsec:pose-graph-optimisation}

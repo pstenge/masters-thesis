@@ -3,11 +3,11 @@
 
 The following subsections describe the methods developed and integrated to achieve globally consistent, ENU-referenced localisation in vineyard environments. These contributions build on the GLIM framework surveyed in the preceding section and address the key challenges of reference frame alignment, GNSS outlier rejection, and parameter optimisation. The resulting system is hereafter referred to as \textbf{GLIM-GNSS}, reflecting its core architecture: a LiDAR-inertial SLAM backbone (GLIM) augmented with sparse GNSS factor injection for absolute drift correction.
 
-To begin this investigation, we implemented GLIM \cite{koideGLIM3DRangeInertial2024}. We chose GLIM as it had infrastructure in place to add extension modules to incorporate new sensors and capabilities. GLIM provides a global callback slot mechanism that allows access to the internal states of the mapping process and insertion of additional constraints into the factor graph. GLIM also eliminated sensor-specific processes, meaning it can be applied to a wide variety of range sensors such as spinning-type LiDAR, non-repetitive scan LiDAR, solid-state LiDAR and even RGB-D cameras.
+To begin this investigation, GLIM \cite{koideGLIM3DRangeInertial2024} was selected as the base framework. GLIM was chosen because it provides infrastructure to add extension modules incorporating new sensors and capabilities. GLIM provides a global callback slot mechanism that allows access to the internal states of the mapping process and insertion of additional constraints into the factor graph. GLIM also eliminated sensor-specific processes, meaning it can be applied to a wide variety of range sensors such as spinning-type LiDAR, non-repetitive scan LiDAR, solid-state LiDAR and even RGB-D cameras.
 
-GLIM state estimation is created in the local odometry frame, whose origin is determined by wherever the robot begins mapping. Without an absolute reference, each run produces a distinct, arbitrarily-oriented map frame, making trajectory estimates across runs mutually incomparable. For our use in the wider research project, we required state estimation in a consistent local ENU reference frame surveyed at each farm, so that all localisation data — regardless of when or where a run begins — can be expressed in the same coordinate system and compared directly. Thus, we needed a procedure to align the GLIM map frame with the existing local ENU reference frame.
+GLIM state estimation is created in the local odometry frame, whose origin is determined by wherever the robot begins mapping. Without an absolute reference, each run produces a distinct, arbitrarily-oriented map frame, making trajectory estimates across runs mutually incomparable. For use in the wider research project, state estimation in a consistent local ENU reference frame surveyed at each farm was required, so that all localisation data — regardless of when or where a run begins — can be expressed in the same coordinate system and compared directly. This necessitated a procedure to align the GLIM map frame with the existing local ENU reference frame.
 
-Firstly, we time synchronise the on-board GPS unit with the LiDAR and with the system clock. This allows us to associate corresponding GNSS points with the submaps or keyframes of LiDAR frames that GLIM registers, as illustrated in \cref{fig:time-matching}. We aggregate a set of corresponding GNSS coordinates with keyframe coordinates, and then implement the Kabsch algorithm \cite{kabschSolutionBestRotation1976} to find the relative transform between the two point sets by minimising the root-mean-square deviation between the two point sets.
+Firstly, the on-board GPS unit is time-synchronised with the LiDAR and with the system clock. This allows corresponding GNSS points to be associated with the submaps or keyframes of LiDAR frames that GLIM registers, as illustrated in \cref{fig:time-matching}. A set of corresponding GNSS coordinates and keyframe coordinates is aggregated, and the Kabsch algorithm \cite{kabschSolutionBestRotation1976} is applied to find the relative transform between the two point sets by minimising the root-mean-square deviation between them.
 
 \begin{figure}[htbp]
     \centering
@@ -27,9 +27,9 @@ The Kabsch algorithm relies on the least-squares method to minimise the root-mea
 
 \subsection{Geometric Consistency-Based Outlier Rejection}
 
-To remove spurious GNSS measurements prior to initialisation, we apply a geometric consistency check that exploits the rigidity of the GNSS--IMU transformation. The method assumes that, for inlier measurements, pairwise distances between GNSS observations should be preserved when mapped into the local map frame via the estimated poses.
+To remove spurious GNSS measurements prior to initialisation, a geometric consistency check is applied that exploits the rigidity of the GNSS--IMU transformation. The method assumes that, for inlier measurements, pairwise distances between GNSS observations should be preserved when mapped into the local map frame via the estimated poses.
 
-Let $\{\mathbf{g}_i\}_{i=1}^{N}$ denote GNSS positions expressed in the ENU frame, and $\{\hat{\mathbf{g}}_i\}_{i=1}^{N}$ denote the corresponding GNSS positions expressed in the map frame, obtained by transforming IMU poses with a fixed extrinsic calibration. For each point $i$, we evaluate its consistency with all other points $j \neq i$ by comparing pairwise Euclidean distances in both frames as shown in Equation \eqref{eq:consistency_check}:
+Let $\{\mathbf{g}_i\}_{i=1}^{N}$ denote GNSS positions expressed in the ENU frame, and $\{\hat{\mathbf{g}}_i\}_{i=1}^{N}$ denote the corresponding GNSS positions expressed in the map frame, obtained by transforming IMU poses with a fixed extrinsic calibration. For each point $i$, its consistency with all other points $j \neq i$ is evaluated by comparing pairwise Euclidean distances in both frames as shown in Equation \eqref{eq:consistency_check}:
 \begin{equation}
 \label{eq:consistency_check}
 \left| \lVert \mathbf{g}_i - \mathbf{g}_j \rVert - \lVert \hat{\mathbf{g}}_i - \hat{\mathbf{g}}_j \rVert \right| < \tau,
@@ -38,7 +38,7 @@ where $\tau$ is a distance consistency threshold reflecting accepted SLAM error 
 
 This approach was chosen over stochastic methods like RANSAC \cite{fischlerRandomSampleConsensus1981} or iterative M-estimators because it takes advantage of the invariance of pairwise Euclidean distances under rigid body transformations, which means that the method remains entirely deterministic and independent of any initial pose estimate or probabilistic modelling.
 
-To formalise the inlier classification, we define a pairwise consistency indicator $c_{ij}$ in Equation \eqref{eq:indicator}:
+To formalise the inlier classification, a pairwise consistency indicator $c_{ij}$ is defined in Equation \eqref{eq:indicator}:
 \begin{equation}
 \label{eq:indicator}
 c_{ij} = 
@@ -64,7 +64,7 @@ GNSS multipath errors \cite{wenExclusionGNSSNLOS2018} can often create erroneous
 
 \subsection{Planar Geometry Quality Assessment in 2D}
 
-Subsequently to outlier rejection, we assess the geometric quality of the remaining point set under the assumption of planar motion by analysing its distribution in the horizontal plane. This analysis is motivated by the sensitivity of the Kabsch algorithm to degenerate point configurations: near-collinear or poorly distributed trajectories produce ill-conditioned cross-covariance matrices, leading to unstable or biased transformations. By detecting such configurations before alignment, we ensure the SVD is well-conditioned and that the estimated transformation is numerically reliable. In particular, we enforce minimum requirements on translational baseline ($\geq 5.0\,\mathrm{m}$), planar spread, rotational excitation, and numerical conditioning.
+Subsequently to outlier rejection, the geometric quality of the remaining point set is assessed under the assumption of planar motion by analysing its distribution in the horizontal plane. This analysis is motivated by the sensitivity of the Kabsch algorithm to degenerate point configurations: near-collinear or poorly distributed trajectories produce ill-conditioned cross-covariance matrices, leading to unstable or biased transformations. By detecting such configurations before alignment, the SVD is ensured to be well-conditioned and the estimated transformation numerically reliable. In particular, minimum requirements on translational baseline ($\geq 5.0\,\mathrm{m}$), planar spread, rotational excitation, and numerical conditioning are enforced.
 
 Given a set of 3D points $\{\mathbf{p}_i\}_{i=1}^{N}$, only the horizontal components are considered by projecting each point onto the $xy$-plane, yielding $\mathbf{q}_i = [x_i, y_i]^\top$. If fewer than three points are available, the geometry is deemed insufficient and the assessment terminates early. The centred projected points are analysed via SVD to obtain the two singular values $\sigma_1 \geq \sigma_2$ that characterise the principal spatial extents of the trajectory in the plane. The condition number
 %
@@ -196,14 +196,14 @@ This factor directly constrains the corresponding submap pose variable in the fa
 The optimisation of Simultaneous Localisation and Mapping (SLAM) parameters is a high-dimensional, non-convex problem where the objective is to identify a parameter vector $\Theta$ that minimises localisation error across heterogeneous environments. This subsection proposes a model-free, heuristic region-refinement algorithm that transitions from global stochastic exploration to localised deterministic refinement. The strategy assumes that optimal configurations cluster within specific sub-regions of the hyper-dimensional search space $\Omega$, which are iteratively identified and contracted using statistical distribution analysis.
 
 \subsubsection{Problem Formulation}
-We define the SLAM system as a complex function $f(X,\theta)$, where $X$ represents raw sensor data (e.g., LiDAR scans and inertial measurements) and $\Theta$ is the $d$-dimensional parameter vector. In a typical LiDAR-inertial setup, $\Theta$ includes parameters such as LiDAR resolution and registration strategy. The objective is to find $\Theta^*$ such that:
+The SLAM system is defined as a complex function $f(X,\theta)$, where $X$ represents raw sensor data (e.g., LiDAR scans and inertial measurements) and $\Theta$ is the $d$-dimensional parameter vector. In a typical LiDAR-inertial setup, $\Theta$ includes parameters such as LiDAR resolution and registration strategy. The objective is to find $\Theta^*$ such that:
 \begin{equation}
     \Theta^* = \arg\min_{\Theta \in \Omega} \mathcal{J}(\Theta)
 \end{equation}
 where $\mathcal{J}$ is a robust objective function representing the consensus performance across $K$ distinct motion profiles.
 
 \subsubsection{Sampling via Latin Hypercube Strategy}
-To explore the initial parameter manifold, we use Latin Hypercube Sampling (LHS), the stratified sampling strategy described in \cref{subsec:slam-hyperparameter}.
+To explore the initial parameter manifold, Latin Hypercube Sampling (LHS) is used, following the stratified sampling strategy described in \cref{subsec:slam-hyperparameter}.
 
 \paragraph{Implementation and Normalisation}
 Parameter vectors are first normalised to the unit hypercube $[0, 1]^d$ \cite{deutschLatinHypercubeSampling2012}. To ensure reproducibility, the pseudo-random permutations used to construct the hypercube are seeded deterministically. The samples are subsequently scaled to physical ranges using:
@@ -213,7 +213,7 @@ Parameter vectors are first normalised to the unit hypercube $[0, 1]^d$ \cite{de
 where $\theta_{j, \min}$ and $\theta_{j, \max}$ represent the physical lower and upper bounds for parameter $j$.
 
 \subsubsection{The Multi-Dataset Consensus Framework}
-A primary challenge in SLAM optimisation is the risk of ``over-specialisation'', where parameters become overfitted to the unique noise characteristics of a single trajectory \cite{limAdaLIORobustAdaptive2023}. We implement a Consensus Survival Framework to prioritise reliability across datasets.
+A primary challenge in SLAM optimisation is the risk of ``over-specialisation'', where parameters become overfitted to the unique noise characteristics of a single trajectory \cite{limAdaLIORobustAdaptive2023}. A Consensus Survival Framework is implemented to prioritise reliability across datasets.
 
 In some situations, standard ``Mean-Performance Optimisation'' can hide brittle configurations that perform well on average but fail catastrophically on a single sequence \cite{robeyProbabilisticallyRobustLearning2022}. In this setting, though, catastrophic failure typically results in excessively high-amplitude errors, which effectively inflate the mean normalised error. That being said, some particular parameter configurations can lead to excessive GPU draw, resulting in a runtime CUDA out-of-memory error. If the parameter set does not complete processing the trajectory on any dataset $k$, the framework assigns it an infinite cost and discards it from the survivor pool. This ensures the survival of only those configurations that meet the computational requirements of the system.
 
@@ -234,7 +234,7 @@ where $E_k(\theta)$ is the primary performance metric for dataset $k$.
 The optimisation proceeds through an ``Iterative Contraction'' or ``Funnel'' strategy. This mirrors the reduction of a search radius in traditional Trust Region Methods \cite{nocedalTrustRegionMethods2006}, concentrating the sampling density into the most promising basins of attraction.
 
 \paragraph{Statistical Search Space Contraction}
-At the conclusion of each phase $i$, the top-performing configurations are used to calculate new search boundaries for phase $i+1$. We employ the 10th and 90th percentiles of the elite set as robust estimators for the update rule in Equation \eqref{eq:quantile_update}:
+At the conclusion of each phase $i$, the top-performing configurations are used to calculate new search boundaries for phase $i+1$. The 10th and 90th percentiles of the elite set serve as robust estimators for the update rule in Equation \eqref{eq:quantile_update}:
 \begin{equation}
 \label{eq:quantile_update}
 \Omega_{j, i+1} = [P_{10}(\theta_{j, \text{top}}), P_{90}(\theta_{j, \text{top}})].

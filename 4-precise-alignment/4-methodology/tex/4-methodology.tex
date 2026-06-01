@@ -99,7 +99,6 @@ The disparity map produced by FoundationStereo is converted to metric depth via 
 \end{equation}
 %
 where $Z$ is the metric depth, $f$ is the focal length of the rectified camera model, $B$ is the stereo baseline, and $d$ is the estimated disparity at each pixel. A far-clip distance of $z_\mathrm{far} = 1.0$\,m is applied to discard depth estimates beyond the typical operating range between the robot and the target vine.
-% TODO: review justification: z_far = 1.0 m reflects the close-range operating distance in the vineyard row; review against actual deployment geometry
 Points with depth below a minimum threshold are also discarded to suppress artefacts close to the camera aperture.
 
 Each pixel for which a valid depth estimate is available is back-projected into a three-dimensional point in the camera frame, using the corresponding RGB values to produce a coloured point cloud. A radius outlier removal filter is subsequently applied to eliminate sparse, isolated points that are not part of any coherent surface.
@@ -150,18 +149,14 @@ A custom trunk segmentation pipeline developed for this work is applied to the m
 \end{figure}
 
 The pipeline comprises three sequential stages. Prior to the first stage, the combined cloud is capped at 600,000 points by random subsampling, bounding the worst-case computation time independently of sensor resolution or accumulation duration.
-% TODO: review whether 600,000 is the tightest practical cap; review against observed input sizes
 
 \textbf{Morphological closing.} A voxel-based morphological closing operation fills gaps in the trunk surface caused by specular reflections or missing depth estimates. The input cloud is voxelised at a resolution of 0.02\,m, and a spherical closing kernel of radius 0.02\,m is applied.
-% TODO: review parameter justification: voxel size 0.02 m and closing radius 0.005 m were selected to bridge typical surface gaps in stereo depth reconstructions of vine bark; review against observed gap statistics
 
 \textbf{DBSCAN clustering.} Density-Based Spatial Clustering of Applications with Noise (DBSCAN)~\cite{esterDensityBasedAlgorithmDiscovering1996}
 partitions the closed point cloud into spatially coherent clusters. DBSCAN groups points whose neighbourhood within radius $\varepsilon$ contains at least $m_\mathrm{min}$ neighbouring points, classifying the remainder as noise. With $\varepsilon = 0.05$\,m and $m_\mathrm{min} = 200$,
-% TODO: review parameter justification: eps = 0.05 m reflects the typical inter-point spacing at vine-trunk distances; min_samples = 200 was chosen to reject small noise clusters while retaining the dominant trunk; review against cloud density statistics
 the dominant cluster, corresponding to the vine trunk, is retained, and all other clusters and noise points are discarded.
 
 \textbf{Voxel density filtering.} The retained cluster is passed through a voxel density filter that partitions the cloud into voxels of side length 0.02\,m and discards any voxel containing fewer than 20 points.
-% TODO: review parameter justification: voxel size 0.02 m and min count 20 eliminate residual sparse regions that survived clustering; review against observed point density at typical vine-to-sensor distances
 This step removes sparsely populated surface regions whose geometric contribution to the ICP objective would otherwise be disproportionate to their informational content.
 \Cref{fig:pa-stereo-pointcloud-processing} illustrates the effect of the full stereo preprocessing pipeline on a representative observation.
 
@@ -198,7 +193,6 @@ The parameters for the stereo preprocessing pipeline are summarised in \cref{tab
     Input point cap           & 600\,000   & Maximum points admitted to the segmentation pipeline \\
     \bottomrule
   \end{tabularx}
-  % TODO: verify all parameter values and add justifications
 \end{table}
 
 % ---------------------------------------------------------------
@@ -221,10 +215,8 @@ an incremental ground segmentation algorithm that models the ground surface as a
 
 The parameters used in this work are as follows. The sensor height above the ground surface is set to 0.88\,m,
 consistent with the physical mounting position of the Livox sensor on the robot platform. The distance threshold for classifying a point as ground is 0.125\,m.
-% TODO: review: distance threshold chosen to accommodate minor terrain irregularities; review against observed ground surface roughness
 The seed threshold for initialising planar patches is 0.5\,m, and three plane-fitting iterations are applied per patch.
-% TODO: review seed threshold justification
-The processing range is bounded to 0.1--3.0\,m to discard returns either too close to the sensor aperture or beyond the typical vine operating distance. 
+The processing range is bounded to 0.1--3.0\,m to discard returns either too close to the sensor aperture or beyond the typical vine operating distance.
 
 \subsubsection{Point Cloud Processing}
 \label{subsubsec:pa-lidar-processing}
@@ -249,7 +241,7 @@ This step exploits the known mounting orientation of the Livox sensor to exclude
 
 \textbf{Voxel downsampling.} The angular-filtered point cloud is downsampled using a voxel grid filter with voxel side length 0.001\,m. This normalises point density before subsequent filtering stages, ensuring that the statistical outlier removal threshold operates on a spatially uniform cloud rather than being biased by density variations inherent to the non-repetitive scan pattern.
 
-\textbf{Statistical outlier removal.} Each point is evaluated against its $k$-nearest neighbourhood; points whose mean neighbour distance exceeds the population mean by more than $\lambda$ standard deviations are classified as outliers and removed. With $k = 20$ and $\lambda = 2.0$, Operating on the voxel-downsampled cloud ensures that the mean-plus-$2\sigma$ threshold targets outliers rather than points in naturally sparse scan regions.
+\textbf{Statistical outlier removal.} Each point is evaluated against its $k$-nearest neighbourhood; points whose mean neighbour distance exceeds the population mean by more than $\lambda$ standard deviations are classified as outliers and removed. With $k = 20$ and $\lambda = 2.0$, operating on the voxel-downsampled cloud ensures that the mean-plus-$2\sigma$ threshold targets outliers rather than points in naturally sparse scan regions.
 
 \textbf{Radial outlier removal.} A spherical neighbourhood of radius 0.05\,m around each point is examined; points with fewer than 30 neighbours within that radius are discarded.
 This pass targets point clusters that are spatially consistent at the individual-point level but are too isolated to form part of a coherent surface.
@@ -289,7 +281,6 @@ The parameters for the LiDAR preprocessing pipeline are summarised in \cref{tab:
     Normal smooth threshold             & $25^{\circ}$              & Maximum normal deviation for smoothing-stage retention \\
     \bottomrule
   \end{tabularx}
-  % TODO: verify all parameter values and add justifications
 \end{table}
 
 % ---------------------------------------------------------------
@@ -301,7 +292,7 @@ Both the stereo and LiDAR preprocessing branches deliver a filtered source point
 
 \textbf{(a) Initial pose.} The initial pose estimate, obtained from the SLAM system (\cref{sec:slam-methodology}), is represented as a $4 \times 4$ homogeneous transformation matrix in $SE(3)$, encoding the rotation and translation of the robot base in the global frame.
 
-\textbf{(b) Target cloud construction.} A single target point cloud is constructed once from the Gaussian means of the 3DGS model, as described in \cref{subsec:pa-reference-model}..
+\textbf{(b) Target cloud construction.} A single target point cloud is constructed once from the Gaussian means of the 3DGS model, as described in \cref{subsec:pa-reference-model}.
 
 \textbf{(c) Neighbourhood perturbation.} To mitigate sensitivity to the accuracy of the initial SLAM pose, the pipeline generates N candidate initial poses by applying small rigid-body perturbations to the initial estimate $T_0$. Each perturbed pose $T_k$ is formed by right-multiplying $T_0$ with a perturbation matrix $\Delta T_k$:
 %
@@ -499,7 +490,6 @@ The preceding subsections have described the complete precise alignment pipeline
 \subsection{Experimental Setup}
 \label{subsec:pa-experimental-setup}
 % ===============================================================
-% TODO: document the computational resources used for evaluation: (1) robot onboard compute (CPU, GPU, RAM) and (2) local machine specs (CPU, GPU, RAM) used to run evals offline.
 
 This section describes the experimental setup used to evaluate the precise-alignment pipeline. LiDAR and stereo data were recorded simultaneously during each trial; both sensing modalities are therefore evaluated against the same set of trial conditions. Six aspects of the evaluation are described: the test environment, the vine specimen and reference model, the trial design, the construction of initial poses, the evaluation protocol, and the metrics used to validate alignment quality.
 
@@ -532,7 +522,7 @@ Several limitations of the indoor evaluation should be noted. First, the dead sp
 \label{subsubsec:pa-vine-specimen}
 % ---------------------------------------------------------------
 
-A dormant vine specimens were mounted on a rigid physical frame to replicate the vertical trunk structure encountered in a vineyard row. Mounting the specimen on a fixed support ensured that the vine remained stationary throughout all trials, eliminating inter-trial positional drift as a confounding factor.
+Dormant vine specimens were mounted on a rigid physical frame to replicate the vertical trunk structure encountered in a vineyard row. Mounting the specimen on a fixed support ensured that the vine remained stationary throughout all trials, eliminating inter-trial positional drift as a confounding factor.
 
 The 3DGS reference model used for registration was reconstructed from outdoor SfM photogrammetry of the same vine specimen, following the procedure described in \cref{subsec:system-context}. The model is georeferenced in the ENU coordinate frame. For the indoor trials, the model's coordinate system was manually aligned to the laboratory environment to establish a consistent spatial reference between the physical specimen and the model. This alignment provided the common frame of reference required by the registration pipeline.
 
