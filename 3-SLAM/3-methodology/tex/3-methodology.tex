@@ -66,37 +66,14 @@ GNSS multipath errors \cite{wenExclusionGNSSNLOS2018} can often create erroneous
 
 Subsequently to outlier rejection, we assess the geometric quality of the remaining point set under the assumption of planar motion by analysing its distribution in the horizontal plane. This analysis is motivated by the sensitivity of the Kabsch algorithm to degenerate point configurations: near-collinear or poorly distributed trajectories produce ill-conditioned cross-covariance matrices, leading to unstable or biased transformations. By detecting such configurations before alignment, we ensure the SVD is well-conditioned and that the estimated transformation is numerically reliable. In particular, we enforce minimum requirements on translational baseline ($\geq 5.0\,\mathrm{m}$), planar spread, rotational excitation, and numerical conditioning.
 
-Given a set of 3D points $\{\mathbf{p}_i\}_{i=1}^{N}$, only the horizontal components are considered by projecting each point onto the $xy$-plane, yielding $\mathbf{q}_i = [x_i, y_i]^\top$. If fewer than three points are available, the geometry is deemed insufficient and the assessment terminates early.
-
-The projected points are assembled into a data matrix $\mathbf{M}$ as defined in Equation \eqref{eq:data_matrix}:
-\begin{equation}
-\label{eq:data_matrix}
-\mathbf{M} = \begin{bmatrix}
-\mathbf{q}_1 & \mathbf{q}_2 & \cdots & \mathbf{q}_N
-\end{bmatrix} \in \mathbb{R}^{2 \times N},
-\end{equation}
-which is centred by subtracting the mean $\bar{\mathbf{q}}$ from each column. Singular value decomposition is then applied to the centred matrix as shown in Equation \eqref{eq:svd}:
-\begin{equation}
-\label{eq:svd}
-\mathbf{M} = \mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^\top,
-\end{equation}
-yielding two singular values $\sigma_1 \geq \sigma_2$ that characterise the principal spatial extents of the trajectory in the plane.
-
-The condition number $\kappa$ is defined in Equation \eqref{eq:condition_number}:
+Given a set of 3D points $\{\mathbf{p}_i\}_{i=1}^{N}$, only the horizontal components are considered by projecting each point onto the $xy$-plane, yielding $\mathbf{q}_i = [x_i, y_i]^\top$. If fewer than three points are available, the geometry is deemed insufficient and the assessment terminates early. The centred projected points are analysed via SVD to obtain the two singular values $\sigma_1 \geq \sigma_2$ that characterise the principal spatial extents of the trajectory in the plane. The condition number
+%
 \begin{equation}
 \label{eq:condition_number}
-\kappa = \frac{\sigma_1}{\sigma_2},
+\kappa = \frac{\sigma_1}{\sigma_2}
 \end{equation}
-and is used as a degeneracy metric, with large values indicating near-collinear motion. The geometry is considered non-degenerate if $\kappa < 20.0$.
-
-To evaluate spatial coverage, a 2D spread ratio $r$ is computed according to Equation \eqref{eq:spread_ratio}:
-\begin{equation}
-\label{eq:spread_ratio}
-r = \frac{\sigma_2}{\sigma_1},
-\end{equation}
-which measures how well the trajectory excites both planar directions. A minimum spread ratio of $r \geq 0.15$ is required. Additionally, a minimum displacement constraint is enforced by requiring both singular values to exceed a baseline threshold of $5.0\,\mathrm{m}$. The spatial distribution is considered sufficient only if both the spread ratio and displacement conditions are satisfied.
-
-Rotational excitation is evaluated independently by computing the angular span of the point set in the horizontal plane. The geometry is considered to provide sufficient rotational constraint if the angular span exceeds $45.0^\circ$.
+%
+serves as the primary degeneracy metric: large values indicate near-collinear motion, and the geometry is considered non-degenerate if $\kappa < 20.0$. Spatial coverage is assessed via the spread ratio $r = \sigma_2 / \sigma_1$, which must satisfy $r \geq 0.15$, and both singular values must exceed a baseline displacement of $5.0\,\mathrm{m}$. Rotational excitation is evaluated independently by requiring the angular span of the point set in the horizontal plane to exceed $45.0^\circ$.
 
 The final geometry quality assessment combines these criteria, reporting whether the point set exhibits sufficient planar spread, adequate rotational excitation, and non-degenerate conditioning. This 2D-based evaluation provides a robust and numerically stable measure of geometric suitability for planar motion scenarios. \cref{fig:geometry-quality} contrasts a degenerate near-collinear configuration against a well-conditioned L-shaped trajectory to illustrate the effect of point distribution on singular value spread.
 
@@ -214,8 +191,9 @@ This factor directly constrains the corresponding submap pose variable in the fa
 \end{figure}
 
 \subsection{Robust SLAM Parameterisation via Iterative Region Refinement}
+\label{subsec:robust-slam-param}
 
-The optimisation of Simultaneous Localisation and Mapping (SLAM) parameters is a high-dimensional, non-convex problem where the objective is to identify a parameter vector $\Theta$ that minimises localisation error across heterogeneous environments \cite{hanMultiObjectiveOptimizationLoop2020}. This subsection proposes a model-free, heuristic region-refinement algorithm that transitions from global stochastic exploration to localised deterministic refinement. The strategy assumes that optimal configurations cluster within specific sub-regions of the hyper-dimensional search space $\Omega$, which are iteratively identified and contracted using statistical distribution analysis.
+The optimisation of Simultaneous Localisation and Mapping (SLAM) parameters is a high-dimensional, non-convex problem where the objective is to identify a parameter vector $\Theta$ that minimises localisation error across heterogeneous environments. This subsection proposes a model-free, heuristic region-refinement algorithm that transitions from global stochastic exploration to localised deterministic refinement. The strategy assumes that optimal configurations cluster within specific sub-regions of the hyper-dimensional search space $\Omega$, which are iteratively identified and contracted using statistical distribution analysis.
 
 \subsubsection{Problem Formulation}
 We define the SLAM system as a complex function $f(X,\theta)$, where $X$ represents raw sensor data (e.g., LiDAR scans and inertial measurements) and $\Theta$ is the $d$-dimensional parameter vector. In a typical LiDAR-inertial setup, $\Theta$ includes parameters such as LiDAR resolution and registration strategy. The objective is to find $\Theta^*$ such that:
@@ -225,7 +203,7 @@ We define the SLAM system as a complex function $f(X,\theta)$, where $X$ represe
 where $\mathcal{J}$ is a robust objective function representing the consensus performance across $K$ distinct motion profiles.
 
 \subsubsection{Sampling via Latin Hypercube Strategy}
-To explore the initial parameter manifold, we utilise Latin Hypercube Sampling (LHS) as an alternative to traditional grid search or independent Monte Carlo (MC) sampling \cite{deutschLatinHypercubeSampling2012}. LHS is technically categorised as a stratified sampling design \cite{chrismanLatinHypercubeSampling2014}. For a sample size $N$ in $d$ dimensions, the range of each parameter $\theta_j$ is partitioned into $N$ equiprobable intervals for $j=1, \dots, d$ \cite{chrismanLatinHypercubeSampling2014}. The mathematical constraint (ensuring exactly one sample per row and column of the grid) minimises the ``clustering'' phenomenon common in pure random sampling \cite{deutschLatinHypercubeSampling2012}. This stratification ensures that the marginal distribution of each parameter is sampled uniformly, achieving a lower variance than independent Monte Carlo sampling for the same sample size \cite{packhamLatinHypercubeSampling2008}.
+To explore the initial parameter manifold, we use Latin Hypercube Sampling (LHS), the stratified sampling strategy described in \cref{subsec:slam-hyperparameter}.
 
 \paragraph{Implementation and Normalisation}
 Parameter vectors are first normalised to the unit hypercube $[0, 1]^d$ \cite{deutschLatinHypercubeSampling2012}. To ensure reproducibility, the pseudo-random permutations used to construct the hypercube are seeded deterministically. The samples are subsequently scaled to physical ranges using:
@@ -235,9 +213,9 @@ Parameter vectors are first normalised to the unit hypercube $[0, 1]^d$ \cite{de
 where $\theta_{j, \min}$ and $\theta_{j, \max}$ represent the physical lower and upper bounds for parameter $j$.
 
 \subsubsection{The Multi-Dataset Consensus Framework}
-A primary challenge in SLAM optimisation is the risk of ``over-specialisation'', where parameters become overfitted to the unique noise characteristics of a single trajectory \cite{soaresVARSLAMVisualAdaptive2025}. We implement a Consensus Survival Framework to prioritise reliability across datasets.
+A primary challenge in SLAM optimisation is the risk of ``over-specialisation'', where parameters become overfitted to the unique noise characteristics of a single trajectory \cite{limAdaLIORobustAdaptive2023}. We implement a Consensus Survival Framework to prioritise reliability across datasets.
 
-In some situations, standard ``Mean-Performance Optimisation'' can hide brittle configurations that perform well on average but fail catastrophically on a single sequence \cite{kandasamyTuningHyperparametersGrad}. In this setting, though, catastrophic failure typically results in excessively high-amplitude errors, which effectively inflate the mean normalised error. That being said, some particular parameter configurations can lead to excessive GPU draw, resulting in a runtime CUDA out-of-memory error. If the parameter set does not complete processing the trajectory on any dataset $k$, the framework assigns it an infinite cost and discards it from the survivor pool. This ensures the survival of only those configurations that meet the computational requirements of the system.
+In some situations, standard ``Mean-Performance Optimisation'' can hide brittle configurations that perform well on average but fail catastrophically on a single sequence \cite{robeyProbabilisticallyRobustLearning2022}. In this setting, though, catastrophic failure typically results in excessively high-amplitude errors, which effectively inflate the mean normalised error. That being said, some particular parameter configurations can lead to excessive GPU draw, resulting in a runtime CUDA out-of-memory error. If the parameter set does not complete processing the trajectory on any dataset $k$, the framework assigns it an infinite cost and discards it from the survivor pool. This ensures the survival of only those configurations that meet the computational requirements of the system.
 
 \paragraph{Formal Objective Function}
 For the ``surviving'' configurations, the objective function $J(\theta)$ is defined as the mean normalised error across the valid sequences \eqref{eq:piecewise_success}:
@@ -315,7 +293,7 @@ For the optimisation of GLIM-GNSS, the cost function is a custom metric referred
 \label{eq:gasp}
 \text{GASP} = w_{\text{drift}} \cdot \left( \frac{\mathrm{ATE}}{\mathrm{L}} \right) + w_{\text{smoothness}} \cdot \text{Translational RPE}.
 \end{equation}
-The weights $w_{\text{drift}}$ and $w_{\text{smoothness}}$ were chosen to normalise the differing magnitudes of the two component metrics, such that each term contributes approximately equally to the total cost under representative operating conditions. Because the weighted sum mixes quantities with different units, GASP serves as a relative performance index; its values are meaningful only when compared within the same experimental framework.
+The weights are set to $w_{\text{drift}} = 40$ and $w_{\text{smoothness}} = 1$; they were chosen to normalise the differing magnitudes of the two component metrics, such that each term contributes approximately equally to the total cost under representative operating conditions. Because the weighted sum mixes quantities with different units, GASP serves as a relative performance index; its values are meaningful only when compared within the same experimental framework.
 
 \subsection{Experimental Setup}
 \label{subsec:slam-experimental-setup}

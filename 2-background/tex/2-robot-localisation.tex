@@ -8,7 +8,7 @@ This section traces the historical foundations of robot localisation, structured
 \subsection{The Limits of Deterministic Localisation}
 \label{subsec:deterministic-localisation}
 
-The first mobile robots capable of autonomous reasoning operated under deterministic models: each commanded action was assumed to execute perfectly, and the robot's pose was updated accordingly. Shakey the Robot (1966--1972) localised through discrete semantic labels and open-loop dead reckoning, with landmark correction that depended on the environment conforming exactly to a pre-modelled structure~\cite{nilssonShakeyRobot1984}. Moravec's Stanford Cart extended this to geometric localisation via stereo vision, maintaining explicit 3D feature positions but associating no uncertainty with them; errors accumulated silently, requiring approximately five hours for a 20-metre indoor traverse~\cite{moravecObstacleAvoidanceNavigatio1980,moravecStanfordCartCMU1990}.
+The first mobile robots capable of autonomous reasoning operated under deterministic models: each commanded action was assumed to execute perfectly, and the robot's pose was updated accordingly. Shakey the Robot (1966--1972) relied on open-loop dead reckoning, updating a pose estimate from commanded motor steps with landmark correction that depended on the environment conforming exactly to a pre-modelled structure~\cite{nilssonShakeyRobot1984}. Moravec's Stanford Cart extended this to geometric localisation via stereo vision, maintaining explicit 3D feature positions; without loop closure or global correction, errors accumulated with each successive step, requiring approximately five hours for a 20-metre indoor traverse~\cite{moravecObstacleAvoidanceNavigatio1980,moravecStanfordCartCMU1990}.
 
 These systems illustrate the core failure mode of deterministic localisation: uncorrected motion errors compound over time, and landmark-based correction is unreliable whenever the observed environment departs from assumed models. In semi-structured outdoor environments such as vineyards, where plant geometry changes seasonally, features repeat along rows, and no guaranteed prior map exists, this fragility is not a boundary case but the normal operating condition. The response was to replace deterministic pose estimates with probabilistic representations that could explicitly track and propagate uncertainty.
 
@@ -31,9 +31,16 @@ Elfes also noted that fusing sensor views into a coherent global map requires ac
 \end{figure}
 
 \subsection{Point Cloud Registration}
-\label{subsec:point-cloud-registration}
+\label{subsec:bg-point-cloud-registration}
 
-Relative pose estimation between sensor frames requires a method for aligning observations acquired at successive robot positions. Besl and McKay's Iterative Closest Point (ICP) algorithm~\cite{beslMethodRegistration3D1992a} frames registration as an optimisation problem: starting from an initial alignment, it alternates between assigning each source point to its nearest neighbour in the target cloud and solving for the rigid transformation that minimises the mean squared distance over all correspondences. Monotonic convergence of the cost function is guaranteed; however, the solution is sensitive to initial conditions and requires sufficient geometric overlap between the two clouds. Subsequent variants, notably point-to-plane error metrics~\cite{chenObjectModelingRegistration1991} and the probabilistic Generalised-ICP formulation~\cite{segalGeneralizedICP2009}, improved convergence speed and robustness in environments lacking strong planar structure.
+Relative pose estimation between sensor frames requires a method for aligning observations acquired at successive robot positions. Besl and McKay's Iterative Closest Point (ICP) algorithm~\cite{beslMethodRegistration3D1992a} frames registration as an optimisation problem: given a source point set $\mathbf{P}$ and a target set $\mathbf{Q}$, ICP seeks the rigid transformation $\mathbf{R} \in SO(3)$, $\mathbf{t} \in \mathbb{R}^3$ that minimises
+%
+\begin{equation}
+    E(\mathbf{R}, \mathbf{t}) = \sum_{i=1}^{N} \| \mathbf{R} \cdot \mathbf{p}_i + \mathbf{t} - \mathbf{q}_i \|^2
+    \label{eq:icp}
+\end{equation}
+%
+by alternating between assigning each source point to its nearest neighbour in the target cloud and solving for the transformation via singular value decomposition. Monotonic convergence of the cost function is guaranteed; however, the solution is sensitive to initial conditions and requires sufficient geometric overlap between the two clouds. Subsequent variants, notably point-to-plane error metrics~\cite{chenObjectModelingRegistration1991} and the probabilistic Generalised-ICP formulation~\cite{segalGeneralizedICP2009}, improved convergence speed and robustness by exploiting locally planar surface structure present in the scene.
 
 ICP is the direct registration engine used in the precise-alignment pipeline described in \cref{chap:precise-alignment}, where a real-time point cloud of a physical vine is aligned against the SfM-derived reference geometry extracted from a 3D Gaussian Splatting model. The sensitivity of ICP to initialisation and partial overlap is a central practical constraint addressed in that chapter.
 

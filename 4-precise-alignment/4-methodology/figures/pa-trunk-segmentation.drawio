@@ -29,7 +29,7 @@
     </mxCell>
 
     <!-- Annotation for Node 2: Morphological Closing -->
-    <mxCell id="7" value="voxel size 0.02 m, closing radius 0.005 m&lt;br&gt;Fills gaps from specular reflections / missing depth" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;fillColor=#f5f5f5;strokeColor=none;" vertex="1" parent="1">
+    <mxCell id="7" value="voxel size 0.02 m, closing radius 0.02 m&lt;br&gt;Fills gaps from specular reflections / missing depth" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;fillColor=#f5f5f5;strokeColor=none;" vertex="1" parent="1">
       <mxGeometry x="545" y="155" width="215" height="55" as="geometry" />
     </mxCell>
 

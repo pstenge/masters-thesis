@@ -13,7 +13,7 @@
                 <mxCell id="6" value="disparity → Z = fB/d, z_far = 1.0 m" style="text;html=1;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;" parent="3" vertex="1">
                     <mxGeometry x="65" y="153" width="375" height="16" as="geometry"/>
                 </mxCell>
-                <mxCell id="13" value="• Morphological Closing (vox 0.02 m, r 0.005 m)&lt;br&gt;• DBSCAN (ε=0.05 m, m=200)&lt;br&gt;• Voxel Density Filter (0.02 m, min 20 pts)" style="text;html=1;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;" parent="3" vertex="1">
+                <mxCell id="13" value="• Morphological Closing (vox 0.02 m, r 0.02 m)&lt;br&gt;• DBSCAN (ε=0.05 m, m=200)&lt;br&gt;• Voxel Density Filter (0.02 m, min 20 pts)" style="text;html=1;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;" parent="3" vertex="1">
                     <mxGeometry x="65" y="568" width="425" height="48" as="geometry"/>
                 </mxCell>
                 <mxCell id="42" value="" style="edgeStyle=orthogonalEdgeStyle;" parent="3" source="4" target="5" edge="1">

@@ -35,7 +35,7 @@ registration stage is shown in \cref{fig:pa-pipeline-icp}.
   \caption{LiDAR preprocessing branch of the precise-alignment pipeline. Dense
            scans from the Livox solid-state LiDAR are filtered through ground
            removal, statistical and angular outlier rejection, and normal-based
-           processing to produce a filtered source point cloud passed to the
+           smoothing to produce a filtered source point cloud passed to the
            shared GICP registration stage (\cref{fig:pa-pipeline-icp}).}
   \label{fig:pa-pipeline-lidar}
 \end{figure}
@@ -53,10 +53,6 @@ registration stage is shown in \cref{fig:pa-pipeline-icp}.
   \label{fig:pa-pipeline-icp}
 \end{figure}
 
-
-
-NOTE: FIG 4.6 is WRONG. THERE IS NO 3DGS RENDERING ANYMORE. WE STILL DO MULTI CANDIDATE VIEWPOINT SAMPLING BUT N >>> 5. 
-
 % ---------------------------------------------------------------
 \subsection{Reference Model: 3D Gaussian Splatting}
 \label{subsec:pa-reference-model}
@@ -64,11 +60,21 @@ NOTE: FIG 4.6 is WRONG. THERE IS NO 3DGS RENDERING ANYMORE. WE STILL DO MULTI CA
 
 The localisation target for both sensor modalities is a point cloud derived directly from the 3DGS model of the target vine. The construction of this model from SfM photogrammetry is described in \cref{subsec:system-context}; the present subsection addresses how it is used during localisation.
 
-The 3DGS model is loaded once at initialisation. The target point cloud is constructed by extracting the mean positions of all Gaussian primitives stored in the model. Each primitive is parameterised by a mean $\boldsymbol{\mu}_i \in \mathbb{R}^3$, representing the centre of the volumetric Gaussian in world coordinates; collecting these centres across all $N$ primitives yields a single global point cloud $\{\boldsymbol{\mu}_i\}_{i=1}^{N}$ that captures the geometric structure of the reconstructed scene. This extraction is a direct read of the model parameters and requires no rendering pass, making it computationally simpler than viewpoint-dependent depth map synthesis and free of viewpoint-dependent artefacts that arise when projecting volumetric primitives onto an image plane.
+The 3DGS model is loaded once at initialisation. The target point cloud is constructed by extracting the mean positions of all Gaussian primitives stored in the model. Each primitive is parameterised by a mean $\boldsymbol{\mu}_i \in \mathbb{R}^3$, representing the centre of the volumetric Gaussian in world coordinates; collecting these centres across all $N$ primitives yields a single global point cloud $\{\boldsymbol{\mu}_i\}_{i=1}^{N}$ that captures the geometric structure of the reconstructed scene (see \cref{fig:pa-gaussian-splat-pointcloud}). This extraction is a direct read of the model parameters and requires no rendering pass, making it computationally simpler than viewpoint-dependent depth map synthesis and free of viewpoint-dependent artefacts that arise when projecting volumetric primitives onto an image plane.
 
 Because the extracted cloud spans the full reconstructed scene, it is spatially cropped to a region of interest centred on the initial pose estimate before registration. This step retains only the local geometry relevant to the current alignment problem and discards distant or structurally irrelevant model points that would otherwise inflate correspondence search cost and introduce spurious matches. Following cropping, the target cloud may optionally be downsampled using a voxel grid filter to reduce point density and match the resolution of the incoming sensor source cloud, further reducing the computational cost of the subsequent registration step.
 
 The resulting target cloud is constructed once per localisation query and reused across all perturbation hypotheses evaluated during ICP registration, as described in \cref{subsec:pa-icp-registration}. This avoids redundant reconstruction overhead and ensures a consistent geometric reference throughout the alignment procedure.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\linewidth]{4-precise-alignment/4-methodology/figures/pa-gaussian-splat-pointcloud}
+  \caption{Point cloud derived from the 3DGS reference model of a dormant
+           grapevine, constructed by extracting the mean positions
+           $\boldsymbol{\mu}_i$ of all Gaussian primitives. Two vine trunks
+           and the shared trellis wire are clearly resolved.}
+  \label{fig:pa-gaussian-splat-pointcloud}
+\end{figure}
 
 % ---------------------------------------------------------------
 \subsection{Stereo Vision Pipeline}
@@ -146,7 +152,7 @@ A custom trunk segmentation pipeline developed for this work is applied to the m
 The pipeline comprises three sequential stages. Prior to the first stage, the combined cloud is capped at 600,000 points by random subsampling, bounding the worst-case computation time independently of sensor resolution or accumulation duration.
 % TODO: review whether 600,000 is the tightest practical cap; review against observed input sizes
 
-\textbf{Morphological closing.} A voxel-based morphological closing operation fills gaps in the trunk surface caused by specular reflections or missing depth estimates. The input cloud is voxelised at a resolution of 0.02\,m, and a spherical closing kernel of radius 0.005\,m is applied.
+\textbf{Morphological closing.} A voxel-based morphological closing operation fills gaps in the trunk surface caused by specular reflections or missing depth estimates. The input cloud is voxelised at a resolution of 0.02\,m, and a spherical closing kernel of radius 0.02\,m is applied.
 % TODO: review parameter justification: voxel size 0.02 m and closing radius 0.005 m were selected to bridge typical surface gaps in stereo depth reconstructions of vine bark; review against observed gap statistics
 
 \textbf{DBSCAN clustering.} Density-Based Spatial Clustering of Applications with Noise (DBSCAN)~\cite{esterDensityBasedAlgorithmDiscovering1996}
@@ -157,6 +163,19 @@ the dominant cluster, corresponding to the vine trunk, is retained, and all othe
 \textbf{Voxel density filtering.} The retained cluster is passed through a voxel density filter that partitions the cloud into voxels of side length 0.02\,m and discards any voxel containing fewer than 20 points.
 % TODO: review parameter justification: voxel size 0.02 m and min count 20 eliminate residual sparse regions that survived clustering; review against observed point density at typical vine-to-sensor distances
 This step removes sparsely populated surface regions whose geometric contribution to the ICP objective would otherwise be disproportionate to their informational content.
+\Cref{fig:pa-stereo-pointcloud-processing} illustrates the effect of the full stereo preprocessing pipeline on a representative observation.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{4-precise-alignment/4-methodology/figures/pa-stereo-pointcloud-processing}
+  \caption{Stereo point cloud before and after preprocessing.
+           (a) The raw back-projected point cloud prior to filtering, exhibiting
+           significant noise, non-structural returns, and artefacts.
+           (b) The filtered point cloud following the full trunk segmentation
+           pipeline, retaining only the vine trunk geometry forwarded to GICP
+           registration.}
+  \label{fig:pa-stereo-pointcloud-processing}
+\end{figure}
 
 The parameters for the stereo preprocessing pipeline are summarised in \cref{tab:pa-stereo-params}.
 
@@ -171,7 +190,7 @@ The parameters for the stereo preprocessing pipeline are summarised in \cref{tab
     Downscale factor          & 0.7        & Input image downscale factor for FoundationStereo inference; empirically derived with a 20\,\% GPU memory safety margin \\
     $z_\mathrm{far}$          & 1.0\,m     & Far-clip depth; points beyond this distance are discarded \\
     Closing voxel size        & 0.02\,m    & Voxel resolution for the morphological closing operation \\
-    Closing radius            & 0.005\,m   & Spherical kernel radius for the closing operator \\
+    Closing radius            & 0.02\,m    & Spherical kernel radius for the closing operator \\
     DBSCAN $\varepsilon$      & 0.05\,m    & Neighbourhood radius for cluster membership \\
     DBSCAN $m_\mathrm{min}$   & 200        & Minimum point count to form a core cluster \\
     Density filter voxel size & 0.02\,m    & Voxel size for the density filtering stage \\
@@ -210,36 +229,32 @@ The processing range is bounded to 0.1--3.0\,m to discard returns either too clo
 \subsubsection{Point Cloud Processing}
 \label{subsubsec:pa-lidar-processing}
 
-Following ground removal, the non-ground point cloud is passed through a custom multi-stage filtering pipeline developed for this work; the five sequential stages are illustrated in \cref{fig:pa-lidar-filtering}.
+Following ground removal, the non-ground point cloud is passed through a custom multi-stage filtering pipeline developed for this work; the six sequential stages are illustrated in \cref{fig:pa-lidar-filtering}.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.75\linewidth]{4-precise-alignment/4-methodology/figures/pa-lidar-filtering}
-  \caption{LiDAR point cloud filtering pipeline. Five sequential stages process the
+  \caption{LiDAR point cloud filtering pipeline. Six sequential stages process the
            non-ground Livox cloud to isolate vine wood structure prior to ICP
            registration.}
   \label{fig:pa-lidar-filtering}
 \end{figure}
 
-The five sequential stages are described below.
+The six sequential stages are described below.
 
-\textbf{Statistical outlier removal.} Each point is evaluated against its $k$-nearest neighbourhood; points whose mean neighbour distance exceeds the population mean by more than $\lambda$ standard deviations are classified as outliers and removed. With $k = 16$ and $\lambda = 2.0$,
-% TODO: review parameter justification: these values provide conservative outlier rejection without eliminating genuine surface points; review against observed noise characteristics
-the first pass removes the most isolated returns, which typically correspond to Livox streak artefacts in far-range returns.
+\textbf{Range filtering.} Points beyond a maximum range of 1.3\,m from the sensor are discarded. This restricts the cloud to the area of the target vine, removing distant returns from adjacent rows and structures that do not exist in the 3DGS reference model.
 
 \textbf{Angular filtering.} Points in the azimuthal range from $-180^{\circ}$ to $0^{\circ}$ are retained; returns outside this half-space are discarded.
-% TODO: review angular filtering direction: the excluded half-space corresponds to the rear-facing hemisphere, where the robot body occludes the vine and sensor returns are predominantly self-returns or spurious reflections; verify against the sensor mounting orientation
 This step exploits the known mounting orientation of the Livox sensor to exclude returns from the robot body and from the vineyard row that the robot is not currently targeting.
 
+\textbf{Voxel downsampling.} The angular-filtered point cloud is downsampled using a voxel grid filter with voxel side length 0.001\,m. This normalises point density before subsequent filtering stages, ensuring that the statistical outlier removal threshold operates on a spatially uniform cloud rather than being biased by density variations inherent to the non-repetitive scan pattern.
+
+\textbf{Statistical outlier removal.} Each point is evaluated against its $k$-nearest neighbourhood; points whose mean neighbour distance exceeds the population mean by more than $\lambda$ standard deviations are classified as outliers and removed. With $k = 20$ and $\lambda = 2.0$, Operating on the voxel-downsampled cloud ensures that the mean-plus-$2\sigma$ threshold targets outliers rather than points in naturally sparse scan regions.
+
 \textbf{Radial outlier removal.} A spherical neighbourhood of radius 0.05\,m around each point is examined; points with fewer than 30 neighbours within that radius are discarded.
-% TODO: review parameter justification: radius 0.05 m and min neighbours 30 remove isolated noise points that survived statistical outlier removal; review against observed point density at registration distance
 This pass targets point clusters that are spatially consistent at the individual-point level but are too isolated to form part of a coherent surface.
 
-\textbf{Normal-based filtering.} Surface normals are estimated for each point from its 75 nearest neighbours. Points whose estimated normal deviates by more than $100^{\circ}$ from the expected surface orientation are discarded.
-% TODO: review parameter justification: the 100-degree threshold is deliberately permissive, targeting only points whose normal estimate is inverted or pathological; review against observed normal distributions in vine point clouds
-
-\textbf{Normal-based smoothing.} A second normal-based pass with 30 nearest neighbours and a $25^{\circ}$ angular threshold enforces local normal consistency across the retained surface, smoothing boundary effects and reducing the influence of surface noise on the ICP correspondence stage.
-% TODO: review parameter justification: the tighter angle threshold (25 degrees) selects locally flat surface patches, removing noise at vine wood boundaries; review
+\textbf{Normal-based smoothing.} Surface normals are estimated for each point from its 30 nearest neighbours. Points whose estimated normal deviates by more than $25^{\circ}$ from the local consensus are discarded, enforcing normal consistency across the retained surface. This smoothing pass reduces boundary effects and the influence of surface noise on the ICP correspondence stage.
 
 The parameters for the LiDAR preprocessing pipeline are summarised in \cref{tab:pa-lidar-params}.
 
@@ -263,14 +278,14 @@ The parameters for the LiDAR preprocessing pipeline are summarised in \cref{tab:
     \midrule
     \multicolumn{3}{l}{\textit{Point cloud filtering}} \\
     \midrule
-    Statistical outlier $k$             & 16                        & Neighbourhood size for statistical outlier removal \\
-    Statistical outlier $\lambda$       & 2.0                       & Standard deviation multiplier for the outlier threshold \\
+    Range filter max range              & 1.3\,m                    & Maximum range from sensor along the forward axis \\
     Angular filter range                & $-180^{\circ}$ to $0^{\circ}$ & Retained azimuthal range \\
+    Voxel downsample size               & 0.001\,m                  & Voxel side length for density normalisation prior to SOR \\
+    Statistical outlier $k$             & 20                        & Neighbourhood size for statistical outlier removal \\
+    Statistical outlier $\lambda$       & 2.0                       & Standard deviation multiplier for the outlier threshold \\
     Radial outlier radius               & 0.05\,m                   & Neighbourhood radius for radial outlier removal \\
     Radial outlier min neighbours       & 30                        & Minimum neighbours within the search radius \\
-    Normal filter $k$                   & 75                        & Neighbourhood size for normal estimation (filtering stage) \\
-    Normal filter threshold             & $100^{\circ}$             & Maximum normal deviation for point retention \\
-    Normal smooth $k$                   & 30                        & Neighbourhood size for normal estimation (smoothing stage) \\
+    Normal smooth $k$                   & 30                        & Neighbourhood size for normal estimation \\
     Normal smooth threshold             & $25^{\circ}$              & Maximum normal deviation for smoothing-stage retention \\
     \bottomrule
   \end{tabularx}
@@ -348,7 +363,7 @@ Applying a single robust loss function throughout an ICP run creates a tension b
            Phase~1 uses a Huber loss ($k_1 = 1.5$\,m) for broad alignment;
            Phase~2 switches to a Cauchy loss ($k_2 = 0.5$\,m) for precision
            refinement. Both phases apply a rotation constraint
-           that clamps the total accumulated pitch and roll correction to $\pm 5^{\circ}$.
+           that clamps the total accumulated pitch and roll correction to $\pm 10^{\circ}$.
            The final transformation is composed as
            $T_{\text{ICP}} = T_{\text{p2}} \cdot T_{\text{p1}}$.}
   \label{fig:pa-graduated-icp}
@@ -386,7 +401,7 @@ where $k_2 = 0.5$\,m. The Cauchy loss grows logarithmically for large residuals,
 where $T_{\text{p2}}$ is the refinement returned by Phase~2.
 
 \paragraph{Rotation constraint.}
-Open3D's \texttt{registration\_generalized\_icp} provides no built-in mechanism for constraining the per-iteration correction. A custom iterative loop therefore replaces the library's internal iteration for both phases: at each step, a single GICP iteration is executed and the accumulated correction transform $T_{\text{accum}}$ (the total ICP-introduced change relative to the current phase's starting pose) is decomposed into ZYX Euler angles. The pitch and roll components of $T_{\text{accum}}$ are clamped to $\pm 5^{\circ}$; yaw and all three translation components remain unconstrained. Because the clamping is applied to $T_{\text{accum}}$ rather than to the absolute pose, it constrains only the correction introduced by ICP and preserves any pitch or roll present in the initial estimate. This is appropriate because the robot operates on approximately level terrain, so large pitch or roll corrections are more likely to be registration artefacts than genuine pose refinements.
+Open3D's \texttt{registration\_generalized\_icp} provides no built-in mechanism for constraining the per-iteration correction. A custom iterative loop therefore replaces the library's internal iteration for both phases: at each step, a single GICP iteration is executed and the accumulated correction transform $T_{\text{accum}}$ (the total ICP-introduced change relative to the current phase's starting pose) is decomposed into ZYX Euler angles. The pitch and roll components of $T_{\text{accum}}$ are clamped to $\pm 10^{\circ}$; yaw and all three translation components remain unconstrained. Because the clamping is applied to $T_{\text{accum}}$ rather than to the absolute pose, it constrains only the correction introduced by ICP and preserves any pitch or roll present in the initial estimate. This is appropriate because the robot operates on approximately level terrain, so large pitch or roll corrections are more likely to be registration artefacts than genuine pose refinements.
 
 Convergence in the constrained loop is declared when the incremental rotation between successive steps falls below $0.01^{\circ}$ and the incremental translation falls below $10^{-4}$\,m, or when the maximum iteration count for that phase is reached. Phase~1 clamps $T_{\text{accum}}$ relative to the initial perturbed pose; Phase~2 clamps $T_{\text{accum}}$ relative to the Phase~1 converged pose.
 
@@ -410,7 +425,7 @@ The parameters for the GICP registration stage are summarised in \cref{tab:pa-ic
     Phase~2 loss (LiDAR)            & Cauchy, $k_2 = 0.5$\,m & Precision refinement phase; aggressive outlier rejection (\cref{eq:cauchy-loss}) \\
     Phase~2 max iterations          & 20                  & Per hypothesis \\
     Max correspondence distance     & 0.15\,m             & Maximum point-pair distance for correspondence acceptance \\
-    Rotation constraint (LiDAR)     & $\pm 5^{\circ}$ pitch/roll & Clamp on total accumulated ICP correction; yaw unconstrained \\
+    Rotation constraint (LiDAR)     & $\pm 10^{\circ}$ pitch/roll & Clamp on total accumulated ICP correction; yaw unconstrained \\
     Constrained convergence: rotation    & $0.01^{\circ}$ & Inter-step rotation change threshold \\
     Constrained convergence: translation & $10^{-4}$\,m   & Inter-step translation change threshold \\
     Fitness threshold               & 0.8                 & Minimum fitness score for hypothesis acceptance \\
@@ -588,7 +603,7 @@ The distance component was measured with a steel tape measure as the orthogonal 
   \label{fig:pa-pose-measurement}
 \end{figure}
 
-The manual measurement procedure introduces a positioning uncertainty on the order of $\pm 2$--$3$\,cm in translation and $\pm 2$--$3^{\circ}$ in orientation. The translational uncertainty reflects the combined precision of the tape measure ($\pm 1$\,mm) and the difficulty of consistently identifying the reference point on the frame and the sensor centre on the robot; the angular uncertainty reflects the propagation of these linear measurement errors through the trigonometric angle computation. This uncertainty is substantially smaller than the absolute trajectory error (ATE) reported for the GLIM SLAM system~\cite{koideGLIM3DRangeInertial2024} with GNSS fusion, which ranges from 0.07 to 0.17\,m across the outdoor evaluation presented in \cref{sec:slam-results}. The manual measurement therefore represents a \emph{more favourable} initial condition than would be encountered in deployment. As a consequence, any alignment failures observed under these laboratory conditions indicate a fundamental limitation of the registration pipeline itself, rather than an artefact of poor initial pose quality.
+The manual measurement procedure introduces a positioning uncertainty on the order of $\pm 2$--$3$\,cm in translation and $\pm 2$--$3^{\circ}$ in orientation. The translational uncertainty reflects the combined precision of the tape measure ($\pm 1$\,mm) and the difficulty of consistently identifying the reference point on the frame and the sensor centre on the robot; the angular uncertainty reflects the propagation of these linear measurement errors through the trigonometric angle computation. This uncertainty is substantially smaller than the absolute trajectory error (ATE) observed for the GLIM SLAM system~\cite{koideGLIM3DRangeInertial2024} with GNSS fusion in the outdoor evaluation presented in \cref{sec:slam-results}, where the ATE ranges from 0.07 to 0.17\,m. The manual measurement therefore represents a \emph{more favourable} initial condition than would be encountered in deployment. As a consequence, any alignment failures observed under these laboratory conditions indicate a fundamental limitation of the registration pipeline itself, rather than an artefact of poor initial pose quality.
 
 % ---------------------------------------------------------------
 \subsubsection{Evaluation Protocol}

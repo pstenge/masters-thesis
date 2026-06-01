@@ -49,7 +49,7 @@
       <mxGeometry x="65" y="520" width="630" height="45" as="geometry" />
     </mxCell>
 
-    <mxCell id="13" value="• Morphological Closing (vox 0.02 m, r 0.005 m)&lt;br&gt;• DBSCAN (ε=0.05 m, m=200)&lt;br&gt;• Voxel Density Filter (0.02 m, min 20 pts)" style="text;html=1;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;" vertex="1" parent="3">
+    <mxCell id="13" value="• Morphological Closing (vox 0.02 m, r 0.02 m)&lt;br&gt;• DBSCAN (ε=0.05 m, m=200)&lt;br&gt;• Voxel Density Filter (0.02 m, min 20 pts)" style="text;html=1;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;" vertex="1" parent="3">
       <mxGeometry x="65" y="568" width="630" height="48" as="geometry" />
     </mxCell>
 
@@ -59,7 +59,7 @@
 
     <!-- RIGHT SWIMLANE: LiDAR Branch -->
     <mxCell id="15" value="LiDAR Branch" style="swimlane;startSize=30;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=12;" vertex="1" parent="1">
-      <mxGeometry x="850" y="110" width="760" height="730" as="geometry" />
+      <mxGeometry x="850" y="110" width="760" height="870" as="geometry" />
     </mxCell>
 
     <mxCell id="16" value="Livox Solid-State LiDAR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="15">
@@ -82,44 +82,44 @@
       <mxGeometry x="65" y="222" width="630" height="16" as="geometry" />
     </mxCell>
 
-    <mxCell id="21" value="Statistical Outlier Removal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="15">
+    <mxCell id="70" value="Range Filtering (max 1.3 m)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="15">
       <mxGeometry x="65" y="245" width="630" height="45" as="geometry" />
     </mxCell>
 
-    <mxCell id="22" value="k=16, λ=2.0" style="text;html=1;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;" vertex="1" parent="15">
-      <mxGeometry x="65" y="293" width="630" height="16" as="geometry" />
+    <mxCell id="23" value="Angular Filtering (−180° to 0°)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="15">
+      <mxGeometry x="65" y="308" width="630" height="45" as="geometry" />
     </mxCell>
 
-    <mxCell id="23" value="Angular Filtering (−180° to 0°)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="15">
-      <mxGeometry x="65" y="316" width="630" height="45" as="geometry" />
+    <mxCell id="71" value="Voxel Downsampling (0.001 m)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="15">
+      <mxGeometry x="65" y="371" width="630" height="45" as="geometry" />
+    </mxCell>
+
+    <mxCell id="21" value="Statistical Outlier Removal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="15">
+      <mxGeometry x="65" y="434" width="630" height="45" as="geometry" />
+    </mxCell>
+
+    <mxCell id="22" value="k=20, λ=2.0" style="text;html=1;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;" vertex="1" parent="15">
+      <mxGeometry x="65" y="482" width="630" height="16" as="geometry" />
     </mxCell>
 
     <mxCell id="24" value="Radial Outlier Removal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="15">
-      <mxGeometry x="65" y="378" width="630" height="45" as="geometry" />
+      <mxGeometry x="65" y="505" width="630" height="45" as="geometry" />
     </mxCell>
 
     <mxCell id="25" value="r=0.05 m, min 30 neighbours" style="text;html=1;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;" vertex="1" parent="15">
-      <mxGeometry x="65" y="426" width="630" height="16" as="geometry" />
-    </mxCell>
-
-    <mxCell id="26" value="Normal-Based Filtering" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="15">
-      <mxGeometry x="65" y="449" width="630" height="45" as="geometry" />
-    </mxCell>
-
-    <mxCell id="27" value="k=75, threshold 100°" style="text;html=1;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;" vertex="1" parent="15">
-      <mxGeometry x="65" y="497" width="630" height="16" as="geometry" />
+      <mxGeometry x="65" y="553" width="630" height="16" as="geometry" />
     </mxCell>
 
     <mxCell id="28" value="Normal-Based Smoothing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="15">
-      <mxGeometry x="65" y="520" width="630" height="45" as="geometry" />
+      <mxGeometry x="65" y="576" width="630" height="45" as="geometry" />
     </mxCell>
 
     <mxCell id="29" value="k=30, threshold 25°" style="text;html=1;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;" vertex="1" parent="15">
-      <mxGeometry x="65" y="568" width="630" height="16" as="geometry" />
+      <mxGeometry x="65" y="624" width="630" height="16" as="geometry" />
     </mxCell>
 
     <mxCell id="30" value="Filtered Source Cloud (LiDAR)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="15">
-      <mxGeometry x="65" y="600" width="630" height="45" as="geometry" />
+      <mxGeometry x="65" y="650" width="630" height="45" as="geometry" />
     </mxCell>
 
     <!-- ICP REGISTRATION STAGE (shared bottom section) -->
@@ -225,23 +225,27 @@
       <mxGeometry relative="1" as="geometry" />
     </mxCell>
 
-    <mxCell id="53" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="19" target="21" parent="1">
+    <mxCell id="53" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="19" target="70" parent="1">
       <mxGeometry relative="1" as="geometry" />
     </mxCell>
 
-    <mxCell id="54" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="21" target="23" parent="1">
+    <mxCell id="72" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="70" target="23" parent="1">
       <mxGeometry relative="1" as="geometry" />
     </mxCell>
 
-    <mxCell id="55" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="23" target="24" parent="1">
+    <mxCell id="73" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="23" target="71" parent="1">
       <mxGeometry relative="1" as="geometry" />
     </mxCell>
 
-    <mxCell id="56" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="24" target="26" parent="1">
+    <mxCell id="54" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="71" target="21" parent="1">
       <mxGeometry relative="1" as="geometry" />
     </mxCell>
 
-    <mxCell id="57" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="26" target="28" parent="1">
+    <mxCell id="55" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="21" target="24" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <mxCell id="56" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="24" target="28" parent="1">
       <mxGeometry relative="1" as="geometry" />
     </mxCell>
 

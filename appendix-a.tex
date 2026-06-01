@@ -1,5 +1,5 @@
 \chapter{Appendix}
-\label{app:supplementary_figures}
+\label{app:Appendix}
 
 This appendix presents additional figures that support the analysis in the main chapters but are not essential to following the primary narrative.
 
@@ -49,6 +49,17 @@ This appendix presents additional figures that support the analysis in the main 
      
      \caption{Consensus error over optimisation stages for baseline tuning (error = error percentage) and GLIM-GNSS tuning (error = GASP).}
      \label{fig:comparison_progression}
+\end{figure}
+
+% ===== SLAM: Map Visualisations =====
+\section{SLAM Map Visualisations}
+\label{app:slam-map-figures}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth]{3-SLAM/3-intro/figures/slam_map_mid_zoom.png}
+    \caption{Perspective view of the LiDAR point cloud from inside a vineyard row, captured after the robot has completed the forward pass and begun the return traversal on the adjacent row. The corridor geometry and row length are apparent; the symmetric canopy and ground returns on either side provide no discriminative features for longitudinal scan-matching.}
+    \label{fig:slam-map-mid-zoom}
 \end{figure}
 
 % ===== SLAM: Trajectory Grids =====

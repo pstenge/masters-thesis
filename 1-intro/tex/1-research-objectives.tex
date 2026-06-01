@@ -7,9 +7,9 @@ The research pursues the following sub-objectives:
 
 \begin{enumerate}
 
-    \item Develop a LiDAR-inertial SLAM system that achieves sub-decimetre absolute trajectory error in GNSS-degraded vineyard environments, addressing the structural ambiguity of row-crop corridors.
+    \item Develop a LiDAR-inertial SLAM system that achieves low-decimetre absolute trajectory error in GNSS-degraded vineyard environments, addressing the structural ambiguity of row-crop corridors.
 
-    \item Design a precise-alignment pipeline that refines the SLAM pose to sub-centimetre accuracy by registering live sensor data against a 3D Gaussian Splatting reference model using point cloud registration.
+    \item Design a precise-alignment pipeline that refines the SLAM pose to low-centimetre accuracy by registering live sensor data against a 3D Gaussian Splatting reference model using point cloud registration.
 
     \item Evaluate two sensing modalities (stereo vision and LiDAR) for the precise-alignment stage, comparing their registration accuracy and failure modes under vineyard field conditions.
 
@@ -23,9 +23,9 @@ The research pursues the following sub-objectives:
 This thesis makes the following contributions:
 
 \begin{enumerate}
-    \item A LiDAR-inertial SLAM system augmented with sparse GNSS factor injection (GLIM-GNSS) that achieves 71--174\,mm absolute trajectory error across five vineyard datasets while utilising less than 1\% of available GNSS measurements, demonstrating that sub-decimetre localisation is attainable in repetitive row-crop environments without continuous RTK coverage.
+    \item A LiDAR-inertial SLAM system augmented with sparse GNSS factor injection (GLIM-GNSS) that achieves a mean absolute trajectory error of 103\,mm across five vineyard datasets while utilising less than 1\% of available GNSS measurements, demonstrating that low-decimetre localisation is attainable in repetitive row-crop environments without continuous RTK coverage.
 
     \item A precise-alignment pipeline that registers live point cloud data against a pre-built 3D Gaussian Splatting reference model via Generalised Iterative Closest Point, achieving centimetre-scale pose refinement (15.51\,mm mean inlier RMSE for stereo; 33.25\,mm median inlier RMSE for LiDAR) from a coarse SLAM initialisation.
 
-    \item A comparative evaluation of LiDAR and stereo vision modalities for vine-scale registration, characterising their convergence--accuracy trade-off: LiDAR achieves 100\% condition-level convergence while stereo produces lower RMSE (78\% convergence), with both modalities confirming that the SLAM-derived pose lies within the registration algorithm's convergence basin.
+    \item A comparative evaluation of LiDAR and stereo vision modalities for vine-scale registration, characterising their convergence--accuracy trade-off: LiDAR achieves 100\% condition-level convergence while stereo produces the lowest registration error, with both modalities confirming that the SLAM-derived pose lies within the registration algorithm's convergence basin.
 \end{enumerate}

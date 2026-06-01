@@ -57,10 +57,11 @@ CONTENT
          (non-repetitive pattern, commanded interval)
       → [Patchwork++ Ground Removal]  (§4.3.4.2)
          (sensor height 0.88 m, threshold 0.125 m, RNR+RVPF enabled)
-      → [Statistical Outlier Removal (k=16, λ=2.0)]
+      → [Range Filtering (max 1.3 m)]
       → [Angular Filtering (−180° to 0°)]
+      → [Voxel Downsampling (0.001 m)]
+      → [Statistical Outlier Removal (k=20, λ=2.0)]
       → [Radial Outlier Removal (r=0.05 m, min 30 neighbours)]
-      → [Normal-Based Filtering (k=75, threshold 100°)]
       → [Normal-Based Smoothing (k=30, threshold 25°)]
       → [Filtered Source Cloud (LiDAR)]
 
@@ -215,27 +216,31 @@ DRAW.IO DIAGRAM TYPE
   Linear process flowchart (top to bottom)
 
 CONTENT
-  Seven nodes:
+  Six nodes:
 
   [Non-Ground Cloud (from Patchwork++)]
     ↓
-  [1. Statistical Outlier Removal]
-    Annotate: k = 16 neighbours, λ = 2.0 std dev
-    Removes: isolated Livox streak artefacts
+  [1. Range Filtering]
+    Annotate: max range 1.3 m (forward axis)
+    Removes: distant returns from adjacent rows
     ↓
   [2. Angular Filtering]
     Annotate: retain azimuth −180° to 0°
     Removes: returns from robot body / opposing vineyard row
     ↓
-  [3. Radial Outlier Removal]
+  [3. Voxel Downsampling]
+    Annotate: voxel size 0.001 m
+    Normalises density before SOR
+    ↓
+  [4. Statistical Outlier Removal]
+    Annotate: k = 20 neighbours, λ = 2.0 std dev
+    Removes: isolated Livox streak artefacts
+    ↓
+  [5. Radial Outlier Removal]
     Annotate: radius = 0.05 m, min 30 neighbours
     Removes: sparse point clusters not forming coherent surfaces
     ↓
-  [4. Normal-Based Filtering]
-    Annotate: k = 75, threshold 100°
-    Removes: points with inverted / pathological normals
-    ↓
-  [5. Normal-Based Smoothing]
+  [6. Normal-Based Smoothing]
     Annotate: k = 30, threshold 25°
     Removes: boundary noise; enforces local normal consistency
     ↓
